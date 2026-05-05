@@ -1,0 +1,994 @@
+\section{Xây dựng Use Case Diagram}
+\subsection{Use case Diagram tổng quát}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.3]{graphics/main/chapter2/section2/usecasetq.jpg}
+    \caption{Use case Diagram tổng quát}
+    \label{fig:usecase_overall}
+\end{figure}
+Các Actor trong hệ thống bao gồm:
+\begin{itemize}[noitemsep]
+    \item \textbf{UserBase}: 
+    Là actor cơ sở đại diện cho tất cả người dùng của hệ thống. UserBase thực hiện các chức năng xác thực và quản lý tài khoản bao gồm: đăng ký, đăng nhập, đăng xuất và quản lý thông tin cá nhân.
+
+    \item \textbf{Customer}: 
+    Là actor kế thừa từ UserBase, đại diện cho khách hàng đã đăng nhập hệ thống. Customer có thể thực hiện các chức năng: xem giới thiệu cửa hàng, xem sản phẩm và danh mục, quản lý giỏ hàng, quản lý đơn hàng, thanh toán, đánh giá sản phẩm, quản lý địa chỉ liên hệ, liên hệ cửa hàng, sử dụng chatbot AI tư vấn và AI phân tích khuôn mặt để gợi ý sản phẩm phù hợp.
+
+    \item \textbf{Guest}: 
+    Là actor đại diện cho người dùng chưa đăng nhập. Guest chỉ có thể thực hiện các chức năng cơ bản như: xem giới thiệu cửa hàng, xem sản phẩm và danh mục.
+
+    \item \textbf{Admin}: 
+    Là actor kế thừa từ UserBase, đại diện cho quản trị viên hệ thống. Admin thực hiện các chức năng quản trị bao gồm: quản lý danh mục, quản lý sản phẩm, quản lý đơn hàng, quản lý người dùng, quản lý vận chuyển, quản lý đánh giá, quản lý khuyến mãi và quản lý thông tin cửa hàng.
+\end{itemize}
+
+%----------------------------------------------------------------Đăng nhập đăng ký---------------
+\subsection{Use case Diagram chức năng xác thực}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{graphics/main/chapter2/section2/usecase_authen.jpg}
+    \caption{Use case Diagram chức năng xác thực}
+    \label{fig:usecase_user}
+\end{figure}
+
+%đặc tả Đăng ký tài khoản
+\subsubsection{Đặc tả Use Case Đăng ký tài khoản}
+
+\begin{table}[H]
+    \caption{Đặc tả Use Case Đăng ký tài khoản}
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Nội dung} \\ \hline
+
+Tên Use Case & Đăng ký tài khoản \\ \hline
+
+Tác nhân & UserBase (Customer, Admin) \\ \hline
+
+Mô tả & 
+Cho phép người dùng tạo tài khoản mới để sử dụng hệ thống. \\ \hline
+
+Điều kiện tiên quyết & 
+- Người dùng chưa có tài khoản. \\ \hline
+
+Hậu điều kiện & 
+Tài khoản mới được tạo trong cơ sở dữ liệu. \\ \hline
+
+Luồng chính & 
+1. Người dùng mở trang đăng ký. \newline
+2. Hệ thống hiển thị form đăng ký. \newline
+3. Người dùng nhập thông tin (email, mật khẩu, họ tên, số điện thoại). \newline
+4. Người dùng nhấn đăng ký. \newline
+5. Hệ thống kiểm tra validation. \newline
+6. Hệ thống kiểm tra email đã tồn tại. \newline
+7. Hệ thống mã hóa mật khẩu. \newline
+8. Hệ thống lưu tài khoản mới vào cơ sở dữ liệu. \newline
+9. Hệ thống hiển thị thông báo thành công và chuyển đến trang đăng nhập. \\ \hline
+
+Luồng mở rộng (Extend) & 
+Không có. \\ \hline
+
+Luồng thay thế & 
+- Thông tin không hợp lệ (thiếu trường bắt buộc, sai định dạng email) → hệ thống hiển thị lỗi validation. \newline
+- Email đã tồn tại → hệ thống hiển thị "Email đã được sử dụng". \\ \hline
+
+\end{tabular}
+
+\end{table}
+
+%đặc tả Đăng nhập
+\subsubsection{Đặc tả Use Case Đăng nhập}
+
+\begin{table}[H]
+    \caption{Đặc tả Use Case Đăng nhập}
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Nội dung} \\ \hline
+
+Tên Use Case & Đăng nhập \\ \hline
+
+Tác nhân & UserBase (Customer, Admin) \\ \hline
+
+Mô tả & 
+Cho phép người dùng đăng nhập vào hệ thống bằng email và mật khẩu để được cấp Access Token. \\ \hline
+
+Điều kiện tiên quyết & 
+- Người dùng đã có tài khoản hợp lệ. \\ \hline
+
+Hậu điều kiện & 
+Người dùng được cấp Access Token và truy cập được các chức năng của hệ thống. \\ \hline
+
+Luồng chính & 
+1. Người dùng mở trang đăng nhập. \newline
+2. Hệ thống hiển thị form đăng nhập. \newline
+3. Người dùng nhập email và mật khẩu. \newline
+4. Người dùng nhấn đăng nhập. \newline
+5. Hệ thống kiểm tra validation. \newline
+6. Hệ thống tìm tài khoản theo email. \newline
+7. Hệ thống so sánh mật khẩu. \newline
+8. Hệ thống tạo Access Token. \newline
+9. Hệ thống trả về token và thông tin user. \newline
+10. Giao diện lưu token vào bộ nhớ và chuyển đến trang chủ. \\ \hline
+
+Luồng mở rộng (Extend) & 
+Không có. \\ \hline
+
+Luồng thay thế & 
+- Thông tin không hợp lệ → hệ thống hiển thị lỗi validation. \newline
+- Email không tồn tại → hệ thống hiển thị "Email không tồn tại". \newline
+- Mật khẩu không đúng → hệ thống hiển thị "Mật khẩu không đúng". \newline
+- Tài khoản bị khóa → hệ thống thông báo liên hệ admin. \\ \hline
+
+\end{tabular}
+
+\end{table}
+
+%đặc tả Đăng xuất
+\subsubsection{Đặc tả Use Case Đăng xuất}
+
+\begin{table}[H]
+    \caption{Đặc tả Use Case Đăng xuất}
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Nội dung} \\ \hline
+
+Tên Use Case & Đăng xuất \\ \hline
+
+Tác nhân & UserBase (Customer, Admin) \\ \hline
+
+Mô tả & 
+Cho phép người dùng thoát khỏi phiên làm việc hiện tại. \\ \hline
+
+Điều kiện tiên quyết & 
+- Người dùng đã đăng nhập. \\ \hline
+
+Hậu điều kiện & 
+Phiên làm việc kết thúc, token bị xóa. \\ \hline
+
+Luồng chính & 
+1. Người dùng nhấn đăng xuất. \newline
+2. Hệ thống xóa token khỏi bộ nhớ. \newline
+3. Hệ thống chuyển về trang đăng nhập. \\ \hline
+
+Luồng mở rộng (Extend) & 
+Không có. \\ \hline
+
+Luồng thay thế & 
+Không có. \\ \hline
+
+\end{tabular}
+
+\end{table}
+
+%đặc tả Quản lý hồ sơ cá nhân
+\subsubsection{Đặc tả Use Case Quản lý hồ sơ cá nhân}
+
+\begin{table}[H]
+    \caption{Đặc tả Use Case Quản lý hồ sơ cá nhân}
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Nội dung} \\ \hline
+
+Tên Use Case & Quản lý hồ sơ cá nhân \\ \hline
+
+Tác nhân & UserBase (Customer, Admin) \\ \hline
+
+Mô tả & 
+Cho phép người dùng xem và quản lý thông tin hồ sơ cá nhân của mình. \\ \hline
+
+Điều kiện tiên quyết & 
+- Người dùng đã đăng nhập. \\ \hline
+
+Hậu điều kiện & 
+Thông tin cá nhân được hiển thị hoặc cập nhật trong cơ sở dữ liệu. \\ \hline
+
+Luồng chính & 
+1. Người dùng truy cập trang hồ sơ cá nhân. \newline
+2. Hệ thống tải thông tin người dùng từ cơ sở dữ liệu. \newline
+3. Hệ thống hiển thị thông tin cá nhân hiện tại (họ tên, email, SĐT). \newline
+4. Người dùng chọn thao tác cần thực hiện. \\ \hline
+
+Luồng mở rộng (Extend) & 
+- Cập nhật thông tin cá nhân: Người dùng chỉnh sửa họ tên, số điện thoại, ảnh đại diện, hệ thống kiểm tra validation và lưu vào cơ sở dữ liệu. \newline
+- Đổi mật khẩu: Người dùng nhập mật khẩu cũ và mật khẩu mới, hệ thống xác thực mật khẩu cũ, mã hóa mật khẩu mới và lưu vào cơ sở dữ liệu. \\ \hline
+
+Luồng thay thế & 
+- Thông tin không hợp lệ → hệ thống hiển thị lỗi validation. \newline
+- Mật khẩu cũ không đúng → hệ thống từ chối đổi mật khẩu. \\ \hline
+
+\end{tabular}
+
+\end{table}
+
+\subsection{Use case Diagram chi tiết về xử lý thanh toán}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{graphics/main/chapter2/section2/usecase_vnpay.jpg}
+    \caption{Use case Diagram xử lý thanh toán}
+    \label{fig:usecase_payment}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Đặc tả Use Case: Thanh toán khi nhận hàng (COD)}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Thông tin} & \textbf{Mô tả} \\
+\hline
+Tên Use Case & Thanh toán khi nhận hàng (COD) \\
+\hline
+Actor & Customer \\
+\hline
+Mô tả & Khách hàng chọn thanh toán tiền mặt khi nhận hàng \\
+\hline
+Điều kiện trước & Khách hàng đã thêm sản phẩm vào giỏ hàng và chọn phương thức thanh toán \\
+\hline
+Luồng chính & 
+\begin{enumerate}[noitemsep]
+    \item Khách hàng chọn phương thức "Thanh toán khi nhận hàng"
+    \item Khách hàng xác nhận đặt hàng
+    \item Hệ thống tạo đơn hàng mới với trạng thái "Chờ giao hàng"
+    \item Hệ thống hiển thị thông báo đặt hàng thành công
+    \item Hệ thống gửi email xác nhận đơn hàng
+\end{enumerate} \\
+\hline
+Điều kiện sau & Đơn hàng được tạo thành công với trạng thái chờ giao hàng \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Đặc tả Use Case: Thanh toán qua VNPay}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Thông tin} & \textbf{Mô tả} \\
+\hline
+Tên Use Case & Thanh toán qua VNPay \\
+\hline
+Actor & Customer \\
+\hline
+Mô tả & Khách hàng thanh toán trực tuyến qua cổng thanh toán VNPay \\
+\hline
+Điều kiện trước & Khách hàng đã thêm sản phẩm vào giỏ hàng và chọn phương thức thanh toán \\
+\hline
+Luồng chính & 
+\begin{enumerate}[noitemsep]
+    \item Khách hàng chọn phương thức "Thanh toán VNPay"
+    \item Khách hàng xác nhận thanh toán
+    \item Hệ thống tạo đơn hàng tạm thời và mã giao dịch
+    \item Hệ thống chuyển hướng khách hàng đến cổng VNPay
+    \item Khách hàng nhập thông tin thanh toán và xác nhận
+    \item VNPay xử lý giao dịch và gửi kết quả về hệ thống
+    \item Hệ thống xác thực chữ ký và cập nhật trạng thái đơn hàng
+    \item Hệ thống hiển thị kết quả thanh toán
+    \item Hệ thống gửi email xác nhận thanh toán
+\end{enumerate} \\
+\hline
+Luồng thay thế & 
+\textbf{6a. Thanh toán thất bại:}
+\begin{enumerate}[noitemsep]
+    \item VNPay trả về kết quả thất bại
+    \item Hệ thống cập nhật trạng thái "Thanh toán thất bại"
+    \item Hệ thống hiển thị thông báo lỗi
+    \item Đề xuất khách hàng thử lại hoặc chọn phương thức khác
+\end{enumerate} \\
+\hline
+Điều kiện sau & Đơn hàng được tạo với trạng thái "Đã thanh toán" hoặc "Thanh toán thất bại" \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Đặc tả Use Case: Xem lịch sử đơn hàng}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Thông tin} & \textbf{Mô tả} \\
+\hline
+Tên Use Case & Xem lịch sử đơn hàng \\
+\hline
+Actor & Customer \\
+\hline
+Mô tả & Khách hàng xem danh sách các đơn hàng đã đặt \\
+\hline
+Điều kiện trước & Khách hàng đã đăng nhập vào hệ thống \\
+\hline
+Luồng chính & 
+\begin{enumerate}[noitemsep]
+    \item Khách hàng truy cập trang lịch sử đơn hàng
+    \item Hệ thống hiển thị danh sách đơn hàng của khách hàng
+    \item Khách hàng xem chi tiết từng đơn hàng
+\end{enumerate} \\
+\hline
+Điều kiện sau & Danh sách đơn hàng được hiển thị thành công \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Đặc tả Use Case: Quản lý đơn hàng}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Thông tin} & \textbf{Mô tả} \\
+\hline
+Tên Use Case & Quản lý đơn hàng \\
+\hline
+Actor & Admin \\
+\hline
+Mô tả & Admin quản lý và cập nhật trạng thái các đơn hàng trong hệ thống \\
+\hline
+Điều kiện trước & Admin đã đăng nhập vào hệ thống \\
+\hline
+Luồng chính & 
+\begin{enumerate}[noitemsep]
+    \item Admin truy cập trang quản lý đơn hàng
+    \item Hệ thống hiển thị danh sách tất cả đơn hàng
+    \item Admin xem chi tiết đơn hàng
+    \item Admin cập nhật trạng thái đơn hàng (đang xử lý, đang giao, hoàn thành, hủy)
+    \item Hệ thống lưu thay đổi và thông báo cho khách hàng
+\end{enumerate} \\
+\hline
+Điều kiện sau & Trạng thái đơn hàng được cập nhật thành công \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\subsection{Use case Diagram chi tiết về phân tích da mặt}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{graphics/main/chapter2/section2/usecase_acne.jpg}
+    \caption{Use case Diagram phân tích da mặt}
+    \label{fig:usecase_acne}
+\end{figure}
+\begin{table}[H]
+\centering
+\caption{Đặc tả Use Case: Phân tích Da mặt}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Thông tin} & \textbf{Mô tả} \\
+\hline
+Tên Use Case & Phân tích Da mặt \\
+\hline
+Actor & Customer \\
+\hline
+Mô tả & Khách hàng upload ảnh khuôn mặt để phân tích tình trạng da và nhận gợi ý sản phẩm phù hợp \\
+\hline
+Điều kiện trước & Khách hàng đã đăng nhập vào hệ thống và có ảnh khuôn mặt rõ nét \\
+\hline
+Luồng chính & 
+\begin{enumerate}[noitemsep]
+    \item Khách hàng truy cập chức năng phân tích da mặt
+    \item Khách hàng upload ảnh khuôn mặt
+    \item Hệ thống sử dụng MediaPipe để nhận diện khuôn mặt
+    \item Hệ thống cắt từng vùng da mặt (trán, má, mũi, cằm)
+    \item Hệ thống sử dụng mô hình CNN để phân tích mụn trên từng vùng
+    \item Hệ thống trả về kết quả phân tích chi tiết
+    \item Hệ thống đưa ra lời khuyên chăm sóc da
+    \item Hệ thống gợi ý các sản phẩm phù hợp với tình trạng da
+\end{enumerate} \\
+\hline
+Luồng thay thế & 
+\textbf{3a. Không phát hiện khuôn mặt:}
+\begin{enumerate}[noitemsep]
+    \item Hệ thống thông báo lỗi "Không tìm thấy khuôn mặt"
+    \item Yêu cầu khách hàng upload lại ảnh rõ nét hơn
+    \item Quay lại bước 2
+\end{enumerate}
+\textbf{3b. Ảnh không đủ chất lượng:}
+\begin{enumerate}[noitemsep]
+    \item Hệ thống thông báo "Ảnh không đủ rõ nét"
+    \item Đề xuất khách hàng chụp ảnh trong điều kiện ánh sáng tốt
+    \item Quay lại bước 2
+\end{enumerate} \\
+\hline
+Điều kiện sau & Khách hàng nhận được kết quả phân tích da, lời khuyên chăm sóc và danh sách sản phẩm gợi ý \\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+%----------------------------------------------------------------Giỏ hàng và đặt hàng---------------
+\subsection{Use case Diagram chi tiết về giỏ hàng và đặt hàng}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{graphics/main/chapter2/section2/usecase_order.png}
+    \caption{Use case Diagram giỏ hàng và đặt hàng}
+    \label{fig:usecase_order}
+\end{figure}
+Dưới đây là các đặc tả use case của quy trình thêm sản phẩm vào giỏ hàng và đặt hàng.
+
+\begin{table}[H]
+\centering
+\caption{Đặc tả Use Case UC-05: Thêm vào giỏ hàng}
+\label{tab:uc05}
+\begin{tabular}{|p{4cm}|p{11cm}|}
+\hline
+\textbf{Actor} & Customer \\
+\hline
+\textbf{Mô tả} & Khách hàng thêm sản phẩm yêu thích vào giỏ hàng để chuẩn bị mua sắm \\
+\hline
+\textbf{Tiền điều kiện} & Khách hàng đang xem chi tiết sản phẩm hoặc danh sách sản phẩm \\
+\hline
+\textbf{Luồng chính} & 
+1. Khách hàng chọn sản phẩm \newline
+2. Chọn số lượng và các tùy chọn (nếu có) \newline
+3. Nhấn nút "Thêm vào giỏ hàng" \newline
+4. Hệ thống kiểm tra tồn kho \newline
+5. Hệ thống thêm sản phẩm vào giỏ hàng và thông báo thành công \\
+\hline
+\textbf{Luồng phụ} & 
+4a. Sản phẩm hết hàng $\rightarrow$ Hệ thống thông báo và không cho phép thêm vào giỏ \\
+\hline
+\textbf{Hậu điều kiện} & Sản phẩm được lưu trong giỏ hàng của khách hàng \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Đặc tả Use Case UC-06: Đặt hàng}
+\label{tab:uc06}
+\begin{tabular}{|p{4cm}|p{11cm}|}
+\hline
+\textbf{Actor} & Customer \\
+\hline
+\textbf{Mô tả} & Khách hàng tiến hành đặt mua các sản phẩm đã có trong giỏ hàng \\
+\hline
+\textbf{Tiền điều kiện} & Có sản phẩm trong giỏ hàng và đã đăng nhập \\
+\hline
+\textbf{Luồng chính} & 
+1. Khách hàng truy cập giỏ hàng \newline
+2. Chọn các sản phẩm muốn thanh toán \newline
+3. Nhấn "Đặt hàng" \newline
+4. Điền thông tin cá nhân (UC-07) \newline
+5. Chọn phương thức thanh toán (UC-08) \newline
+6. Xác nhận đơn hàng \newline
+7. Hệ thống tạo đơn hàng và trừ số lượng tồn kho \\
+\hline
+\textbf{Luồng phụ} & 
+Extend: Chọn mã giảm giá (UC-09) \\
+\hline
+\textbf{Hậu điều kiện} & Đơn hàng được tạo thành công với trạng thái "Chờ xác nhận" \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Đặc tả Use Case UC-07: Điền thông tin cá nhân}
+\label{tab:uc07}
+\begin{tabular}{|p{4cm}|p{11cm}|}
+\hline
+\textbf{Actor} & Customer \\
+\hline
+\textbf{Mô tả} & Cung cấp thông tin nhận hàng cho đơn hàng \\
+\hline
+\textbf{Luồng chính} & 
+1. Nhập họ tên người nhận \newline
+2. Nhập số điện thoại \newline
+3. Nhập địa chỉ giao hàng cụ thể \newline
+4. Hệ thống ghi nhận thông tin \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Đặc tả Use Case UC-08: Chọn phương thức thanh toán}
+\label{tab:uc08}
+\begin{tabular}{|p{4cm}|p{11cm}|}
+\hline
+\textbf{Actor} & Customer \\
+\hline
+\textbf{Mô tả} & Khách hàng lựa chọn cách thức thanh toán cho đơn hàng \\
+\hline
+\textbf{Luồng chính} & 
+1. Khách hàng chọn giữa các phương thức: COD, VNPay, Chuyển khoản \newline
+2. Hệ thống ghi nhận phương thức đã chọn \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Đặc tả Use Case UC-09: Chọn mã giảm giá}
+\label{tab:uc09}
+\begin{tabular}{|p{4cm}|p{11cm}|}
+\hline
+\textbf{Actor} & Customer \\
+\hline
+\textbf{Mô tả} & Khách hàng áp dụng mã khuyến mãi để được giảm giá đơn hàng \\
+\hline
+\textbf{Luồng chính} & 
+1. Nhập mã giảm giá hoặc chọn từ danh sách \newline
+2. Hệ thống kiểm tra điều kiện áp dụng \newline
+3. Tính toán lại tổng tiền đơn hàng \\
+\hline
+\textbf{Luồng phụ} & 
+2a. Mã không hợp lệ/hết hạn $\rightarrow$ Thông báo lỗi \\
+\hline
+\end{tabular}
+\end{table}
+
+% usecase đánh giá sản phẩm admin
+\subsection{Use case Diagram đánh giá sản phẩm admin}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{graphics/main/chapter2/section2/usecasedgamin.png}
+    \caption{Use case Diagram đánh giá sản phẩm }
+    \label{fig:usecase_addg}
+\end{figure}
+ 
+%đặc tả admin
+\subsubsection{Đặc tả Use Case Quản lý đánh giá sản phẩm}
+
+\begin{table}[H]
+    \caption{Đặc tả Use Case Quản lý đánh giá sản phẩm (Admin)}
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Nội dung} \\ \hline
+
+Tên Use Case & Quản lý đánh giá sản phẩm \\ \hline
+
+Actor & Admin \\ \hline
+
+Mô tả & 
+Cho phép Admin xem, kiểm duyệt hoặc xóa các đánh giá sản phẩm do khách hàng gửi lên hệ thống. \\ \hline
+
+Điều kiện tiên quyết & 
+Admin đã đăng nhập thành công vào hệ thống. \\ \hline
+
+Hậu điều kiện & 
+Đánh giá được cập nhật trạng thái (hiển thị/ẩn) hoặc bị xóa khỏi hệ thống. \\ \hline
+
+Luồng chính & 
+1. Admin truy cập trang quản lý đánh giá. \newline
+2. Hệ thống hiển thị danh sách đánh giá của khách hàng. \newline
+3. Admin chọn một đánh giá cụ thể. \newline
+4. Admin có thể lọc đánh giá. \newline
+4. Thực hiện thao tác duyệt, ẩn hoặc xóa đánh giá. \newline
+5. Hệ thống cập nhật dữ liệu và hiển thị danh sách mới. \\ \hline
+
+Luồng thay thế & 
+Nếu xảy ra lỗi hệ thống hoặc không tìm thấy đánh giá, hệ thống hiển thị thông báo lỗi và không thực hiện thay đổi. \\ \hline
+
+\end{tabular}
+
+\end{table}
+
+% usecase khách hàng đánh giá sản phẩm 
+\subsection{Use case Diagram khách hàng đánh giá sản phẩm}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{graphics/main/chapter2/section2/usecasecusdg.png}
+    \caption{Use case Diagram khách hàng đánh giá sản phẩm }
+    \label{fig:usecase_gdg}
+\end{figure}
+ 
+%đặc tả khách hàng đánh giá sản phẩm 
+\subsubsection{Đặc tả Use Case Khách hàng đánh giá sản phẩm}
+
+\begin{table}[H]
+    \caption{Đặc tả Use Case Khách hàng đánh giá sản phẩm}
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Nội dung} \\ \hline
+
+Tên Use Case & Đánh giá sản phẩm \\ \hline
+
+Tác nhân & Customer \\ \hline
+
+Mô tả & 
+Cho phép khách hàng đánh giá sản phẩm đã mua khi đơn hàng ở trạng thái hoàn thành. \\ \hline
+
+Điều kiện tiên quyết & 
+- Khách hàng đã đăng nhập. \newline
+- Đơn hàng đã hoàn thành. \\ \hline
+
+Hậu điều kiện & 
+Đánh giá được lưu vào hệ thống và hiển thị tại trang sản phẩm. \\ \hline
+
+Luồng chính & 
+1. Khách hàng đăng nhập. \newline
+2. Truy cập mục “Đơn hàng của tôi”. \newline
+3. Chọn đơn hàng đã hoàn thành. \newline
+4. Chọn “Đánh giá sản phẩm”. \newline
+5. Nhập nội dung và chọn số sao. \newline
+6. Gửi đánh giá. \newline
+7. Hệ thống lưu và thông báo thành công. \\ \hline
+
+Luồng mở rộng (Extend) & 
+- Đánh giá sao (1–5 sao). \newline
+- Viết bình luận chi tiết. \newline
+- Gửi ảnh/video minh họa. \newline
+- Sửa đánh giá sau khi đã gửi. \\ \hline
+
+Luồng thay thế & 
+- Đơn hàng chưa hoàn thành → không được đánh giá. \newline
+- Nội dung vi phạm → hệ thống từ chối. \newline
+- Ảnh/video sai định dạng → báo lỗi. \\ \hline
+
+\end{tabular}
+
+\end{table}
+
+% usecase ChatbotAI tư vấn sản phẩm 
+\subsection{Use case Diagram ChatbotAI tư vấn sản phẩm}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{graphics/main/chapter2/section2/uc_chat.jpg}
+    \caption{Use case Diagram ChatbotAI tư vấn sản phẩm}
+    \label{fig:usecase_chat}
+\end{figure}
+
+%đặc tả Gửi tin nhắn hỏi đáp
+\subsubsection{Đặc tả Use Case ChatbotAI tư vấn sản phẩm}
+
+\begin{table}[H]
+    \caption{Đặc tả Use Case ChatbotAI tư vấn sản phẩm}
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Nội dung} \\ \hline
+
+Tên Use Case & Gửi tin nhắn hỏi đáp \\ \hline
+
+Tác nhân & Customer \\ \hline
+
+Mô tả & 
+Cho phép khách hàng gửi câu hỏi về sản phẩm, chăm sóc da thông qua chatbot AI và nhận phản hồi tự động. \\ \hline
+
+Điều kiện tiên quyết & 
+- Khách hàng đã truy cập giao diện chatbot. \\ \hline
+
+Hậu điều kiện & 
+Câu trả lời từ AI được hiển thị trên giao diện chat. \\ \hline
+
+Luồng chính & 
+1. Khách hàng mở chatbot. \newline
+2. Hệ thống hiển thị giao diện chat và lời chào. \newline
+3. Khách hàng nhập câu hỏi và gửi. \newline
+4. Hệ thống chuyển câu hỏi thành vector embedding. \newline
+5. Hệ thống tìm kiếm context liên quan trong Qdrant. \newline
+6. Hệ thống gửi câu hỏi kèm context đến Ollama LLM. \newline
+7. AI trả về câu trả lời. \newline
+8. Hệ thống hiển thị câu trả lời cho khách hàng. \\ \hline
+
+Luồng mở rộng (Extend) & 
+Không có. \\ \hline
+
+Luồng thay thế & 
+- Không tìm thấy context phù hợp → hệ thống trả về câu trả lời mặc định. \newline
+- Câu hỏi ngoài lề (không liên quan sản phẩm/skincare) → AI từ chối trả lời và hướng dẫn hỏi về chủ đề phù hợp. \newline
+- Lỗi kết nối đến Ollama → hệ thống thông báo lỗi. \\ \hline
+
+\end{tabular}
+
+\end{table}
+
+% usecase Quản lý cửa hàng
+\subsection{Use case Diagram quản lý cửa hàng}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{graphics/main/chapter2/section2/uc_store.jpg}
+    \caption{Use case Diagram quản lý cửa hàng}
+    \label{fig:usecase_store}
+\end{figure}
+
+%đặc tả Cập nhật thông tin cửa hàng
+\subsubsection{Đặc tả Use Case Cập nhật thông tin cửa hàng}
+
+\begin{table}[H]
+    \caption{Đặc tả Use Case Cập nhật thông tin cửa hàng}
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Nội dung} \\ \hline
+
+Tên Use Case & Cập nhật thông tin cửa hàng \\ \hline
+
+Tác nhân & Admin \\ \hline
+
+Mô tả & 
+Cho phép Admin cập nhật các thông tin cơ bản của cửa hàng như tên, số điện thoại, email. \\ \hline
+
+Điều kiện tiên quyết & 
+- Admin đã đăng nhập. \newline
+- Cửa hàng đã tồn tại trong hệ thống. \\ \hline
+
+Hậu điều kiện & 
+Thông tin cửa hàng được cập nhật trong cơ sở dữ liệu. \\ \hline
+
+Luồng chính & 
+1. Admin mở trang quản lý cửa hàng. \newline
+2. Hệ thống tải và hiển thị thông tin cửa hàng hiện tại. \newline
+3. Admin chỉnh sửa thông tin (tên, SĐT, email). \newline
+4. Admin xác nhận cập nhật. \newline
+5. Hệ thống kiểm tra validation. \newline
+6. Hệ thống lưu thông tin vào cơ sở dữ liệu. \newline
+7. Hệ thống hiển thị thông báo cập nhật thành công. \\ \hline
+
+Luồng mở rộng (Extend) & 
+Không có. \\ \hline
+
+Luồng thay thế & 
+- Thông tin không hợp lệ (thiếu tên, sai định dạng email/SĐT) → hệ thống hiển thị lỗi validation. \newline
+- Không tìm thấy cửa hàng → hệ thống thông báo lỗi. \\ \hline
+
+\end{tabular}
+
+\end{table}
+
+%đặc tả Quản lý địa chỉ cửa hàng
+\subsubsection{Đặc tả Use Case Quản lý địa chỉ cửa hàng}
+
+\begin{table}[H]
+    \caption{Đặc tả Use Case Quản lý địa chỉ cửa hàng}
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Nội dung} \\ \hline
+
+Tên Use Case & Quản lý địa chỉ cửa hàng \\ \hline
+
+Tác nhân & Admin \\ \hline
+
+Mô tả & 
+Cho phép Admin quản lý địa chỉ cửa hàng bao gồm thêm, sửa, xóa địa chỉ và cập nhật tọa độ trên bản đồ. \\ \hline
+
+Điều kiện tiên quyết & 
+- Admin đã đăng nhập. \\ \hline
+
+Hậu điều kiện & 
+Địa chỉ cửa hàng được cập nhật trong cơ sở dữ liệu. \\ \hline
+
+Luồng chính & 
+1. Admin mở trang quản lý cửa hàng. \newline
+2. Hệ thống hiển thị thông tin cửa hàng kèm bản đồ vị trí hiện tại. \newline
+3. Admin chọn thao tác (Thêm / Sửa / Xóa địa chỉ). \\ \hline
+
+Luồng mở rộng (Extend) & 
+- Thêm địa chỉ cửa hàng: Admin nhập địa chỉ chi tiết, tìm kiếm và chấm vị trí trên bản đồ, hệ thống lấy tọa độ và lưu vào cơ sở dữ liệu. \newline
+- Sửa địa chỉ cửa hàng: Admin chỉnh sửa thông tin địa chỉ hoặc cập nhật vị trí trên bản đồ, hệ thống cập nhật tọa độ mới vào cơ sở dữ liệu. \newline
+- Xóa địa chỉ cửa hàng: Admin chọn địa chỉ cần xóa, xác nhận xóa, hệ thống xóa khỏi cơ sở dữ liệu. \\ \hline
+
+Luồng thay thế & 
+- Thông tin không hợp lệ (thiếu địa chỉ, thiếu tọa độ GPS) → hệ thống hiển thị lỗi validation. \newline
+- Không tìm thấy địa chỉ cần sửa/xóa → hệ thống thông báo lỗi. \\ \hline
+
+\end{tabular}
+
+\end{table}
+
+%đặc tả Xem giới thiệu cửa hàng
+\subsubsection{Đặc tả Use Case Xem giới thiệu cửa hàng}
+
+\begin{table}[H]
+    \caption{Đặc tả Use Case Xem giới thiệu cửa hàng}
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Nội dung} \\ \hline
+
+Tên Use Case & Xem giới thiệu cửa hàng \\ \hline
+
+Tác nhân & Customer \\ \hline
+
+Mô tả & 
+Cho phép khách hàng xem thông tin giới thiệu của cửa hàng bao gồm tên, địa chỉ và vị trí trên bản đồ. \\ \hline
+
+Điều kiện tiên quyết & 
+Không có. \\ \hline
+
+Hậu điều kiện & 
+Thông tin cửa hàng được hiển thị cho khách hàng. \\ \hline
+
+Luồng chính & 
+1. Khách hàng truy cập trang giới thiệu cửa hàng. \newline
+2. Hệ thống tải thông tin cửa hàng từ cơ sở dữ liệu. \newline
+3. Hệ thống hiển thị tên, địa chỉ, vị trí trên bản đồ. \\ \hline
+
+Luồng mở rộng (Extend) & 
+Không có. \\ \hline
+
+Luồng thay thế & 
+- Lỗi tải dữ liệu → hệ thống thông báo lỗi. \\ \hline
+
+\end{tabular}
+
+\end{table}
+
+%đặc tả Liên hệ cửa hàng
+\subsubsection{Đặc tả Use Case Liên hệ cửa hàng}
+
+\begin{table}[H]
+    \caption{Đặc tả Use Case Liên hệ cửa hàng}
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Nội dung} \\ \hline
+
+Tên Use Case & Liên hệ cửa hàng \\ \hline
+
+Tác nhân & Customer \\ \hline
+
+Mô tả & 
+Cho phép khách hàng xem thông tin liên hệ của cửa hàng (số điện thoại, email) để liên hệ trực tiếp. \\ \hline
+
+Điều kiện tiên quyết & 
+Không có. \\ \hline
+
+Hậu điều kiện & 
+Thông tin liên hệ được hiển thị cho khách hàng. \\ \hline
+
+Luồng chính & 
+1. Khách hàng truy cập trang liên hệ. \newline
+2. Hệ thống hiển thị thông tin liên hệ (SĐT, email). \newline
+3. Khách hàng chọn phương thức liên hệ (gọi điện hoặc gửi email). \\ \hline
+
+Luồng mở rộng (Extend) & 
+Không có. \\ \hline
+
+Luồng thay thế & 
+- Lỗi tải dữ liệu → hệ thống thông báo lỗi. \\ \hline
+
+\end{tabular}
+
+\end{table}
+
+% usecase Quản lý vận chuyển 
+\subsection{Use case Diagram quản lý vận chuyển}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{graphics/main/chapter2/section2/uc_vanchuyen.jpg}
+    \caption{Use case Diagram quản lý vận chuyển}
+    \label{fig:usecase_vanchuyen}
+\end{figure}
+
+%đặc tả Xem phương thức vận chuyển
+\subsubsection{Đặc tả Use Case Xem phương thức vận chuyển}
+
+\begin{table}[H]
+    \caption{Đặc tả Use Case Xem phương thức vận chuyển}
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Nội dung} \\ \hline
+
+Tên Use Case & Xem phương thức vận chuyển \\ \hline
+
+Tác nhân & Admin \\ \hline
+
+Mô tả & 
+Cho phép Admin xem danh sách các nhà vận chuyển và phương thức vận chuyển hiện có trong hệ thống. \\ \hline
+
+Điều kiện tiên quyết & 
+- Admin đã đăng nhập. \\ \hline
+
+Hậu điều kiện & 
+Danh sách nhà vận chuyển và phương thức vận chuyển được hiển thị. \\ \hline
+
+Luồng chính & 
+1. Admin mở trang quản lý vận chuyển. \newline
+2. Hệ thống tải danh sách nhà vận chuyển đang hoạt động. \newline
+3. Hệ thống hiển thị danh sách nhà vận chuyển kèm các phương thức (tên, mã, phí cơ bản, phí theo km, thời gian giao dự kiến). \\ \hline
+
+Luồng mở rộng (Extend) & 
+Không có. \\ \hline
+
+Luồng thay thế & 
+- Không có nhà vận chuyển nào đang hoạt động → hệ thống hiển thị danh sách trống. \newline
+- Lỗi tải dữ liệu → hệ thống thông báo lỗi. \\ \hline
+
+\end{tabular}
+
+\end{table}
+
+%đặc tả Tính phí theo khoảng cách
+\subsubsection{Đặc tả Use Case Tính phí theo khoảng cách}
+
+\begin{table}[H]
+    \caption{Đặc tả Use Case Tính phí theo khoảng cách}
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Nội dung} \\ \hline
+
+Tên Use Case & Tính phí theo khoảng cách \\ \hline
+
+Tác nhân & Customer \\ \hline
+
+Mô tả & 
+Cho phép khách hàng tính phí vận chuyển dựa trên phương thức vận chuyển đã chọn và khoảng cách giao hàng. \\ \hline
+
+Điều kiện tiên quyết & 
+- Khách hàng đang trong quy trình đặt hàng. \\ \hline
+
+Hậu điều kiện & 
+Phí vận chuyển được tính và hiển thị cho khách hàng. \\ \hline
+
+Luồng chính & 
+1. Khách hàng chọn phương thức vận chuyển. \newline
+2. Khách hàng nhập địa chỉ giao hàng (include: Nhập địa chỉ giao hàng). \newline
+3. Hệ thống tính khoảng cách từ cửa hàng đến địa chỉ giao. \newline
+4. Hệ thống tính phí vận chuyển (phí cơ bản + phí theo km × khoảng cách). \newline
+5. Hệ thống hiển thị phí vận chuyển cho khách hàng (include: Xem phí vận chuyển). \\ \hline
+
+Luồng mở rộng (Extend) & 
+Không có. \\ \hline
+
+Luồng thay thế & 
+- Không tìm thấy phương thức vận chuyển → hệ thống thông báo lỗi. \newline
+- Địa chỉ giao hàng không hợp lệ → hệ thống yêu cầu nhập lại. \\ \hline
+
+\end{tabular}
+
+\end{table}
+
+%đặc tả Cập nhật trạng thái vận chuyển
+\subsubsection{Đặc tả Use Case Cập nhật trạng thái vận chuyển}
+
+\begin{table}[H]
+    \caption{Đặc tả Use Case Cập nhật trạng thái vận chuyển}
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Nội dung} \\ \hline
+
+Tên Use Case & Cập nhật trạng thái vận chuyển \\ \hline
+
+Tác nhân & Admin \\ \hline
+
+Mô tả & 
+Cho phép Admin cập nhật trạng thái vận chuyển của đơn hàng và ghi nhận lịch sử tracking. \\ \hline
+
+Điều kiện tiên quyết & 
+- Admin đã đăng nhập. \newline
+- Đơn hàng đã tồn tại trong hệ thống. \\ \hline
+
+Hậu điều kiện & 
+Bản ghi tracking mới được lưu vào cơ sở dữ liệu. \\ \hline
+
+Luồng chính & 
+1. Admin mở trang quản lý vận chuyển. \newline
+2. Hệ thống hiển thị danh sách đơn vận chuyển. \newline
+3. Admin chọn đơn hàng cần cập nhật. \newline
+4. Hệ thống hiển thị chi tiết đơn hàng và lịch sử trạng thái. \newline
+5. Admin chọn trạng thái mới (Đang lấy hàng / Đang giao / Giao thành công / Giao thất bại). \newline
+6. Admin nhập thông tin bổ sung (vị trí, mô tả). \newline
+7. Admin xác nhận cập nhật. \newline
+8. Hệ thống tạo bản ghi tracking mới vào cơ sở dữ liệu. \newline
+9. Hệ thống hiển thị thông báo cập nhật thành công. \\ \hline
+
+Luồng mở rộng (Extend) & 
+Không có. \\ \hline
+
+Luồng thay thế & 
+- Thiếu trạng thái → hệ thống hiển thị lỗi "Trạng thái là bắt buộc". \newline
+- Không tìm thấy đơn hàng → hệ thống thông báo lỗi. \\ \hline
+
+\end{tabular}
+
+\end{table}
