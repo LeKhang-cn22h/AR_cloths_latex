@@ -1,111 +1,5 @@
 \section{Kết luận}
 
-\subsection{Backend}
-Backend được xây dựng bằng FastAPI trên nền tảng Python, đóng vai trò trung tâm trong kiến trúc hệ thống. Thành phần này chịu trách nhiệm xử lý các yêu cầu từ phía người dùng, quản lý nghiệp vụ, xác thực JWT, phân quyền và kết nối với các dịch vụ như cơ sở dữ liệu, FitDiT AI, Ollama chatbot và hệ thống thanh toán Stripe.
-
-\textbf{Cài đặt:}
-\begin{itemize}[noitemsep]
-\item Cài đặt các thư viện và gói phụ thuộc từ \texttt{requirements.txt}.
-\item Cấu hình các biến môi trường và thông tin kết nối cơ sở dữ liệu (Neon PostgreSQL, Firebase Firestore).
-\item Thực hiện migration để khởi tạo cấu trúc dữ liệu trong PostgreSQL.
-\item Khởi động server Uvicorn tại cổng 8000.
-\item Sử dụng ngrok để expose backend ra Internet phục vụ callback thanh toán.
-\end{itemize}
-
-\subsection{Frontend}
-Frontend được xây dựng bằng Nuxt.js 3.17 (chế độ SPA) nhằm phát triển giao diện người dùng thân thiện, hỗ trợ tương tác AR qua Snap Camera Kit. Frontend đóng vai trò hiển thị dữ liệu, tiếp nhận tương tác của người dùng (bao gồm thử đồ AI, thử đồ AR, chatbot) và giao tiếp với backend thông qua các RESTful API.
-
-\textbf{Cài đặt:}
-\begin{itemize}[noitemsep]
-\item Cài đặt các thư viện giao diện (TailwindCSS, Pinia, vue-query) và cấu hình kết nối API đến backend.
-\item Khởi động server phát triển bằng Yarn và truy cập hệ thống tại localhost cổng 3000.
-\end{itemize}
-
-\subsection{Database}
-Hệ thống sử dụng hai loại cơ sở dữ liệu:
-\begin{itemize}[noitemsep]
-\item Firebase Firestore (NoSQL): Lưu trữ dữ liệu nghiệp vụ chính (sản phẩm, đơn hàng, giỏ hàng, người dùng, voucher, category).
-\item Neon PostgreSQL (Relational): Lưu trữ dữ liệu quan hệ (người dùng, địa chỉ, cửa hàng, garments, số đo cơ thể, phiên try-on, lịch sử chat) cùng với pgvector cho tìm kiếm ngữ nghĩa.
-\end{itemize}
-
-\textbf{Cấu hình:}
-\begin{itemize}[noitemsep]
-\item Firestore: Project location nam5
-\item PostgreSQL: Kết nối qua asyncpg
-\item Vector DB: pgvector extension
-\end{itemize}
-
-\subsection{Vector Database}
-Hệ thống sử dụng pgvector (extension của PostgreSQL) để lưu trữ vector embeddings (dimension 1536) và hỗ trợ tìm kiếm ngữ nghĩa, phục vụ cho cơ chế truy xuất tri thức (RAG) trong hệ thống hỏi đáp của chatbot tư vấn thời trang.
-
-\textbf{Cấu hình:}
-\begin{itemize}[noitemsep]
-\item Bảng \texttt{product_embeddings}: lưu vector 1536 chiều cho sản phẩm.
-\item Tìm kiếm tương tự bằng cosine distance.
-\end{itemize}
-
-\subsection{AI Chatbot}
-Hệ thống sử dụng Ollama để triển khai mô hình ngôn ngữ lớn qwen2.5:7b cho chatbot tư vấn thời trang. Chatbot có khả năng tiếp nhận câu hỏi tự nhiên từ người dùng, kết hợp ngữ cảnh truy xuất từ pgvector (RAG) để tạo ra phản hồi phù hợp về sản phẩm, size, và xu hướng thời trang.
-
-\textbf{Cấu hình:}
-\begin{itemize}[noitemsep]
-\item Model: qwen2.5:7b (chạy local)
-\item Context window: phù hợp với RAG
-\item Temperature: 0.7 nhằm cân bằng giữa tính sáng tạo và độ chính xác
-\end{itemize}
-
-\subsection{AI Model FitDiT (Virtual Try-On)}
-Mô hình FitDiT (Diffusion Transformer) được sử dụng để tạo ảnh thử đồ ảo từ ảnh người dùng và ảnh sản phẩm. Mô hình sử dụng Stable Diffusion 3 làm backbone, kết hợp DWpose để trích xuất keypoints và human parsing để phân vùng quần áo.
-
-\textbf{Thông tin chính:}
-\begin{itemize}[noitemsep]
-\item Framework: PyTorch 2.1.0 + CUDA 12.1
-\item GPU: NVIDIA RTX 4060 Laptop 8GB VRAM
-\item Độ phân giải đầu ra: 768x1024 / 1152x1536 / 1536x2048
-\item Checkpoints: \texttt{D:\textbackslash FitDiT\textbackslash ckpts\textbackslash} (~18GB)
-\end{itemize}
-
-\subsection{AR Try-On (Snap Lens Studio)}
-Hệ thống tích hợp Snap Camera Kit và Lens Studio để cung cấp trải nghiệm thử đồ thời trang thực tế ảo (AR) ngay trên web. Lens được build từ Lens Studio v5.19.2 với cơ chế ObjectTracking3D để bám theo cơ thể người dùng.
-
-\textbf{Thông tin chính:}
-\begin{itemize}[noitemsep]
-\item Công cụ: Lens Studio v5.19.2
-\item Ngôn ngữ script: TypeScript
-\item Body tracking: Snap ObjectTracking3D (Neck, Arms, Hips)
-\item 3D Model: GLB format
-\item Lens ID: \texttt{8db6dfc4-c7f3-4cc6-a7d5-d4e335db567f}
-\end{itemize}
-
-\subsection{Thanh toán Stripe}
-Hệ thống tích hợp cổng thanh toán Stripe trong môi trường sandbox nhằm kiểm thử quy trình thanh toán trực tuyến. Việc tích hợp cho phép mô phỏng luồng thanh toán thực tế trước khi triển khai lên môi trường chính thức.
-
-\textbf{Cài đặt:}
-\begin{itemize}[noitemsep]
-\item Sử dụng Ngrok để công khai backend ra môi trường Internet phục vụ webhook callback.
-\item Cấu hình các URL phản hồi từ Stripe về hệ thống backend.
-\end{itemize}
-
-\subsection{Quy trình khởi động hệ thống}
-\begin{enumerate}[noitemsep]
-\item Khởi động các dịch vụ AI: Ollama (qwen2.5:7b)
-\item Khởi động backend FastAPI (Uvicorn) kết hợp ngrok
-\item Khởi động frontend Nuxt.js (yarn dev)
-\item (Tùy chọn) Khởi động FitDiT service cho virtual try-on
-\end{enumerate}
-
-\subsection{Kiểm tra hệ thống}
-\begin{itemize}[noitemsep]
-\item Kiểm tra chatbot phản hồi đúng ngữ cảnh câu hỏi về thời trang và sản phẩm.
-\item Kiểm tra chức năng thử đồ AI (FitDiT) hoạt động chính xác với ảnh full body
-
-t cần là kết luận chung về đề tài
-Dưới đây là phần Kết luận chung cho đề tài hệ thống Virtual Try-On, viết lại từ nội dung bạn đã cung cấp:
-
-\section{Kết luận chung}
-
-Đề tài "Xây dựng hệ thống thương mại điện tử thời trang tích hợp thử đồ ảo bằng AI và AR" đã đạt được các mục tiêu đề ra, cụ thể như sau:
-
 \subsection{Kết quả đạt được}
 
 \textbf{Về mặt chức năng:}
@@ -122,8 +16,8 @@ Dưới đây là phần Kết luận chung cho đề tài hệ thống Virtual 
 \begin{itemize}[noitemsep]
 \item Hệ thống được xây dựng theo kiến trúc microservice với backend \textbf{FastAPI} (Python), frontend \textbf{Nuxt.js 3} (TypeScript), đảm bảo tính modular, dễ bảo trì và mở rộng.
 \item Kết hợp hai loại cơ sở dữ liệu: \textbf{Firebase Firestore} cho dữ liệu nghiệp vụ và \textbf{Neon PostgreSQL} (pgvector) cho dữ liệu quan hệ và tìm kiếm ngữ nghĩa.
-\item Mô hình FitDiT hoạt động ổn định trên GPU RTX 4060, tạo ảnh thử đồ với độ phân giải lên đến 1536x2048.
-\item Lens AR trên Snap Camera Kit bám theo cơ thể người dùng với 7 điểm mốc (Neck, Arms, Hips…), hỗ trợ tương tác qua carousel 3D chọn trang phục.
+\item Mô hình FitDiT hoạt động ổn định trên GPU RTX 4060, tạo ảnh thử đồ với độ phân giải lên đến 1536$\times$2048.
+\item Lens AR trên Snap Camera Kit bám theo cơ thể người dùng với 7 điểm mốc (Neck, Arms, Hips), hỗ trợ tương tác qua carousel 3D chọn trang phục.
 \item Xác thực và phân quyền người dùng được thực hiện qua \textbf{Firebase Authentication} và JWT, phân biệt rõ vai trò user/admin.
 \end{itemize}
 
@@ -131,7 +25,7 @@ Dưới đây là phần Kết luận chung cho đề tài hệ thống Virtual 
 
 \textbf{Hạn chế:}
 \begin{itemize}[noitemsep]
-\item Thời gian xử lý của FitDiT còn chậm (khoảng 2-3 phút cho 30 bước lặp trên GPU laptop), chưa đáp ứng tốt cho trải nghiệm real-time.
+\item Thời gian xử lý của FitDiT còn chậm (khoảng 2--3 phút cho 30 bước lặp trên GPU laptop), chưa đáp ứng tốt cho trải nghiệm real-time.
 \item Chưa tích hợp hoàn thiện cơ chế face swap cho trường hợp ảnh người dùng chỉ có khuôn mặt.
 \item Lens AR yêu cầu thiết bị có camera và cấu hình đủ mạnh để chạy ObjectTracking3D mượt mà.
 \item Chưa triển khai hệ thống lên môi trường production (đang chạy local qua ngrok).
@@ -139,8 +33,8 @@ Dưới đây là phần Kết luận chung cho đề tài hệ thống Virtual 
 
 \textbf{Hướng phát triển:}
 \begin{itemize}[noitemsep]
-\item Tối ưu tốc độ inference của FitDiT (giảm num_steps, sử dụng TensorRT) hoặc chuyển sang GPU cloud (RunPod/Vast.ai).
-\item Hoàn thiện pipeline smart try-on: tự động phát hiện ảnh full-body hay chỉ có mặt → face swap nếu cần → fit assessment → FitDiT.
+\item Tối ưu tốc độ inference của FitDiT (giảm num\_steps, sử dụng TensorRT) hoặc chuyển sang GPU cloud (RunPod/Vast.ai).
+\item Hoàn thiện pipeline smart try-on: tự động phát hiện ảnh full-body hay chỉ có mặt $\to$ face swap nếu cần $\to$ fit assessment $\to$ FitDiT.
 \item Mở rộng kho dữ liệu 3D model (GLB) cho nhiều loại trang phục hơn.
 \item Triển khai hệ thống lên cloud (AWS/GCP) với Docker/Kubernetes để đảm bảo tính sẵn sàng và mở rộng.
 \item Phát triển ứng dụng di động (React Native/Flutter) tích hợp Camera Kit để tăng trải nghiệm AR.
@@ -148,4 +42,4 @@ Dưới đây là phần Kết luận chung cho đề tài hệ thống Virtual 
 
 \subsection{Đánh giá tổng quan}
 
-Đề tài đã chứng minh tính khả thi của việc tích hợp các công nghệ AI (FitDiT, RAG, Ollama) và AR (Snap Camera Kit) vào một hệ thống thương mại điện tử thời trang hoàn chỉnh. Hệ thống không chỉ cung cấp trải nghiệm mua sắm trực tuyến thông thường mà còn giải quyết bài toán "thử đồ trực tuyến" vốn là rào cản lớn của ngành thời trang e-commerce. Kết quả của đề tài có thể làm nền tảng để phát triển thành sản phẩm thương mại thực tế, đáp ứng nhu cầu ngày càng cao của người tiêu dùng trong thời đại chuyển đổi số.
+Đề tài đã chứng minh tính khả thi của việc tích hợp các công nghệ AI (FitDiT, RAG, Ollama) và AR (Snap Camera Kit) vào một hệ thống thương mại điện tử thời trang hoàn chỉnh. Hệ thống không chỉ cung cấp trải nghiệm mua sắm trực tuyến thông thường mà còn giải quyết bài toán ``thử đồ trực tuyến'' vốn là rào cản lớn của ngành thời trang e-commerce. Kết quả của đề tài có thể làm nền tảng để phát triển thành sản phẩm thương mại thực tế, đáp ứng nhu cầu ngày càng cao của người tiêu dùng trong thời đại chuyển đổi số.
