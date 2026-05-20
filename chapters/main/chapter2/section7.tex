@@ -180,23 +180,24 @@ Hệ thống hỗ trợ nhiều hình thức thanh toán khác nhau như thanh t
 Trang quản lý đơn hàng cho phép người dùng theo dõi danh sách các đơn hàng đã đặt và trạng thái xử lý của từng đơn. Giao diện hỗ trợ lọc đơn hàng theo trạng thái nhằm giúp người dùng thuận tiện tra cứu và quản lý lịch sử mua sắm.
 
 Mỗi đơn hàng được hiển thị kèm theo các thông tin cơ bản như mã đơn hàng, thời gian đặt hàng, trạng thái xử lý, phương thức thanh toán và tổng giá trị đơn hàng. Tại mỗi đơn hàng, người dùng có thể thực hiện một số thao tác phù hợp với trạng thái hiện tại của đơn, chẳng hạn như hủy đơn khi đơn chưa được xử lý hoặc tiếp tục thanh toán đối với các đơn chưa hoàn tất giao dịch.
-\subsection{Giao diện chuyển giao diện sang vnpay để thanh toán}
+\subsection{Giao diện thanh toán của Stripe Link (thuộc Stripe Payment)}
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{graphics/main/chapter3/xac_thuc_thanh_toan.png}
-    \caption{Giao diện chuyển giao diện sang vnpay để thanh toán}
+    \caption{Giao diện thanh toán của Stripe Link}
     \label{fig:vnpay_ui}
 \end{figure}
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{graphics/main/chapter3/thanh_toan_thanh_cong.png}
-    \caption{Giao diện nhập tài khoản thanh toán}
+    \caption{Thanh toán thành công qua Stripe Link}
     \label{fig:payment_account_ui}
 \end{figure}
-Khi người dùng lựa chọn thanh toán trực tuyến qua VNPay, hệ thống sẽ chuyển hướng đến cổng thanh toán của VNPay. Giao diện thanh toán được thiết kế theo tiêu chuẩn bảo mật, cung cấp nhiều phương thức thanh toán khác nhau như thẻ nội địa, thẻ quốc tế và các hình thức thanh toán điện tử.
+Khi người dùng lựa chọn thanh toán trực tuyến, hệ thống sẽ chuyển hướng đến cổng thanh toán Stripe để thực hiện giao dịch. Giao diện thanh toán được thiết kế theo tiêu chuẩn bảo mật hiện đại, hỗ trợ nhiều hình thức thanh toán điện tử khác nhau và tích hợp cơ chế xác thực người dùng nhằm đảm bảo an toàn trong quá trình giao dịch.
 
-Trang thanh toán hiển thị đầy đủ thông tin đơn hàng để người dùng kiểm tra trước khi xác nhận giao dịch. Quá trình thanh toán được thực hiện thông qua các bước xác thực nhằm đảm bảo tính an toàn và bảo mật thông tin cho người dùng.
+Trang thanh toán hiển thị đầy đủ thông tin đơn hàng như số tiền cần thanh toán, đơn vị tiền tệ và mã đơn hàng để người dùng kiểm tra trước khi xác nhận thanh toán. Hệ thống yêu cầu xác thực số điện thoại thông qua dịch vụ Stripe Link nhằm tăng cường tính bảo mật và hạn chế các giao dịch không hợp lệ.
 
+Sau khi hoàn tất bước xác thực, người dùng có thể tiếp tục nhập thông tin thanh toán và hoàn thành giao dịch trực tuyến một cách nhanh chóng và an toàn.
 
 
 
@@ -204,7 +205,7 @@ Trang thanh toán hiển thị đầy đủ thông tin đơn hàng để ngườ
 \subsection{Giao diện AI chatbot chăm sóc khách hàng}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{graphics/main/chapter3/thanh_toan_thanh_cong.png}
+    \includegraphics[width=1\textwidth]{graphics/main/chapter3/box_chat.png}
     \caption{Giao diện AI chatbot chăm sóc khách hàng}
     \label{fig:chatbot_ui}
 \end{figure}
@@ -212,27 +213,18 @@ Hệ thống tích hợp chatbot AI nhằm hỗ trợ tư vấn sản phẩm và
 
 Dựa trên nội dung tương tác và nhu cầu của người dùng, chatbot có thể gợi ý các sản phẩm phù hợp, cung cấp thông tin cơ bản về sản phẩm và hỗ trợ người dùng truy cập nhanh đến trang chi tiết sản phẩm. Chức năng chatbot góp phần nâng cao trải nghiệm người dùng và hỗ trợ quá trình ra quyết định mua hàng một cách hiệu quả.
 
-\subsection{Giao diện AI phân tích da mặt}
+
+\subsection{Giao diện thử đồ thực tế ảo (AR)}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{graphics/main/chapter3/thanh_toan_thanh_cong.png}
-    \caption{Giao diện AI phân tích da mặt}
-    \label{fig:skin_analysis_ui}
+    \includegraphics[width=1\textwidth]{graphics/main/chapter3/ar.png}
+    \caption{Giao diện thử đồ thực tế ảo (AR)}
+    \label{fig:ar_tryon_ui}
 \end{figure}
-Giao diện phân tích da mặt sử dụng trí tuệ nhân tạo nhằm giúp người dùng nhận biết tình trạng da và mức độ mụn thông qua hình ảnh khuôn mặt được tải lên hệ thống. Giao diện được thiết kế đơn giản, thân thiện với người dùng, bao gồm các thành phần chính như sau:
-\subsection{Giao diện kết quả phân tích da mặt}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{graphics/main/chapter3/thanh_toan_thanh_cong.png}
-    \caption{Giao diện kết quả phân tích da mặt}
-    \label{fig:analysis_result_ui}
-\end{figure}
-Giao diện kết quả phân tích da mặt hiển thị chi tiết tình trạng da và mức độ mụn sau khi người dùng tải ảnh khuôn mặt lên hệ thống. Kết quả được trình bày cụ thể, bao gồm các thông tin như số lượng mụn trên từng vùng da (trán, má, mũi, cằm), mức độ mụn tổng thể và lời khuyên chăm sóc da phù hợp.
 
+Giao diện thử đồ thực tế ảo (AR) mang đến cho người dùng trải nghiệm mua sắm tương tác và trực quan. Thông qua camera của thiết bị, hệ thống sẽ nhận diện và phủ các mô hình trang phục 3D (như áo, quần, phụ kiện) lên cơ thể người dùng theo thời gian thực. Trong hình minh họa, người dùng đang ướm thử một chiếc áo khoác với độ khớp sinh động và tự nhiên.
 
-
-
-
+Phía dưới màn hình là thanh menu trực quan hiển thị các tùy chọn sản phẩm khác nhau, cho phép người dùng dễ dàng chuyển đổi và lựa chọn các món đồ muốn thử. Hai bên góc trên màn hình được bố trí các nút điều hướng giúp thao tác thuận tiện hơn. Tính năng này không chỉ nâng cao trải nghiệm người dùng, mang lại sự thú vị mà còn hỗ trợ khách hàng hình dung rõ ràng về sản phẩm, từ đó đưa ra quyết định mua hàng chính xác hơn mà không cần phải đến trực tiếp cửa hàng.
 
 \subsection{Giao diện dasboard admin}
 \begin{figure}[H]
