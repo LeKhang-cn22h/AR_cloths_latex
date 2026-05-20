@@ -1,0 +1,246 @@
+\chapter{CÀI ĐẶT VÀ KIỂM THỬ}
+
+\section{Công cụ kiểm thử}
+
+\subsection{Google Lighthouse}
+Google Lighthouse là một công cụ kiểm thử và phân tích website 
+mã nguồn mở do Google phát triển, được sử dụng rộng rãi trong 
+việc đánh giá chất lượng và tối ưu hóa trang web \cite{lighthouse_docs}. 
+Công cụ này có thể chạy trực tiếp trên Chrome DevTools, cài đặt 
+dưới dạng tiện ích mở rộng hoặc sử dụng qua dòng lệnh. Khi thực 
+hiện kiểm tra, Lighthouse tự động phân tích nhiều khía cạnh quan 
+trọng của website bao gồm hiệu năng tải trang (Performance), khả 
+năng truy cập (Accessibility), mức độ tuân thủ các chuẩn SEO, 
+các thực hành tốt về bảo mật (Best Practices) và khả năng hỗ trợ 
+Progressive Web App (PWA). Sau quá trình đánh giá, công cụ cung 
+cấp báo cáo chi tiết kèm các chỉ số Core Web Vitals (FCP, LCP, 
+CLS, TBT, Speed Index) và gợi ý cải thiện cụ thể.
+
+\subsection{Postman}
+Postman là công cụ kiểm thử API phổ biến, cho phép gửi các yêu 
+cầu HTTP đến server và kiểm tra phản hồi một cách trực quan 
+\cite{postman_docs}. Trong đề tài, Postman được sử dụng để kiểm 
+thử các endpoint của FastAPI backend bao gồm xác thực JWT, upload 
+ảnh cho AI Virtual Try-On, các API quản lý sản phẩm, đơn hàng, 
+chatbot và thanh toán Stripe. Postman hỗ trợ kiểm thử với 
+multipart/form-data, thiết lập header xác thực và lưu trữ 
+collection test case có tổ chức.
+
+\subsection{Swagger UI}
+Swagger UI là giao diện tài liệu và kiểm thử API được FastAPI 
+tự động sinh ra tại đường dẫn \texttt{/docs} \cite{fastapi_docs}. 
+Công cụ này cho phép kiểm thử trực tiếp tất cả endpoint của hệ 
+thống ngay trên trình duyệt mà không cần cài đặt thêm phần mềm, 
+đồng thời hiển thị đầy đủ schema request và response của từng API.
+
+\subsection{Responsive Viewer}
+Responsive Viewer là tiện ích mở rộng (extension) của trình duyệt 
+Chrome, cho phép kiểm tra giao diện website trên nhiều kích thước 
+màn hình cùng lúc \cite{responsive_viewer}. Trong đề tài, công cụ 
+này được sử dụng để kiểm thử tính tương thích giao diện của hệ 
+thống trên các thiết bị di động, máy tính bảng và máy tính để bàn 
+mà không cần thiết bị vật lý.
+
+% ─────────────────────────────────────────
+\section{Kiểm thử}
+
+\subsection{Kiểm thử API}
+
+Các endpoint của hệ thống được kiểm thử thông qua Postman và 
+Swagger UI. Bảng~\ref{tab:api_test} trình bày một số test case 
+tiêu biểu.
+
+\begin{table}[H]
+\centering
+\caption{Một số test case kiểm thử API}
+\label{tab:api_test}
+\begin{tabular}{|c|p{3cm}|p{3cm}|p{3cm}|c|}
+\hline
+\textbf{STT} & \textbf{Endpoint} & \textbf{Input} & 
+\textbf{Kết quả mong đợi} & \textbf{Kết quả} \\
+\hline
+1 & POST /users & Firebase UID hợp lệ & 
+Upsert user thành công, trả về thông tin user & Đạt \\
+\hline
+2 & GET /garments/ & -- & 
+Trả về danh sách garment & Đạt \\
+\hline
+3 & POST /tryon & Ảnh người + ảnh quần áo & 
+Trả về URL ảnh kết quả từ Cloudinary & Đạt \\
+\hline
+4 & POST /photo-tryon/fit-assessment & 
+body\_profile\_id, garment\_id, size\_label & 
+Trả về đánh giá chest\_fit, waist\_fit, hip\_fit, 
+size\_suggestion & Đạt \\
+\hline
+5 & POST /chatbot/chat & Câu hỏi tư vấn thời trang & 
+Trả về phản hồi từ Ollama qwen2.5 & Đạt \\
+\hline
+6 & POST /payment/stripe & Thông tin đơn hàng & 
+Tạo payment intent thành công & Đạt \\
+\hline
+7 & POST /tryon & Thiếu file ảnh & 
+Trả về lỗi 422 Unprocessable Entity & Đạt \\
+\hline
+\end{tabular}
+\end{table}
+
+% ─────────────────────────────────────────
+\subsection{Kiểm thử hiệu năng}
+
+Kiểm thử hiệu năng được thực hiện bằng Google Lighthouse trên 
+hai trang quan trọng của hệ thống là trang chủ và trang danh 
+sách sản phẩm.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{graphics/test/lighthouse_home.png}
+    \caption{Kiểm thử hiệu năng trang chủ}
+    \label{fig:lighthouse_home}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{graphics/test/lighthouse_product.png}
+    \caption{Kiểm thử hiệu năng trang danh sách sản phẩm}
+    \label{fig:lighthouse_product}
+\end{figure}
+
+Các chỉ số đo lường trong kết quả Lighthouse:
+
+\begin{itemize}
+    \item \textbf{First Contentful Paint (FCP)}: Thời gian từ khi 
+    người dùng mở trang cho đến khi trình duyệt hiển thị nội dung 
+    đầu tiên (văn bản, ảnh, canvas...).
+    
+    \item \textbf{Largest Contentful Paint (LCP)}: Thời gian để 
+    hiển thị phần tử nội dung lớn nhất trong vùng nhìn thấy, 
+    thường là ảnh sản phẩm hoặc banner.
+    
+    \item \textbf{Total Blocking Time (TBT)}: Tổng thời gian 
+    trình duyệt bị chặn bởi các tác vụ JavaScript dài (trên 50ms), 
+    khiến người dùng không thể tương tác.
+    
+    \item \textbf{Cumulative Layout Shift (CLS)}: Mức độ thay đổi 
+    bố cục khi trang tải, ví dụ văn bản bị đẩy xuống do ảnh 
+    load chậm.
+    
+    \item \textbf{Speed Index}: Tốc độ trung bình mà nội dung 
+    hiển thị trên màn hình trong quá trình tải trang, chỉ số 
+    càng thấp càng tốt.
+\end{itemize}
+
+% ─────────────────────────────────────────
+\subsection{Kiểm thử chức năng giao diện}
+
+Kiểm thử giao diện được thực hiện trên các chức năng chính của 
+hệ thống, mỗi nhóm chức năng chọn một màn hình đại diện.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{graphics/test/ui_login.png}
+    \caption{Kiểm thử giao diện đăng nhập}
+    \label{fig:ui_login}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{graphics/test/ui_product.png}
+    \caption{Kiểm thử giao diện danh sách sản phẩm}
+    \label{fig:ui_product}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{graphics/test/ui_cart.png}
+    \caption{Kiểm thử giao diện giỏ hàng và thanh toán}
+    \label{fig:ui_cart}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{graphics/test/ui_tryon.png}
+    \caption{Kiểm thử giao diện AI Virtual Try-On}
+    \label{fig:ui_tryon}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{graphics/test/ui_ar.png}
+    \caption{Kiểm thử giao diện AR Try-On}
+    \label{fig:ui_ar}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{graphics/test/ui_chatbot.png}
+    \caption{Kiểm thử giao diện Chatbot tư vấn}
+    \label{fig:ui_chatbot}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{graphics/test/ui_admin.png}
+    \caption{Kiểm thử giao diện quản trị hệ thống}
+    \label{fig:ui_admin}
+\end{figure}
+
+% ─────────────────────────────────────────
+\subsection{Kiểm thử trên nhiều thiết bị}
+
+Sử dụng extension Responsive Viewer trên Chrome để kiểm tra tính 
+tương thích giao diện trên nhiều loại thiết bị:
+
+\begin{itemize}
+    \item \textbf{Điện thoại}: iPhone 14, iPhone 14 Plus, 
+    iPhone SE, Samsung Galaxy S8, Galaxy S20
+    \item \textbf{Máy tính bảng}: iPad Mini, iPad Air, iPad Pro
+    \item \textbf{Máy tính}: Màn hình 1920$\times$1080px, 
+    MacBook Pro 15 inch
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{graphics/test/responsive_mobile.png}
+    \caption{Kiểm thử giao diện trên thiết bị di động}
+    \label{fig:responsive_mobile}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{graphics/test/responsive_tablet.png}
+    \caption{Kiểm thử giao diện trên máy tính bảng}
+    \label{fig:responsive_tablet}
+\end{figure}
+
+Riêng chức năng \textbf{AR Try-On} được kiểm thử trực tiếp trên 
+thiết bị thật do yêu cầu quyền truy cập camera thực tế, không 
+thể giả lập qua Responsive Viewer.
+
+% ─────────────────────────────────────────
+\subsection{Kiểm thử trên nhiều trình duyệt}
+
+Hệ thống được kiểm thử trên các trình duyệt phổ biến nhằm đảm 
+bảo tính tương thích và hiển thị nhất quán.
+
+\begin{table}[H]
+\centering
+\caption{Kết quả kiểm thử trên nhiều trình duyệt}
+\label{tab:browser_test}
+\begin{tabular}{|c|l|l|c|}
+\hline
+\textbf{STT} & \textbf{Trình duyệt} & \textbf{Chức năng kiểm tra} 
+& \textbf{Kết quả} \\
+\hline
+1 & Google Chrome & Toàn bộ chức năng & Đạt \\
+\hline
+2 & Microsoft Edge & Giao diện, mua sắm, chatbot & Đạt \\
+\hline
+3 & Mozilla Firefox & Giao diện, mua sắm, chatbot & Đạt \\
+\hline
+\end{tabular}
+\end{table}
+
+\textit{Lưu ý: Chức năng AR Try-On sử dụng Snap Camera Kit hoạt 
+động tốt nhất trên Google Chrome do yêu cầu hỗ trợ WebGL và 
+quyền truy cập camera của trình duyệt.}
