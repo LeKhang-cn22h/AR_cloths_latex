@@ -11,7 +11,8 @@
 \urlstyle{rm}
 \usepackage{geometry}
 \usepackage{fancybox}
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
+\definecolor{header}{RGB}{0,102,204}
 \usepackage{anyfontsize}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{enumitem}
@@ -25,6 +26,7 @@
 \usepackage[acronym]{glossaries}
 \usepackage{tocloft}
 \usepackage{setspace}
+\usepackage{tabularx}
 \onehalfspacing
 \usepackage{indentfirst}
 \usepackage{caption}
@@ -33,6 +35,7 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{fancyhdr}
 
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 % === GEOMETRY (theo đúng hướng dẫn) ===
 \geometry{
     a4paper,

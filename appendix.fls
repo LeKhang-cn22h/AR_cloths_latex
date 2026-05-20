@@ -1,0 +1,4 @@
+PWD D:\AR_cloths_Latex
+INPUT C:\Users\Acer\AppData\Local\MiKTeX\miktex\data\le\xetex\xelatex.fmt
+INPUT appendix.tex
+OUTPUT appendix.log

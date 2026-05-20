@@ -38,29 +38,6 @@ Xem lịch sử đơn hàng
     \item Sau khi thanh toán, khách hàng có thể xem lịch sử đơn hàng
     \item Backend hiển thị danh sách đơn hàng của khách hàng
 \end{enumerate}
-\subsection{Sơ đồ tuần tự thử đồ thực tế tăng cường (AR Try-On)}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{graphics/main/chapter2/section2/sequence_ar_tryon.png}
-    \caption{Sơ đồ tuần tự thử đồ AR}
-    \label{fig:sequence_ar_tryon}
-\end{figure}
-
-\subsubsection{Mục đích}
-Sequence diagram này mô tả luồng tương tác giữa người dùng và hệ thống trong quá trình thử đồ thực tế tăng cường. Sơ đồ thể hiện các bước từ khi khởi tạo Snap Camera Kit, xác thực quyền camera, theo dõi cơ thể bằng ObjectTracking3D, render model GLB trang phục lên cơ thể real-time, đến khi người dùng chuyển đổi trang phục qua Carousel 3D hoặc lưu kết quả.
-
-\subsubsection{Mô tả luồng hoạt động}
-\begin{enumerate}[noitemsep]
-    \item Người dùng truy cập trang AR Try-On
-    \item Frontend gọi \texttt{GET /garments/\{id\}/lens-link} lấy \texttt{lens\_url} kèm \texttt{item\_index}
-    \item Frontend khởi tạo CameraKit session và apply Lens với \texttt{launchParams: \{item\_index\}}
-    \item Hệ thống yêu cầu quyền truy cập camera, người dùng cấp quyền
-    \item Snap Camera Kit bật camera stream và khởi động ObjectTracking3D trong Lens
-    \item ObjectTracking3D chuyển trạng thái từ \texttt{BODY\_TRACKING\_LOST} → \texttt{BODY\_TRACKING\_DETECTED} → \texttt{BODY\_TRACKING\_IN\_VIEW}
-    \item Hệ thống render model GLB trang phục chính xác lên cơ thể người dùng theo thời gian thực
-    \item Người dùng vuốt để chuyển trang phục, Carousel3D gọi \texttt{EnableChildByIndex} load model GLB mới
-    \item (Tùy chọn) Người dùng lưu ảnh kết quả về thiết bị
-\end{enumerate}
 
 \subsection{Sơ đồ tuần tự thử đồ ảo AI (Virtual Try-On)}
 \begin{figure}[H]

@@ -27,38 +27,6 @@ Người dùng bắt đầu bằng việc lựa chọn phương thức thanh to�
 \end{itemize}
 
 Sau khi hoàn tất thanh toán, người dùng có thể xem lịch sử đơn hàng. Trong trường hợp người dùng có nhu cầu hủy đơn, hệ thống tiếp nhận yêu cầu hủy và chuyển cho Admin xử lý. Sau khi Admin xác nhận, hệ thống cập nhật lại trạng thái đơn hàng tương ứng và thông báo kết quả cho người dùng.
-\subsection{Activity Diagram thử đồ thực tế tăng cường (AR Try-On)}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\textwidth]{graphics/main/chapter2/section2/activity_ar_tryon.png}
-    \caption{Activity Diagram thử đồ AR}
-    \label{fig:activity_ar_tryon}
-\end{figure}
-
-\textbf{Mục đích:}\\
-Chức năng thử đồ thực tế tăng cường (AR Try-On) cho phép người dùng xem trước trang phục trực tiếp lên cơ thể qua camera theo thời gian thực ngay trên trình duyệt web. Hệ thống ứng dụng Snap Camera Kit kết hợp Lens Studio với công nghệ ObjectTracking3D để theo dõi chuyển động cơ thể và render model 3D (GLB) trang phục chính xác theo các điểm khớp xương. Người dùng có thể chuyển đổi linh hoạt giữa các mẫu trang phục thông qua thao tác vuốt trên Carousel 3D mà không cần rời khỏi trang.
-
-\textbf{Luồng hoạt động:}\\
-Người dùng truy cập trang AR Try-On, hệ thống tải Snap Camera Kit và kiểm tra khả năng hỗ trợ WebAssembly/WebGL của trình duyệt. Nếu trình duyệt không tương thích, hệ thống thông báo lỗi và đề xuất sử dụng tính năng AI Virtual Try-On thay thế.
-
-Sau khi người dùng cấp quyền camera, Lens AR được khởi động và ObjectTracking3D bắt đầu theo dõi cơ thể. Khi phát hiện cơ thể ở trạng thái \texttt{BODY\_TRACKING\_IN\_VIEW}, hệ thống render model GLB trang phục lên đúng vị trí cơ thể theo thời gian thực. Người dùng có thể vuốt để chuyển sang trang phục khác qua Carousel 3D, hoặc lưu/chia sẻ kết quả thử đồ.
-\subsection{Activity Diagram thử đồ ảo AI (Virtual Try-On)}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\textwidth]{graphics/main/chapter2/section2/activity_ai_tryon.png}
-    \caption{Activity Diagram thử đồ ảo AI (FitDiT)}
-    \label{fig:activity_ai_tryon}
-\end{figure}
-
-\textbf{Mục đích:}\\
-Chức năng AI Virtual Try-On cho phép người dùng xem trước trang phục ảo trên ảnh cá nhân thông qua mô hình FitDiT~\cite{fitdit_paper} --- một Diffusion Transformer tiên tiến dựa trên nền tảng Stable Diffusion 3. Hệ thống tự động xử lý ảnh đầu vào qua pipeline DWpose (phát hiện keypoint cơ thể) và Human Parsing (tách vùng trang phục), sau đó sinh ảnh thử đồ chất lượng cao với độ phân giải lên đến 1536$\times$2048. Kết quả được lưu vào lịch sử phiên thử đồ kèm gợi ý size phù hợp.
-
-\textbf{Luồng hoạt động:}\\
-Người dùng chọn trang phục và nhấn ``Thử đồ AI'', hệ thống hiển thị giao diện upload ảnh toàn thân. Ảnh được kiểm tra tính hợp lệ trước khi upload lên Cloudinary để lấy \texttt{person\_image\_url}.
-
-Hệ thống gọi API \texttt{POST /photo-tryon/tryon}, khởi động pipeline xử lý gồm 3 bước tuần tự: DWpose phát hiện keypoint cơ thể, Human Parsing tách vùng trang phục cần thay thế, và FitDiT Diffusion Transformer sinh ảnh kết quả. Trong trường hợp GPU quá tải hoặc timeout, hệ thống thông báo và yêu cầu thử lại. Khi thành công, ảnh kết quả được lưu vào bảng \texttt{photo\_tryon\_sessions} và hiển thị kèm gợi ý size dựa trên \texttt{fit\_warnings}. Người dùng có thể tiến hành đặt hàng trực tiếp từ trang kết quả.
-
-%Activity Diagram admin đánh giá sản phẩm
 \subsection{Activity Diagram admin quản lý đánh giá}
 
 \begin{figure}[H]
