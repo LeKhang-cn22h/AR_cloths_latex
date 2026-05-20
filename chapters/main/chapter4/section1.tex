@@ -38,12 +38,6 @@ Hệ thống sử dụng hai loại cơ sở dữ liệu:
 \subsection{Vector Database}
 Hệ thống sử dụng pgvector (extension của PostgreSQL) để lưu trữ vector embeddings (dimension 1536) và hỗ trợ tìm kiếm ngữ nghĩa, phục vụ cho cơ chế truy xuất tri thức (RAG) trong hệ thống hỏi đáp của chatbot tư vấn thời trang.
 
-\textbf{Cấu hình:}
-\begin{itemize}[noitemsep]
-\item Bảng \texttt{product_embeddings}: lưu vector 1536 chiều cho sản phẩm.
-\item Tìm kiếm tương tự bằng cosine distance.
-\end{itemize}
-
 \subsection{AI Chatbot}
 Hệ thống sử dụng Ollama để triển khai mô hình ngôn ngữ lớn qwen2.5:7b cho chatbot tư vấn thời trang. Chatbot có khả năng tiếp nhận câu hỏi tự nhiên từ người dùng, kết hợp ngữ cảnh truy xuất từ pgvector (RAG) để tạo ra phản hồi phù hợp về sản phẩm, size, và xu hướng thời trang.
 
@@ -139,8 +133,6 @@ Dưới đây là phần Kết luận chung cho đề tài hệ thống Virtual 
 
 \textbf{Hướng phát triển:}
 \begin{itemize}[noitemsep]
-\item Tối ưu tốc độ inference của FitDiT (giảm num_steps, sử dụng TensorRT) hoặc chuyển sang GPU cloud (RunPod/Vast.ai).
-\item Hoàn thiện pipeline smart try-on: tự động phát hiện ảnh full-body hay chỉ có mặt → face swap nếu cần → fit assessment → FitDiT.
 \item Mở rộng kho dữ liệu 3D model (GLB) cho nhiều loại trang phục hơn.
 \item Triển khai hệ thống lên cloud (AWS/GCP) với Docker/Kubernetes để đảm bảo tính sẵn sàng và mở rộng.
 \item Phát triển ứng dụng di động (React Native/Flutter) tích hợp Camera Kit để tăng trải nghiệm AR.
