@@ -1,7 +1,7 @@
 \section{Sơ đồ Class (Class Diagram)}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{graphics/main/chapter2/section2/class23.jpg}
+    \includegraphics[width=1\textwidth]{graphics/main/chapter2/section2/class23.png}
     \caption{Sơ đồ lớp thiết kế website bán hàng mỹ phẩm}
     \label{fig:class_diagram}
 \end{figure}
@@ -134,7 +134,7 @@ user\_id & int (FK) & Tham chiếu đến bảng Users(id). \\ \hline
 total\_price & decimal & Tổng giá trị đơn hàng. \\ \hline
 order\_date & timestamp & Thời điểm đặt hàng. \\ \hline
 payment\_status & varchar & Trạng thái thanh toán (pending, paid, failed). \\ \hline
-payment\_method & varchar & Phương thức thanh toán (COD, VNPay). \\ \hline
+payment\_method & varchar & Phương thức thanh toán (COD,Stripe). \\ \hline
 transaction\_no & varchar & Mã giao dịch từ cổng thanh toán. \\ \hline
 bank\_code & varchar & Mã ngân hàng thanh toán. \\ \hline
 payment\_note & text & Ghi chú thanh toán. \\ \hline

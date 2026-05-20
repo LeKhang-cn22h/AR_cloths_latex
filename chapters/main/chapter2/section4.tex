@@ -6,20 +6,20 @@
 \subsection{Activity Diagram xử lý thanh toán}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{graphics/main/chapter2/section2/activity_vnpay.jpg}
-    \caption{Activity Diagram thanh toán qua VNPAY}
-    \label{fig:activity_vnpay}
+    \includegraphics[width=0.8\textwidth]{graphics/main/chapter2/section2/activity_Stripe.png}
+    \caption{Activity Diagram thanh toán qua Stripe}
+    \label{fig:activity_Stripe}
 \end{figure}
 
 \textbf{Mục đích:}  
-Chức năng thanh toán và quản lý đơn hàng nhằm hỗ trợ người dùng hoàn tất quá trình mua hàng trên hệ thống một cách thuận tiện và an toàn. Hệ thống cung cấp hai hình thức thanh toán là thanh toán khi nhận hàng (COD) và thanh toán trực tuyến qua cổng VNPay, giúp người dùng linh hoạt lựa chọn phương thức phù hợp. Đồng thời, chức năng này cho phép người dùng theo dõi lịch sử đơn hàng và gửi yêu cầu hủy đơn khi cần thiết, hỗ trợ Admin quản lý và xử lý trạng thái đơn hàng một cách hiệu quả.
+Chức năng thanh toán và quản lý đơn hàng nhằm hỗ trợ người dùng hoàn tất quá trình mua hàng trên hệ thống một cách thuận tiện và an toàn. Hệ thống cung cấp hai hình thức thanh toán là thanh toán khi nhận hàng (COD) và thanh toán trực tuyến qua cổng Stripe, giúp người dùng linh hoạt lựa chọn phương thức phù hợp. Đồng thời, chức năng này cho phép người dùng theo dõi lịch sử đơn hàng và gửi yêu cầu hủy đơn khi cần thiết, hỗ trợ Admin quản lý và xử lý trạng thái đơn hàng một cách hiệu quả.
 
 \textbf{Luồng hoạt động:}  
 Người dùng bắt đầu bằng việc lựa chọn phương thức thanh toán cho đơn hàng.  
 
 \begin{itemize}
     \item Trường hợp người dùng chọn thanh toán khi nhận hàng (COD), hệ thống tiến hành tạo đơn hàng và hiển thị kết quả thanh toán cho người dùng.
-    \item Trường hợp người dùng chọn thanh toán qua VNPay, hệ thống chuyển hướng người dùng đến cổng thanh toán VNPay để thực hiện giao dịch. Sau khi quá trình thanh toán được xử lý:
+    \item Trường hợp người dùng chọn thanh toán qua Stripe, hệ thống chuyển hướng người dùng đến cổng thanh toán Stripe để thực hiện giao dịch. Sau khi quá trình thanh toán được xử lý:
     \begin{itemize}
         \item Nếu giao dịch thành công, hệ thống cập nhật trạng thái đơn hàng và hiển thị kết quả thanh toán thành công.
         \item Nếu giao dịch thất bại, hệ thống thông báo kết quả thất bại để người dùng có thể thực hiện lại hoặc lựa chọn phương thức thanh toán khác.
@@ -27,23 +27,37 @@ Người dùng bắt đầu bằng việc lựa chọn phương thức thanh to�
 \end{itemize}
 
 Sau khi hoàn tất thanh toán, người dùng có thể xem lịch sử đơn hàng. Trong trường hợp người dùng có nhu cầu hủy đơn, hệ thống tiếp nhận yêu cầu hủy và chuyển cho Admin xử lý. Sau khi Admin xác nhận, hệ thống cập nhật lại trạng thái đơn hàng tương ứng và thông báo kết quả cho người dùng.
-
-\subsection{Activity Diagram phân tích da mặt}
+\subsection{Activity Diagram thử đồ thực tế tăng cường (AR Try-On)}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{graphics/main/chapter2/section2/activity_acne.jpg}
-    \caption{Activity Diagram phân tích da mặt}
-    \label{fig:activity_acne}
+    \includegraphics[width=0.6\textwidth]{graphics/main/chapter2/section2/activity_ar_tryon.png}
+    \caption{Activity Diagram thử đồ AR}
+    \label{fig:activity_ar_tryon}
 \end{figure}
 
+\textbf{Mục đích:}\\
+Chức năng thử đồ thực tế tăng cường (AR Try-On) cho phép người dùng xem trước trang phục trực tiếp lên cơ thể qua camera theo thời gian thực ngay trên trình duyệt web. Hệ thống ứng dụng Snap Camera Kit kết hợp Lens Studio với công nghệ ObjectTracking3D để theo dõi chuyển động cơ thể và render model 3D (GLB) trang phục chính xác theo các điểm khớp xương. Người dùng có thể chuyển đổi linh hoạt giữa các mẫu trang phục thông qua thao tác vuốt trên Carousel 3D mà không cần rời khỏi trang.
 
-\textbf{Mục đích:}  
-Chức năng phân tích da mặt bằng AI nhằm hỗ trợ người dùng nhận biết tình trạng da và mức độ mụn thông qua hình ảnh khuôn mặt được tải lên hệ thống. Hệ thống ứng dụng công nghệ MediaPipe để nhận diện khuôn mặt và các điểm đặc trưng, kết hợp mô hình CNN để phân tích tình trạng mụn trên từng vùng da. Dựa trên kết quả phân tích, hệ thống đưa ra lời khuyên chăm sóc da và gợi ý sản phẩm phù hợp, giúp người dùng lựa chọn sản phẩm hiệu quả và cá nhân hóa trải nghiệm mua sắm.
+\textbf{Luồng hoạt động:}\\
+Người dùng truy cập trang AR Try-On, hệ thống tải Snap Camera Kit và kiểm tra khả năng hỗ trợ WebAssembly/WebGL của trình duyệt. Nếu trình duyệt không tương thích, hệ thống thông báo lỗi và đề xuất sử dụng tính năng AI Virtual Try-On thay thế.
 
-\textbf{Luồng hoạt động:}  
-Người dùng thực hiện tải ảnh khuôn mặt lên hệ thống. Hệ thống sử dụng MediaPipe để nhận diện khuôn mặt và xác định các vùng da chính gồm trán, má trái/phải, mũi và cằm. Sau đó, từng vùng da được cắt ra và đưa vào mô hình CNN để phân tích tình trạng mụn.  
+Sau khi người dùng cấp quyền camera, Lens AR được khởi động và ObjectTracking3D bắt đầu theo dõi cơ thể. Khi phát hiện cơ thể ở trạng thái \texttt{BODY\_TRACKING\_IN\_VIEW}, hệ thống render model GLB trang phục lên đúng vị trí cơ thể theo thời gian thực. Người dùng có thể vuốt để chuyển sang trang phục khác qua Carousel 3D, hoặc lưu/chia sẻ kết quả thử đồ.
+\subsection{Activity Diagram thử đồ ảo AI (Virtual Try-On)}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{graphics/main/chapter2/section2/activity_ai_tryon.png}
+    \caption{Activity Diagram thử đồ ảo AI (FitDiT)}
+    \label{fig:activity_ai_tryon}
+\end{figure}
 
-Kết quả phân tích (bao gồm số lượng, vị trí và mức độ mụn) được hệ thống tổng hợp và hiển thị cho người dùng. Dựa trên kết quả này, hệ thống đồng thời thực hiện hai chức năng: đưa ra lời khuyên chăm sóc da phù hợp và gợi ý các sản phẩm tương ứng với tình trạng da của người dùng.
+\textbf{Mục đích:}\\
+Chức năng AI Virtual Try-On cho phép người dùng xem trước trang phục ảo trên ảnh cá nhân thông qua mô hình FitDiT~\cite{fitdit_paper} --- một Diffusion Transformer tiên tiến dựa trên nền tảng Stable Diffusion 3. Hệ thống tự động xử lý ảnh đầu vào qua pipeline DWpose (phát hiện keypoint cơ thể) và Human Parsing (tách vùng trang phục), sau đó sinh ảnh thử đồ chất lượng cao với độ phân giải lên đến 1536$\times$2048. Kết quả được lưu vào lịch sử phiên thử đồ kèm gợi ý size phù hợp.
+
+\textbf{Luồng hoạt động:}\\
+Người dùng chọn trang phục và nhấn ``Thử đồ AI'', hệ thống hiển thị giao diện upload ảnh toàn thân. Ảnh được kiểm tra tính hợp lệ trước khi upload lên Cloudinary để lấy \texttt{person\_image\_url}.
+
+Hệ thống gọi API \texttt{POST /photo-tryon/tryon}, khởi động pipeline xử lý gồm 3 bước tuần tự: DWpose phát hiện keypoint cơ thể, Human Parsing tách vùng trang phục cần thay thế, và FitDiT Diffusion Transformer sinh ảnh kết quả. Trong trường hợp GPU quá tải hoặc timeout, hệ thống thông báo và yêu cầu thử lại. Khi thành công, ảnh kết quả được lưu vào bảng \texttt{photo\_tryon\_sessions} và hiển thị kèm gợi ý size dựa trên \texttt{fit\_warnings}. Người dùng có thể tiến hành đặt hàng trực tiếp từ trang kết quả.
+
 %Activity Diagram admin đánh giá sản phẩm
 \subsection{Activity Diagram admin quản lý đánh giá}
 

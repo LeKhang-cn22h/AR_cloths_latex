@@ -180,20 +180,20 @@ Hệ thống hỗ trợ nhiều hình thức thanh toán khác nhau như thanh t
 Trang quản lý đơn hàng cho phép người dùng theo dõi danh sách các đơn hàng đã đặt và trạng thái xử lý của từng đơn. Giao diện hỗ trợ lọc đơn hàng theo trạng thái nhằm giúp người dùng thuận tiện tra cứu và quản lý lịch sử mua sắm.
 
 Mỗi đơn hàng được hiển thị kèm theo các thông tin cơ bản như mã đơn hàng, thời gian đặt hàng, trạng thái xử lý, phương thức thanh toán và tổng giá trị đơn hàng. Tại mỗi đơn hàng, người dùng có thể thực hiện một số thao tác phù hợp với trạng thái hiện tại của đơn, chẳng hạn như hủy đơn khi đơn chưa được xử lý hoặc tiếp tục thanh toán đối với các đơn chưa hoàn tất giao dịch.
-\subsection{Giao diện chuyển giao diện sang vnpay để thanh toán}
+\subsection{Giao diện chuyển giao diện sang Stripe để thanh toán}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{graphics/main/chapter3/vnpay.jpg}
-    \caption{Giao diện chuyển giao diện sang vnpay để thanh toán}
-    \label{fig:vnpay_ui}
+    \includegraphics[width=1\textwidth]{graphics/main/chapter3/Stripe.jpg}
+    \caption{Giao diện chuyển giao diện sang Stripe để thanh toán}
+    \label{fig:Stripe_ui}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{graphics/main/chapter3/tinh_vnpay.jpg}
+    \includegraphics[width=1\textwidth]{graphics/main/chapter3/tinh_Stripe.jpg}
     \caption{Giao diện nhập tài khoản thanh toán}
     \label{fig:payment_account_ui}
 \end{figure}
-Khi người dùng lựa chọn thanh toán trực tuyến qua VNPay, hệ thống sẽ chuyển hướng đến cổng thanh toán của VNPay. Giao diện thanh toán được thiết kế theo tiêu chuẩn bảo mật, cung cấp nhiều phương thức thanh toán khác nhau như thẻ nội địa, thẻ quốc tế và các hình thức thanh toán điện tử.
+Khi người dùng lựa chọn thanh toán trực tuyến qua Stripe, hệ thống sẽ chuyển hướng đến cổng thanh toán của Stripe. Giao diện thanh toán được thiết kế theo tiêu chuẩn bảo mật, cung cấp nhiều phương thức thanh toán khác nhau như thẻ nội địa, thẻ quốc tế và các hình thức thanh toán điện tử.
 
 Trang thanh toán hiển thị đầy đủ thông tin đơn hàng để người dùng kiểm tra trước khi xác nhận giao dịch. Quá trình thanh toán được thực hiện thông qua các bước xác thực nhằm đảm bảo tính an toàn và bảo mật thông tin cho người dùng.
 
@@ -211,27 +211,6 @@ Trang thanh toán hiển thị đầy đủ thông tin đơn hàng để ngườ
 Hệ thống tích hợp chatbot AI nhằm hỗ trợ tư vấn sản phẩm và giải đáp thắc mắc cho người dùng trong quá trình mua sắm. Chatbot được hiển thị dưới dạng cửa sổ trò chuyện trên giao diện website, cho phép người dùng đặt câu hỏi và nhận phản hồi theo thời gian thực.
 
 Dựa trên nội dung tương tác và nhu cầu của người dùng, chatbot có thể gợi ý các sản phẩm phù hợp, cung cấp thông tin cơ bản về sản phẩm và hỗ trợ người dùng truy cập nhanh đến trang chi tiết sản phẩm. Chức năng chatbot góp phần nâng cao trải nghiệm người dùng và hỗ trợ quá trình ra quyết định mua hàng một cách hiệu quả.
-
-\subsection{Giao diện AI phân tích da mặt}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{graphics/main/chapter3/AI_acne.jpg}
-    \caption{Giao diện AI phân tích da mặt}
-    \label{fig:skin_analysis_ui}
-\end{figure}
-Giao diện phân tích da mặt sử dụng trí tuệ nhân tạo nhằm giúp người dùng nhận biết tình trạng da và mức độ mụn thông qua hình ảnh khuôn mặt được tải lên hệ thống. Giao diện được thiết kế đơn giản, thân thiện với người dùng, bao gồm các thành phần chính như sau:
-\subsection{Giao diện kết quả phân tích da mặt}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{graphics/main/chapter3/ketqua_acne.jpg}
-    \caption{Giao diện kết quả phân tích da mặt}
-    \label{fig:analysis_result_ui}
-\end{figure}
-Giao diện kết quả phân tích da mặt hiển thị chi tiết tình trạng da và mức độ mụn sau khi người dùng tải ảnh khuôn mặt lên hệ thống. Kết quả được trình bày cụ thể, bao gồm các thông tin như số lượng mụn trên từng vùng da (trán, má, mũi, cằm), mức độ mụn tổng thể và lời khuyên chăm sóc da phù hợp.
-
-
-
-
 
 
 \subsection{Giao diện dasboard admin}

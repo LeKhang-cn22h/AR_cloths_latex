@@ -1,11 +1,15 @@
 \section{Hạn chế}
-Mặc dù đã nỗ lực hoàn thiện, tuy nhiên do hạn chế về thời gian cũng như kiến thức chuyên sâu trong lĩnh vực thị giác máy tính, hệ thống vẫn khó tránh khỏi một số thiếu sót cần nhìn nhận khách quan:
+Mặc dù đã nỗ lực hoàn thiện, tuy nhiên do hạn chế về thời gian cũng như kiến thức chuyên sâu trong lĩnh vực thị giác máy tính và học sâu, hệ thống vẫn còn một số thiếu sót cần nhìn nhận khách quan:
 \begin{itemize}[noitemsep]
-    \item \textbf{Độ chính xác của mô hình AI:} Kết quả phân tích da mặt vẫn phụ thuộc khá nhiều vào các yếu tố ngoại cảnh như chất lượng camera của thiết bị, cường độ ánh sáng môi trường và góc chụp của người dùng. Trong một số điều kiện ánh sáng phức tạp, mô hình có thể nhầm lẫn giữa các loại mụn hoặc vết thâm.
+    \item \textbf{Hiệu năng sinh ảnh Virtual Try-On:} Mô hình FitDiT~\cite{fitdit_paper} hiện yêu cầu khoảng 2--3 phút để sinh một ảnh thử đồ với 30 bước inference trên GPU NVIDIA RTX 4060 Laptop 8GB VRAM. Thời gian xử lý này chưa đáp ứng được kỳ vọng trải nghiệm thời gian thực của người dùng. Ngoài ra, module Human Parsing hiện chạy trên CPU do \texttt{onnxruntime} chưa hỗ trợ CUDA, làm tăng thêm độ trễ tổng thể của pipeline.
 
-    \item \textbf{Sự đa dạng của tập dữ liệu (Dataset):} Tập dữ liệu dùng để huấn luyện mô hình CNN hiện tại chủ yếu tập trung vào các loại mụn phổ biến. Hệ thống chưa có khả năng nhận diện sâu các bệnh lý da liễu phức tạp hơn như viêm da cơ địa, nám nội tiết hay các dấu hiệu lão hóa sớm.
+    \item \textbf{Chất lượng đầu vào ảnh người dùng:} Kết quả thử đồ phụ thuộc đáng kể vào chất lượng ảnh đầu vào --- hệ thống yêu cầu ảnh toàn thân rõ nét, đúng tư thế đứng thẳng. Trong trường hợp người dùng chỉ cung cấp ảnh khuôn mặt, tính năng face swap qua InsightFace chưa được triển khai hoàn chỉnh, dẫn đến trải nghiệm không nhất quán.
 
-    \item \textbf{Tối ưu hóa quy trình vận chuyển:} Hệ thống hiện mới chỉ dừng lại ở việc cập nhật trạng thái đơn hàng thủ công từ phía Admin, chưa tích hợp API thực tế với các đơn vị vận chuyển (như Giao Hàng Nhanh, Viettel Post) để tính phí tự động và theo dõi lộ trình thời gian thực.
+    \item \textbf{Hạn chế mô hình AR trên nền tảng web:} Tính năng thử đồ AR qua Snap Camera Kit~\cite{snap_camera_kit_docs} yêu cầu trình duyệt hỗ trợ WebAssembly và WebGL, đồng thời phụ thuộc vào chất lượng camera và điều kiện ánh sáng môi trường. Hệ thống hiện chưa được tối ưu hóa cho thiết bị di động, làm giảm trải nghiệm trên smartphone.
 
-    \item \textbf{Khả năng chịu tải (Scalability):} Mặc dù SQL Server xử lý tốt dữ liệu hiện tại, nhưng khi số lượng người dùng đồng thời tăng lên hàng chục ngàn người cùng lúc thực hiện phân tích ảnh AI, hệ thống có thể đối mặt với thách thức về tài nguyên phần cứng và độ trễ phản hồi.
+    \item \textbf{Độ chính xác gợi ý size:} Thuật toán Fit Assessment hiện dựa thuần túy trên phương pháp Ease Allowance --- so sánh số đo cơ thể với thông số trang phục theo ngưỡng cố định. Hệ thống chưa tính đến các yếu tố như độ co giãn vải, phong cách mặc (fitted vs. oversized) hay sở thích cá nhân của người dùng, dẫn đến gợi ý đôi khi chưa phản ánh đúng cảm giác mặc thực tế.
+
+    \item \textbf{Khả năng chịu tải (Scalability):} Pipeline AI Virtual Try-On yêu cầu tài nguyên GPU đáng kể. Trong môi trường production với nhiều người dùng đồng thời, hệ thống có thể gặp tình trạng hàng đợi dài hoặc timeout. Hiện tại chưa có cơ chế hàng đợi tác vụ (task queue) hay giải pháp triển khai GPU cloud (RunPod, Vast.ai) để xử lý tải cao.
+
+    \item \textbf{Phạm vi dữ liệu chatbot:} Chatbot RAG~\cite{rag_lewis_2020} hoạt động dựa trên knowledge base sản phẩm hiện có trong hệ thống. Chất lượng tư vấn bị giới hạn bởi độ phủ và độ cập nhật của dữ liệu embedding, chưa có cơ chế tự động cập nhật vector khi có sản phẩm mới được thêm vào catalog.
 \end{itemize}

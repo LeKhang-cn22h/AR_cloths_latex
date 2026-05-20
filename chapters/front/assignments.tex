@@ -1,15 +1,38 @@
 \chapter*{Bảng phân chia công việc}
 
-
-
 \renewcommand{\arraystretch}{1.5}
 \begin{longtable}{|c|>{\raggedright\arraybackslash}p{4.5cm}|>{\raggedright\arraybackslash}p{8.5cm}|}
 \hline
-\textbf{STT} & \textbf{Họ và tên - MSSV} & \textbf{Nhiệm vụ được giao} \\ \hline
-1 & Lê Tuấn Khang (2251120420) & Quản lý dự án, rag chatbot hỗ trợ tư vấn khách hàng, cửa hàng, địa chỉ liên lạc, vận chuyển \\ \hline
-2 & Lê Nguyễn Minh Phúc (2251120040) & Chức năng thêm sản phẩm vào giỏ hàng, đặt hàng \\ \hline
-3 & Hồ Huỳnh Nhu (2251120433) & Chức năng thanh toán (VNPAY, COD), phân tích mụn \\ \hline
-4 & Bùi Trọng Vũ (2251120132) & Giao diện trang sản phẩm, Chức năng quản lý danh mục, sản phẩm \\ \hline
-5 & Lê Hà Chí Tâm (2251320031) & Chức năng đánh giá sản phẩm, Giao diện trang Giới thiệu, Liên hệ \\ \hline
+\textbf{STT} & \textbf{Họ và tên -- MSSV} & \textbf{Nhiệm vụ được giao} \\ \hline
+1 & Lê Tuấn Khang (2251120420) &
+\textbf{Backend (FastAPI):}
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=*]
+    \item Quản lý dự án, phân tích và thiết kế hệ thống
+    \item Xây dựng toàn bộ API endpoints, xác thực JWT, tích hợp Firebase Admin
+    \item Tích hợp AI Virtual Try-On (FitDiT): pipeline DWpose + Human Parsing + Diffusion Transformer
+    \item Chức năng gợi ý size (Fit Assessment): thuật toán Ease Allowance, body profile
+    \item Chatbot tư vấn thời trang: kiến trúc RAG, Ollama qwen2.5:7b, pgvector embedding
+    \item Quản lý cửa hàng (stores), địa chỉ (addresses), đánh giá (reviews)
+    \item Tích hợp Cloudinary (lưu trữ media), Stripe (thanh toán), ngrok (dev tunnel)
+    \item Cơ sở dữ liệu Neon PostgreSQL: thiết kế schema, migration, pgvector
+\end{itemize}
+\textbf{Frontend (Nuxt.js):}
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=*]
+    \item Tích hợp AR Try-On: Snap Camera Kit, Lens Studio, ObjectTracking3D, Carousel 3D
+    \item Giao diện AI Virtual Try-On: upload ảnh, hiển thị kết quả FitDiT
+    \item Giao diện gợi ý size: nhập số đo cơ thể, hiển thị fit assessment
+    \item Trang giới thiệu cửa hàng: counters, bản đồ Leaflet
+    \item Tích hợp TanStack vue-query cho data fetching và caching
+\end{itemize} \\ \hline
+2 & Trần Chung Kiên (2251120023) &
+\textbf{Frontend (Nuxt.js, TailwindCSS):}
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=*]
+    \item Giao diện xác thực: đăng nhập Google Sign-In (Firebase Auth), quản lý session Pinia
+    \item Giao diện giỏ hàng: thêm/xóa/cập nhật sản phẩm, tính tổng giá
+    \item Trang sản phẩm: danh sách, lọc theo danh mục, chi tiết sản phẩm
+    \item Giao diện quản lý người dùng: user profile, địa chỉ giao hàng
+    \item Hệ thống voucher: áp dụng mã giảm giá, kiểm tra điều kiện
+    \item Trang quản trị Admin: dashboard, quản lý sản phẩm, đơn hàng, danh mục
+    \item Kết nối Firebase Firestore: collections sản phẩm, đơn hàng, voucher
+\end{itemize} \\ \hline
 \end{longtable}
-

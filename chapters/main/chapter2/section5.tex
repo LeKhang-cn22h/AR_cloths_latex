@@ -3,12 +3,12 @@
 \subsection{Sơ đồ tuần tự xử lý thanh toán}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{graphics/main/chapter2/section2/sequence_vnpay.jpg}
+    \includegraphics[width=0.8\textwidth]{graphics/main/chapter2/section2/sequence_Stripe.png}
     \caption{Sơ đồ tuần tự xử lý thanh toán}
-    \label{fig:sequence_vnpay}
+    \label{fig:sequence_Stripe}
 \end{figure}
 \subsubsection{Mục đích}
-Sequence diagram này mô tả quy trình thanh toán trực tuyến của hệ thống với hai phương thức: thanh toán khi nhận hàng (COD) và thanh toán qua cổng VNPay. Sơ đồ thể hiện tương tác giữa khách hàng, hệ thống backend và cổng thanh toán VNPay trong suốt quá trình đặt hàng và thanh toán.
+Sequence diagram này mô tả quy trình thanh toán trực tuyến của hệ thống với hai phương thức: thanh toán khi nhận hàng (COD) và thanh toán qua cổng Stripe. Sơ đồ thể hiện tương tác giữa khách hàng, hệ thống backend và cổng thanh toán Stripe trong suốt quá trình đặt hàng và thanh toán.
 
 \subsubsection{Mô tả luồng hoạt động}
 Luồng thanh toán COD
@@ -19,13 +19,13 @@ Luồng thanh toán COD
     \item Backend hiển thị kết quả thanh toán COD cho khách hàng
 \end{enumerate}
 
-Luồng thanh toán VNPay
+Luồng thanh toán Stripe
 \begin{enumerate}[noitemsep]
-    \item Khách hàng chọn phương thức thanh toán VNPay
-    \item Backend chuyển hướng khách hàng đến cổng thanh toán VNPay
-    \item VNPay hiển thị giao diện thanh toán cho khách hàng
-    \item Khách hàng thực hiện thanh toán trên VNPay
-    \item VNPay trả kết quả giao dịch (thành công/thất bại) về Backend
+    \item Khách hàng chọn phương thức thanh toán Stripe
+    \item Backend chuyển hướng khách hàng đến cổng thanh toán Stripe
+    \item Stripe hiển thị giao diện thanh toán cho khách hàng
+    \item Khách hàng thực hiện thanh toán trên Stripe
+    \item Stripe trả kết quả giao dịch (thành công/thất bại) về Backend
     \item Backend xử lý kết quả:
     \begin{itemize}[noitemsep]
         \item Nếu thanh toán thành công: Backend hiển thị kết quả thành công
@@ -38,31 +38,53 @@ Xem lịch sử đơn hàng
     \item Sau khi thanh toán, khách hàng có thể xem lịch sử đơn hàng
     \item Backend hiển thị danh sách đơn hàng của khách hàng
 \end{enumerate}
-\subsection{Sơ đồ tuần tự phân tích da mặt}
+\subsection{Sơ đồ tuần tự thử đồ thực tế tăng cường (AR Try-On)}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{graphics/main/chapter2/section2/sequence_acne.jpg}
-    \caption{Sơ đồ tuần tự phân tích da mặt}
-    \label{fig:sequence_acne}
+    \includegraphics[width=0.8\textwidth]{graphics/main/chapter2/section2/sequence_ar_tryon.png}
+    \caption{Sơ đồ tuần tự thử đồ AR}
+    \label{fig:sequence_ar_tryon}
 \end{figure}
+
 \subsubsection{Mục đích}
-Sequence diagram này mô tả quy trình phân tích da mặt sử dụng trí tuệ nhân tạo. Sơ đồ thể hiện luồng xử lý từ khi người dùng upload ảnh khuôn mặt, qua các bước nhận diện khuôn mặt bằng MediaPipe, phân tích mụn bằng mô hình CNN, đến khi trả về kết quả phân tích cùng lời khuyên và gợi ý sản phẩm phù hợp.
+Sequence diagram này mô tả luồng tương tác giữa người dùng và hệ thống trong quá trình thử đồ thực tế tăng cường. Sơ đồ thể hiện các bước từ khi khởi tạo Snap Camera Kit, xác thực quyền camera, theo dõi cơ thể bằng ObjectTracking3D, render model GLB trang phục lên cơ thể real-time, đến khi người dùng chuyển đổi trang phục qua Carousel 3D hoặc lưu kết quả.
 
 \subsubsection{Mô tả luồng hoạt động}
-
 \begin{enumerate}[noitemsep]
-    \item Người dùng upload ảnh khuôn mặt lên hệ thống Backend
-    \item Backend gửi ảnh đến MediaPipe để nhận diện khuôn mặt và các điểm landmark
-    \item MediaPipe trả về tọa độ khuôn mặt và các điểm landmark
-    \item Backend cắt từng vùng da mặt (Trán, Má, Mũi, Cằm) dựa trên landmark
-    \item Backend gửi từng vùng da đã cắt đến mô hình CNN để phân tích mụn
-    \item CNN Model phát hiện mụn và trả về kết quả (số lượng, vị trí, mức độ)
-    \item Backend tổng hợp kết quả từ tất cả các vùng da
-    \item Backend trả về kết quả phân tích chi tiết cho người dùng
-    \item Backend đưa ra lời khuyên chăm sóc da dựa trên kết quả phân tích
-    \item Backend gợi ý các sản phẩm phù hợp với tình trạng da của người dùng
+    \item Người dùng truy cập trang AR Try-On
+    \item Frontend gọi \texttt{GET /garments/\{id\}/lens-link} lấy \texttt{lens\_url} kèm \texttt{item\_index}
+    \item Frontend khởi tạo CameraKit session và apply Lens với \texttt{launchParams: \{item\_index\}}
+    \item Hệ thống yêu cầu quyền truy cập camera, người dùng cấp quyền
+    \item Snap Camera Kit bật camera stream và khởi động ObjectTracking3D trong Lens
+    \item ObjectTracking3D chuyển trạng thái từ \texttt{BODY\_TRACKING\_LOST} → \texttt{BODY\_TRACKING\_DETECTED} → \texttt{BODY\_TRACKING\_IN\_VIEW}
+    \item Hệ thống render model GLB trang phục chính xác lên cơ thể người dùng theo thời gian thực
+    \item Người dùng vuốt để chuyển trang phục, Carousel3D gọi \texttt{EnableChildByIndex} load model GLB mới
+    \item (Tùy chọn) Người dùng lưu ảnh kết quả về thiết bị
 \end{enumerate}
 
+\subsection{Sơ đồ tuần tự thử đồ ảo AI (Virtual Try-On)}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{graphics/main/chapter2/section2/sequence_ai_tryon.png}
+    \caption{Sơ đồ tuần tự thử đồ ảo AI (FitDiT)}
+    \label{fig:sequence_ai_tryon}
+\end{figure}
+
+\subsubsection{Mục đích}
+Sequence diagram này mô tả luồng xử lý đầy đủ của tính năng AI Virtual Try-On. Sơ đồ thể hiện quá trình từ khi người dùng upload ảnh toàn thân, qua pipeline FitDiT gồm DWpose phát hiện keypoint, Human Parsing tách vùng trang phục và Diffusion Transformer sinh ảnh, đến khi kết quả được lưu vào \texttt{photo\_tryon\_sessions} và trả về kèm gợi ý size cho người dùng.
+
+\subsubsection{Mô tả luồng hoạt động}
+\begin{enumerate}[noitemsep]
+    \item Người dùng chọn trang phục và nhấn ``Thử đồ AI'', Frontend hiển thị giao diện upload ảnh
+    \item Người dùng upload ảnh toàn thân, Frontend kiểm tra tính hợp lệ của ảnh
+    \item Ảnh hợp lệ được upload lên Cloudinary, nhận về \texttt{person\_image\_url}
+    \item Frontend gọi \texttt{POST /photo-tryon/tryon} với \texttt{person\_image\_url}, \texttt{garment\_id} và \texttt{cloth\_type}
+    \item Backend truy vấn PostgreSQL lấy \texttt{cloth\_image\_url} theo \texttt{garment\_id}
+    \item Backend gọi FitDiT Service với pipeline 3 bước: DWpose phát hiện keypoint cơ thể → Human Parsing tách vùng trang phục → Diffusion Transformer sinh ảnh kết quả
+    \item Trường hợp GPU timeout hoặc quá tải, Backend trả về lỗi 503 và thông báo người dùng thử lại
+    \item Ảnh kết quả được upload lên Cloudinary, Backend lưu phiên thử đồ vào \texttt{photo\_tryon\_sessions} kèm \texttt{fit\_warnings} và \texttt{suggested\_size}
+    \item Frontend hiển thị ảnh kết quả và gợi ý size; người dùng có thể tiến hành đặt hàng
+\end{enumerate}
 %Seque admin quản lýđánh giá sản phẩm
 
 \subsection{Sơ đồ tuần tự Admin quản lý đánh giá sản phẩm}

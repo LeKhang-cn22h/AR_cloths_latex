@@ -63,13 +63,13 @@ Mô hình CNN được sử dụng để phân tích và phân loại các loạ
     \item Ngưỡng tin cậy: 0.5 để lọc các dự đoán có độ tin cậy thấp.
 \end{itemize}
 
-\subsection{Thanh toán VNPay}
-Hệ thống tích hợp cổng thanh toán VNPay trong môi trường sandbox nhằm kiểm thử quy trình thanh toán trực tuyến. Việc tích hợp cho phép mô phỏng luồng thanh toán thực tế trước khi triển khai lên môi trường chính thức.
+\subsection{Thanh toán Stripe}
+Hệ thống tích hợp cổng thanh toán Stripe trong môi trường sandbox nhằm kiểm thử quy trình thanh toán trực tuyến. Việc tích hợp cho phép mô phỏng luồng thanh toán thực tế trước khi triển khai lên môi trường chính thức.
 
 \textbf{Cài đặt:}
 \begin{itemize}[noitemsep]
     \item Sử dụng Ngrok để công khai backend ra môi trường Internet phục vụ callback.
-    \item Cấu hình các URL phản hồi từ VNPay về hệ thống backend.
+    \item Cấu hình các URL phản hồi từ Stripe về hệ thống backend.
 \end{itemize}
 
 \subsection{Frontend - Nuxt}

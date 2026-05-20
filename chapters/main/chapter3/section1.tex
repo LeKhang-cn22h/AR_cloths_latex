@@ -1,210 +1,116 @@
 \section{Cài đặt Hệ thống}
+
 \subsection{Backend}
-Backend được xây dựng bằng FastAPI, đóng vai trò trung tâm trong kiến trúc hệ thống. Thành phần này chịu trách nhiệm xử lý các yêu cầu từ phía người dùng, quản lý nghiệp vụ, xác thực, phân quyền và kết nối với các dịch vụ như cơ sở dữ liệu, AI Service và hệ thống thanh toán.
+Backend được xây dựng bằng FastAPI, đóng vai trò trung tâm trong 
+kiến trúc hệ thống, chịu trách nhiệm xử lý các yêu cầu từ phía 
+người dùng, quản lý nghiệp vụ, xác thực, phân quyền và kết nối 
+với các dịch vụ như cơ sở dữ liệu, AI Service và hệ thống 
+thanh toán.
 
 \textbf{Cài đặt:}
 \begin{itemize}[noitemsep]
-    \item Khởi tạo môi trường ảo và cài đặt các thư viện cần thiết từ file requirements.txt.
-    \item Cấu hình các biến môi trường và thông tin kết nối cơ sở dữ liệu trong file .env.
-    \item Thực hiện migration để khởi tạo cấu trúc dữ liệu.
-    \item Khởi động server và kiểm tra các API tại địa chỉ localhost cổng 8081.
+    \item Khởi tạo môi trường ảo Python 3.11 và cài đặt các thư 
+    viện cần thiết từ file \texttt{requirements.txt}.
+    \item Cấu hình các biến môi trường trong file \texttt{.env} 
+    bao gồm thông tin kết nối Neon PostgreSQL, Firebase, 
+    Cloudinary và Stripe.
+    \item Khởi động ngrok để tạo đường hầm công khai phục vụ 
+    callback thanh toán và kết nối frontend.
+    \item Khởi động server bằng script \texttt{start\_dev.ps1}, 
+    hệ thống sẽ tự động cập nhật URL ngrok vào \texttt{.env} 
+    và khởi chạy Uvicorn tại địa chỉ \texttt{localhost} cổng 8000.
+    \item Kiểm tra các API tại \texttt{http://localhost:8000/docs}.
 \end{itemize}
+
 \subsection{Frontend}
-Frontend được xây dựng bằng Nuxt nhằm phát triển giao diện người dùng thân thiện, hỗ trợ hiển thị phía máy chủ và cải thiện trải nghiệm người dùng. Frontend đóng vai trò hiển thị dữ liệu, tiếp nhận tương tác của người dùng và giao tiếp với backend thông qua các API. Frontend được triển khai trên môi trường cục bộ tại cổng 3000.
+Frontend được xây dựng bằng Nuxt.js 3 theo chế độ Single Page 
+Application (SPA), đóng vai trò hiển thị giao diện người dùng, 
+tiếp nhận tương tác và giao tiếp với backend thông qua các API.
 
 \textbf{Cài đặt:}
 \begin{itemize}[noitemsep]
-    \item Cài đặt các thư viện giao diện và cấu hình kết nối API đến backend.
-    \item Khởi động server phát triển và truy cập hệ thống tại localhost cổng 3000.
+    \item Cài đặt các thư viện cần thiết bằng lệnh 
+    \texttt{yarn install}.
+    \item Cấu hình kết nối API đến backend và các biến môi 
+    trường Firebase trong file \texttt{.env}.
+    \item Khởi động server phát triển bằng lệnh \texttt{yarn dev} 
+    và truy cập hệ thống tại \texttt{http://localhost:3000}.
 \end{itemize}
-\subsection{Database}
-Hệ thống sử dụng:
-Neon: PostgreSQL được sử dụng làm cơ sở dữ liệu chính để lưu trữ dữ liệu nghiệp vụ, bao gồm thông tin người dùng, lịch sử tương tác, kết quả phân tích da và các dữ liệu liên quan đến thanh toán. Việc sử dụng Neon giúp đảm bảo hiệu suất cao và khả năng mở rộng linh hoạt cho hệ thống.
-Firebase: Authentication được sử dụng để quản lý xác thực người dùng, cung cấp các phương thức đăng nhập đa dạng như email/password, Google, Facebook và Apple. Firebase Authentication giúp đơn giản hóa quá trình quản lý người dùng và tăng cường bảo mật cho hệ thống. Firestore được sử dụng để lưu trữ dữ liệu phi cấu trúc như sản phẩm,loại sản phẩm, đơn hàng, giỏ hàng, khuyến mãi, cấu hình giới thiệu.
-Dbreaver CE: Công cụ quản lý cơ sở dữ liệu được sử dụng để trực quan hóa và quản lý dữ liệu trong Neon. Dbeaver CE hỗ trợ kết nối đến nhiều loại cơ sở dữ liệu khác nhau, giúp việc truy vấn, chỉnh sửa và theo dõi dữ liệu trở nên dễ dàng hơn.
-cloudinary: Dịch vụ lưu trữ đám mây được sử dụng để lưu trữ các tệp tin đa phương tiện như ảnh đại diện người dùng, ảnh sản phẩm và các tài liệu liên quan đến hỗ trợ khách hàng. Cloudinary cung cấp khả năng quản lý và tối ưu hóa hình ảnh hiệu quả, giúp cải thiện tốc độ tải trang và trải nghiệm người dùng.
 
-\subsection{Vector Database}
-pgvector trong Neon dùng được sử dụng để lưu trữ các vector embeddings và hỗ trợ tìm kiếm ngữ nghĩa, phục vụ cho cơ chế truy xuất tri thức trong hệ thống hỏi đáp dựa trên ngữ cảnh. Thành phần này giúp chatbot đưa ra câu trả lời chính xác hơn nhờ khai thác tri thức đã được lưu trữ.
+\subsection{Cơ sở dữ liệu}
+Hệ thống sử dụng hai cơ sở dữ liệu song song phục vụ các mục 
+đích khác nhau.
 
-\subsection{AI Chatbot}
-Hệ thống sử dụng Ollama để triển khai mô hình ngôn ngữ lớn cho chatbot tư vấn làm đẹp và chăm sóc da. Chatbot có khả năng tiếp nhận câu hỏi tự nhiên từ người dùng, kết hợp ngữ cảnh truy xuất từ Vector Database để tạo ra phản hồi phù hợp.
+\textbf{Neon PostgreSQL} được sử dụng làm cơ sở dữ liệu quan hệ 
+chính, lưu trữ thông tin người dùng, số đo cơ thể, garment, 
+lịch sử thử đồ ảo, phiên chatbot và vector embeddings sản phẩm. 
+Extension \textbf{pgvector} được kích hoạt để hỗ trợ tìm kiếm 
+ngữ nghĩa phục vụ chatbot RAG.
 
-\textbf{Cấu hình:}
+\textbf{Firebase Firestore} được sử dụng để lưu trữ dữ liệu 
+phi cấu trúc bao gồm sản phẩm, danh mục, đơn hàng, giỏ hàng, 
+voucher và cấu hình giới thiệu cửa hàng. \textbf{Firebase 
+Authentication} đảm nhận xác thực người dùng với các phương thức 
+đăng nhập qua email và Google.
+
+\textbf{DBeaver CE} được sử dụng làm công cụ quản lý và trực 
+quan hóa dữ liệu trong Neon PostgreSQL, hỗ trợ truy vấn, 
+chỉnh sửa và theo dõi dữ liệu trong quá trình phát triển 
+\cite{dbeaver_docs}.
+
+\subsection{Lưu trữ đám mây}
+\textbf{Cloudinary} được sử dụng làm dịch vụ lưu trữ đám mây 
+cho các tệp đa phương tiện bao gồm ảnh sản phẩm, ảnh người dùng 
+và ảnh kết quả AI Virtual Try-On \cite{cloudinary_docs}. 
+Cloudinary cung cấp khả năng quản lý, tối ưu hóa hình ảnh 
+tự động và phân phối nội dung qua CDN, giúp cải thiện tốc độ 
+tải trang.
+
+\subsection{AI Service}
+\textbf{FitDiT} được triển khai như một service độc lập, tích 
+hợp vào backend thông qua module \texttt{fitdit.py}. Model được 
+load lên GPU (NVIDIA RTX 4060 Laptop, 8GB VRAM) khi khởi động 
+server và xử lý các yêu cầu thử đồ ảo qua endpoint 
+\texttt{POST /tryon}.
+
+\textbf{Ollama} được cài đặt trên máy cục bộ để chạy mô hình 
+ngôn ngữ lớn \textbf{Qwen2.5 7B} phục vụ chatbot tư vấn thời 
+trang. Chatbot kết hợp kỹ thuật RAG với pgvector để truy xuất 
+thông tin sản phẩm phù hợp trước khi sinh phản hồi.
+
+\textbf{Cấu hình Ollama:}
 \begin{itemize}[noitemsep]
-    \item Model: llama3.
-    \item Context window: 4096 tokens.
-    \item Temperature: 0.7 nhằm cân bằng giữa tính sáng tạo và độ chính xác.
+    \item Model: \texttt{qwen2.5:7b}
+    \item Triển khai: cục bộ, không cần kết nối Internet
+    \item Tích hợp: qua thư viện \texttt{ollama} 0.6 trong 
+    FastAPI service
 \end{itemize}
 
-\subsection{AI Model CNN}
-Mô hình CNN được sử dụng để phân tích và phân loại các loại mụn trên da từ hình ảnh người dùng cung cấp. Kết quả dự đoán của mô hình được sử dụng làm đầu vào cho hệ thống tư vấn, giúp cá nhân hóa khuyến nghị chăm sóc da.
-
-\textbf{Thông tin chính:}
-\begin{itemize}[noitemsep]
-    \item Framework: PyTorch.
-    \item Kích thước ảnh đầu vào: 224 x 224.
-    \item Ngưỡng tin cậy: 0.5 để lọc các dự đoán có độ tin cậy thấp.
-\end{itemize}
-
-\subsection{Thanh toán VNPay}
-Hệ thống tích hợp cổng thanh toán VNPay trong môi trường sandbox nhằm kiểm thử quy trình thanh toán trực tuyến. Việc tích hợp cho phép mô phỏng luồng thanh toán thực tế trước khi triển khai lên môi trường chính thức.
+\subsection{Thanh toán}
+Hệ thống tích hợp cổng thanh toán \textbf{Stripe} để xử lý 
+thanh toán trực tuyến \cite{stripe_docs}.
 
 \textbf{Cài đặt:}
 \begin{itemize}[noitemsep]
-    \item Sử dụng Ngrok để công khai backend ra môi trường Internet phục vụ callback.
-    \item Cấu hình các URL phản hồi từ VNPay về hệ thống backend.
+    \item Cấu hình Stripe API key trong file \texttt{.env}.
+    \item Sử dụng ngrok để công khai backend ra môi trường 
+    Internet phục vụ Stripe webhook callback.
+    \item Kiểm thử thanh toán trong môi trường sandbox trước 
+    khi triển khai chính thức.
 \end{itemize}
-
-\subsection{Frontend - Nuxt}
-Frontend được phát triển với Nuxt.js, framework Vue.js cho server-side rendering.
 
 \subsection{Quy trình khởi động hệ thống}
 \begin{enumerate}[noitemsep]
-    \item Khởi động các dịch vụ AI, bao gồm Ollama và Qdrant.
-    \item Khởi động AI Service cho mô hình CNN và backend server.
-    \item Khởi động Ngrok để phục vụ callback thanh toán và frontend.
+    \item Khởi động Ollama: \texttt{ollama serve} và load model 
+    \texttt{qwen2.5:7b}.
+    \item Khởi động Backend: chạy \texttt{.\textbackslash 
+    start\_dev.ps1} tại thư mục 
+    \texttt{D:\textbackslash Backend\_AR\_Clothes}.
+    \item Chờ FitDiT load model lên GPU (khoảng 1--2 phút) 
+    đến khi xuất hiện thông báo 
+    \texttt{Application startup complete}.
+    \item Khởi động Frontend: chạy \texttt{yarn dev} tại thư 
+    mục \texttt{D:\textbackslash Web\_Clothes}.
+    \item Truy cập hệ thống tại 
+    \texttt{http://localhost:3000}.
 \end{enumerate}
-
-\subsection{Kiểm tra hệ thống}
-\begin{itemize}[noitemsep]
-    \item Kiểm tra chatbot phản hồi đúng ngữ cảnh câu hỏi.
-    \item Kiểm tra chức năng phân tích ảnh hoạt động chính xác.
-    \item Kiểm tra kết nối cơ sở dữ liệu và các API backend.
-\end{itemize}
-
-\subsection{Thiết kế hệ thống}
-
-\noindent \textbf{a) Kiến trúc source Front End}
-
-\noindent Hệ thống Front End của GlowUp được thiết kế theo kiến trúc hiện đại, tập trung vào tính mô-đun, khả năng tái sử dụng và hiệu năng tối ưu. Ứng dụng được xây dựng dựa trên framework Nuxt 3, tận dụng tối đa các tính năng của Vue.js 3 và hệ sinh thái liên quan.
-
-\begin{itemize}
-    \item \textbf{Tổng quan về Framework Nuxt 3}:
-    Hệ thống sử dụng Nuxt 3 (phiên bản 3.17.7) với chế độ Single Page Application (SPA) cho trang Admin và Render đa dạng cho người dùng. Các tính năng cốt lõi được áp dụng bao gồm:
-    \begin{itemize}
-        \item \textbf{File-based Routing}: Tự động tạo route dựa trên cấu trúc thư mục \textbf{pages/}, giúp quản lý điều hướng minh bạch.
-        \begin{itemize}
-            \item \textbf{pages/home}: Trang chủ hiển thị sản phẩm.
-            \item \textbf{pages/admin}: Các trang quản trị điều khiển và thống kê.
-            \item \textbf{pages/auth}: Các trang đăng nhập, đăng ký và lấy lại mật khẩu.
-        \end{itemize}
-        \item \textbf{Auto-imports}: Tự động nạp các Component, Composable và hàm từ thư viện, giúp mã nguồn gọn gàng và tăng tốc độ phát triển.
-    \end{itemize}
-
-    \item \textbf{Cơ chế Quản lý Trạng thái (State Management)}:
-    Ứng dụng kết hợp linh hoạt giữa State nội bộ và State toàn cục:
-    \begin{itemize}
-        \item \textbf{Vue State (\textbf{useState})}: Được dùng để duy trì trạng thái đồng nhất giữa Server-Side Rendering và Client-Side Rendering, cụ thể là quản lý thông tin phiên đăng nhập (\textbf{auth\_token}) và giỏ hàng (\textbf{cart\_state}) trong suốt vòng đời ứng dụng.
-        \item \textbf{Pinia Store}: Sử dụng để quản lý các logic UI phức tạp hoặc dữ liệu cần lưu trữ lâu dài thông qua plugin \textbf{pinia-plugin-persistedstate}, đảm bảo trải nghiệm người dùng không bị gián đoạn khi tải lại trang.
-    \end{itemize}
-
-    \item \textbf{Lớp Dịch vụ API (API Service Layer)}:
-    Để tương tác với Backend một cách hiệu quả và bảo mật, hệ thống triển khai lớp \texttt{useApi}:
-    \begin{itemize}
-        \item \textbf{Tự động xác thực}: Mọi request gửi đi đều được tự động nhúng JWT Token vào Header (\textbf{Authorization: Bearer <token>}) nếu người dùng đã đăng nhập.
-        \item \textbf{Xử lý tập trung}: Các phương thức \textbf{GET, POST, PUT, DELETE} được đóng gói trong Composable, giúp thuận tiện bảo trì và thay đổi URL API tại file cấu hình \textbf{nuxt.config.ts}.
-    \end{itemize}
-
-    \item \textbf{Bảo mật và Kiểm soát Quyền truy cập}:
-    Hệ thống triển khai cơ chế Middleware toàn cục (\textbf{auth.global.ts}) để bảo vệ tài nguyên:
-    \begin{itemize}
-        \item \textbf{Navigation Guards}: Kiểm tra trạng thái đăng nhập trước khi truy cập bất kỳ route nào (ngoại trừ trang Auth).
-        \item \textbf{Role-based Access Control }: Phân định cụ thể quyền hạn giữa \textit{Admin} (truy cập Dashboard, quản lý hệ thống) và \textit{Customer} (quản lý giỏ hàng, đặt hàng cá nhân). Người dùng không có quyền sẽ tự động bị điều hướng về trang đăng nhập.
-    \end{itemize}
-
-    \item \textbf{Tổ chức Mã nguồn và Công nghệ bổ trợ}:
-    \begin{itemize}
-        \item \textbf{Giao diện (\textbf{components/})}: Chia nhỏ UI thành các Atomic Component có tính tái sử dụng cực cao.
-        \item \textbf{Composables (\textbf{logic/})}: Tách biệt hoàn toàn logic nghiệp vụ ra khỏi giao diện, tuân thủ nguyên lý Separation of Concerns.
-        \item \textbf{Hệ sinh thái đi kèm}: Sử dụng Tailwind CSS để tối ưu hóa việc viết mã giao diện; Leaflet cho các tính năng địa lý và Chart.js cho các báo cáo trực quan.
-    \end{itemize}
-\end{itemize}
-
-\noindent \textbf{b) Kiến trúc source Back End}
-
-\noindent Backend của hệ thống GlowUp được xây dựng dựa trên nền tảng Node.js và framework Express.js theo kiến trúc RESTful API. Hệ thống được tổ chức theo mô hình kiến trúc phân tầng (Layered Architecture) và module hóa, giúp phân tách cụ thể trách nhiệm giữa các thành phần.
-
-\begin{itemize}
-    \item \textbf{Cấu trúc tổng quan và Cấu trúc thư mục}:
-    Hệ thống được thiết kế theo các tầng (Layers) đảm nhận các vai trò riêng biệt, kết nối chặt chẽ với nhau:
-    \begin{itemize}
-        \item \textbf{Routes}: Định nghĩa các endpoint API và điều hướng request.
-        \item \textbf{Controllers}: Tiếp nhận và xử lý request/response, điều phối luồng dữ liệu.
-        \item \textbf{Services}: Nơi tập trung toàn bộ logic nghiệp vụ (Business Logic) và tính toán.
-        \item \textbf{Models}: Đại diện cho cấu trúc dữ liệu và thực hiện tương tác với Database.
-        \item \textbf{Middlewares}: Xử lý các tác vụ xuyên suốt như xác thực, phân quyền và bắt lỗi.
-    \end{itemize}
-
-    \item \textbf{Sơ đồ cấu trúc thư mục chính của dự án (\textbf{src/})}:
-    \begin{itemize}[noitemsep, topsep=0pt]
-        \item \textbf{src/}: Thư mục chứa toàn bộ mã nguồn của hệ thống Backend.
-        \begin{itemize}[noitemsep]
-            \item \textbf{config/}: Quản lý các cấu hình quan trọng như DB và biến môi trường.
-            \item \textbf{controllers/}: Tiếp nhận và xử lý request/response.
-            \item \textbf{middlewares/}: Xử lý xác thực, phân quyền và bắt lỗi.
-            \item \textbf{models/}: Định nghĩa lược đồ dữ liệu và tương tác DB.
-            \item \textbf{routes/}: Khai báo các API endpoint.
-            \item \textbf{scripts/}: Các script hỗ trợ hoặc migrate dữ liệu.
-            \item \textbf{services/}: Xử lý logic nghiệp vụ chính.
-            \item \textbf{uploads/}: Lưu trữ tệp tin đa phương tiện.
-            \item \textbf{app.js}: File khởi động chính của hệ thống.
-        \end{itemize}
-    \end{itemize}
-
-    \item \textbf{Mô tả chức năng chi tiết các thành phần}:
-    \begin{itemize}
-        \item \textbf{config/}: Quản lý các cấu hình quan trọng như kết nối cơ sở dữ liệu và biến môi trường. Việc tách biệt giúp việc thay đổi môi trường triển khai (Dev, Staging, Production) trở nên thuận tiện và an toàn.
-        \item \textbf{controllers/}: Đóng vai trò lớp trung gian, nhận dữ liệu từ Client qua Route, gọi đến Service tương ứng và trả về kết quả theo định dạng JSON. Mỗi controller tương ứng với một nhóm chức năng (Người dùng, Sản phẩm, Đơn hàng...).
-        \item \textbf{services/}: Đây là "trái tim" của hệ thống, chứa các thuật toán và logic xử lý chính. Việc tách Service giúp tránh trùng lặp mã nguồn (DRY), thuận tiện viết Unit Test và có thể tái sử dụng ở nhiều nơi khác nhau.
-        \item \textbf{models/}: Ánh xạ các đối tượng nghiệp vụ vào cơ sở dữ liệu (MongoDB/PostgreSQL). Tầng này đảm bảo tính nhất quán và toàn vẹn dữ liệu trước khi được lưu trữ.
-        \item \textbf{middlewares/}: Cung cấp các "chốt chặn" bảo mật, kiểm tra tính hợp lệ của Token JWT trước khi cho phép truy cập tài nguyên nhạy cảm và tập trung xử lý mọi lỗi phát sinh để trả về thông báo thống nhất.
-        \item \textbf{uploads/}: Khu vực lưu trữ vật lý các dữ liệu đa phương tiện như ảnh đại diện, ảnh sản phẩm hoặc các tài liệu liên quan đến hỗ trợ khách hàng.
-    \end{itemize}
-
-    \item \textbf{Các tệp tin cấu hình then chốt}:
-    \begin{itemize}
-        \item \textbf{\textbf{app.js}}: Là điểm nhập (Entry Point) duy nhất của hệ thống Backend. Tệp này có nhiệm vụ khởi tạo ứng dụng Express, thiết lập các middleware toàn cục (CORS, Body-parser), đăng ký hệ thống route và thiết lập kết nối đến máy chủ cơ sở dữ liệu.
-        \item \textbf{\textbf{.env}}: Tệp lưu trữ các tham số môi trường dưới dạng key-value. Việc không lưu trực tiếp các bí mật (API Key, Database URL) vào mã nguồn giúp ngăn ngừa rò rỉ thông tin quan trọng khi quản lý qua Git.
-    \end{itemize}
-
-    \item \textbf{Ưu điểm của Kiến trúc GlowUp}:
-    Việc áp dụng kiến trúc phân tầng mang lại các lợi ích vượt trội:
-    \begin{itemize}
-        \item \textbf{Separation of Concerns}: Phân tách cụ thể trách nhiệm giúp đội ngũ phát triển thuận tiện định vị và sửa lỗi.
-        \item \textbf{Scalability}: thuận tiện mở rộng thêm các tính năng mới bằng cách thêm Controller và Service mới mà không phá vỡ cấu trúc hiện tại.
-        \item \textbf{Maintainability}: Mã nguồn sạch, có tổ chức giúp việc nâng cấp và bảo trì hệ thống lâu dài đạt hiệu quả cao.
-    \end{itemize}
-\end{itemize}
-
-\section{Kết quả huấn luyện mô hình CNN}
-
-Mô hình CNN được huấn luyện trên tập dữ liệu ảnh da với mụn trong 30 epoch. Kết quả huấn luyện được thể hiện qua hai biểu đồ chính: Training and Validation Loss và Training and Validation Accuracy.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{graphics/main/chapter3/training_history.png}
-    \caption{Kết quả huấn luyện mô hình CNN}
-    \label{fig:training_history}
-\end{figure}
-
-\textbf{Phân tích Loss (Độ mất mát):}
-
-Biểu đồ bên trái thể hiện sự thay đổi của loss qua các epoch. Train Loss (đường màu xanh) giảm đều đặn từ giá trị ban đầu khoảng 1.75 xuống còn khoảng 0.15 ở epoch 30, cho thấy mô hình học tập tốt trên tập huấn luyện. Validation Loss (đường màu cam) có xu hướng giảm nhưng dao động nhiều hơn, bắt đầu từ khoảng 1.6 và ổn định quanh mức 0.95 ở các epoch cuối. Sự chênh lệch giữa train loss và validation loss tăng dần theo thời gian, cho thấy có dấu hiệu overfitting nhẹ ở giai đoạn sau của quá trình huấn luyện.
-
-\textbf{Phân tích Accuracy (Độ chính xác):}
-
-Biểu đồ bên phải cho thấy sự cải thiện rõ rệt của độ chính xác. Train Accuracy (đường màu xanh) tăng từ khoảng 30\% lên đến 95\% ở epoch cuối, thể hiện khả năng học tập mạnh mẽ của mô hình trên tập huấn luyện. Validation Accuracy (đường màu cam) cũng có xu hướng tăng từ khoảng 42\% lên 75\% nhưng dao động đáng kể và có xu hướng ổn định ở mức 75-77\% từ epoch 15 trở đi. 
-
-\textbf{Đánh giá tổng quan:}
-
-Mô hình đạt train accuracy khoảng 95\% và validation accuracy khoảng 75\% sau 30 epoch huấn luyện. Khoảng cách giữa train accuracy và validation accuracy (khoảng 20\%) cho thấy mô hình có hiện tượng overfitting. Tuy nhiên, validation accuracy đạt 75\% là kết quả chấp nhận được cho bài toán phân loại mụn trên da. Để cải thiện hiệu suất, có thể áp dụng các kỹ thuật như data augmentation mạnh hơn, regularization (dropout, L2), hoặc early stopping để tránh overfitting.
-
-\textbf{Các chỉ số chính:}
-\begin{itemize}[noitemsep]
-    \item Train Loss cuối cùng: 0.15
-    \item Validation Loss cuối cùng: 0.95
-    \item Train Accuracy cuối cùng: 95\%
-    \item Validation Accuracy cuối cùng: 75\%
-    \item Số epoch huấn luyện: 30
-    \item Overfitting gap: 20\% (giữa train và validation accuracy)
-\end{itemize}
