@@ -2,6 +2,7 @@
 
 Đề tài "Xây dựng hệ thống thương mại điện tử thời trang tích hợp thử đồ ảo bằng AI và AR" đã đạt được các mục tiêu đề ra, cụ thể như sau:
 
+>>>>>>> 1cd5c21fbd7f9cc5cce956caf90a26cc32f44f31
 \subsection{Kết quả đạt được}
 
 \textbf{Về mặt chức năng:}
@@ -18,8 +19,8 @@
 \begin{itemize}[noitemsep]
 \item Hệ thống được xây dựng theo kiến trúc microservice với backend \textbf{FastAPI} (Python), frontend \textbf{Nuxt.js 3} (TypeScript), đảm bảo tính modular, dễ bảo trì và mở rộng.
 \item Kết hợp hai loại cơ sở dữ liệu: \textbf{Firebase Firestore} cho dữ liệu nghiệp vụ và \textbf{Neon PostgreSQL} (pgvector) cho dữ liệu quan hệ và tìm kiếm ngữ nghĩa.
-\item Mô hình FitDiT hoạt động ổn định trên GPU RTX 4060, tạo ảnh thử đồ với độ phân giải lên đến 1536x2048.
-\item Lens AR trên Snap Camera Kit bám theo cơ thể người dùng với 7 điểm mốc (Neck, Arms, Hips…), hỗ trợ tương tác qua carousel 3D chọn trang phục.
+\item Mô hình FitDiT hoạt động ổn định trên GPU RTX 4060, tạo ảnh thử đồ với độ phân giải lên đến 1536$\times$2048.
+\item Lens AR trên Snap Camera Kit bám theo cơ thể người dùng với 7 điểm mốc (Neck, Arms, Hips), hỗ trợ tương tác qua carousel 3D chọn trang phục.
 \item Xác thực và phân quyền người dùng được thực hiện qua \textbf{Firebase Authentication} và JWT, phân biệt rõ vai trò user/admin.
 \end{itemize}
 
@@ -27,7 +28,7 @@
 
 \textbf{Hạn chế:}
 \begin{itemize}[noitemsep]
-\item Thời gian xử lý của FitDiT còn chậm (khoảng 2-3 phút cho 30 bước lặp trên GPU laptop), chưa đáp ứng tốt cho trải nghiệm real-time.
+\item Thời gian xử lý của FitDiT còn chậm (khoảng 2--3 phút cho 30 bước lặp trên GPU laptop), chưa đáp ứng tốt cho trải nghiệm real-time.
 \item Chưa tích hợp hoàn thiện cơ chế face swap cho trường hợp ảnh người dùng chỉ có khuôn mặt.
 \item Lens AR yêu cầu thiết bị có camera và cấu hình đủ mạnh để chạy ObjectTracking3D mượt mà.
 \item Chưa triển khai hệ thống lên môi trường production (đang chạy local qua ngrok).
