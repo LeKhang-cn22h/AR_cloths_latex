@@ -1,52 +1,93 @@
 \chapter*{LỜI MỞ ĐẦU}
 \addcontentsline{toc}{chapter}{LỜI MỞ ĐẦU}
 
-\textbf{1. Lý do chọn đề tài}
+\section*{1. Lý do chọn đề tài}
 
-Trong những năm gần đây, thương mại điện tử tại Việt Nam phát triển mạnh mẽ, đặc biệt là lĩnh vực thời trang trực tuyến. Tuy nhiên, một trong những hạn chế lớn nhất khi mua quần áo qua mạng là người dùng không thể thử sản phẩm trước khi đặt hàng, dẫn đến tỉ lệ đổi trả cao và làm giảm trải nghiệm mua sắm. Cùng với đó, các cửa hàng thời trang tư nhân quy mô vừa và nhỏ thường phụ thuộc vào các sàn thương mại điện tử lớn, khó chủ động trong việc quản lý dữ liệu khách hàng cũng như xây dựng thương hiệu riêng.
+Trong bối thương mại điện tử tại Việt Nam phát triển mạnh mẽ, đặc biệt trong lĩnh vực thời trang trực tuyến. Tuy nhiên, một trong những hạn chế lớn nhất của việc mua sắm quần áo qua mạng là người dùng không thể thử sản phẩm trước khi đặt hàng, dẫn đến tỷ lệ đổi trả cao và làm giảm trải nghiệm mua sắm. Bên cạnh đó, nhiều cửa hàng thời trang quy mô vừa và nhỏ vẫn phụ thuộc vào các sàn thương mại điện tử lớn, gây khó khăn trong việc xây dựng thương hiệu riêng và quản lý dữ liệu khách hàng.
 
-Sự phát triển của Computer Vision (CV) và Augmented Reality (AR) trong những năm gần đây, cùng với các mô hình học sâu chuyên biệt cho bài toán Virtual Try-On như CatVTON và các giải pháp phát hiện điểm mốc cơ thể như MediaPipe Pose, đã mở ra khả năng triển khai chức năng thử quần áo ảo ngay trên trình duyệt web với chi phí hợp lý. Xuất phát từ thực tế đó, đề tài lựa chọn xây dựng một hệ thống thương mại điện tử dành cho cửa hàng thời trang, tích hợp chức năng thử quần áo ảo dựa trên CV và AR, kết hợp chatbot RAG nhằm hỗ trợ tư vấn sản phẩm và nâng cao trải nghiệm người dùng.
+Sự phát triển của AI, Computer Vision và Augmented Reality trong những năm gần đây đã mở ra khả năng xây dựng các hệ thống thử đồ ảo với chi phí triển khai phù hợp. Các mô hình AI Virtual Try-On hiện đại như FitDiT, kết hợp với các kỹ thuật phát hiện keypoint cơ thể và Human Parsing, cho phép sinh ảnh thử đồ với chất lượng cao. Đồng thời, công nghệ AR hỗ trợ hiển thị quần áo trực tiếp trên cơ thể người dùng thông qua camera theo thời gian thực, góp phần nâng cao tính trực quan trong quá trình mua sắm.
 
-\textbf{2. Tình hình nghiên cứu}
+Xuất phát từ thực tế đó, đề tài lựa chọn xây dựng một hệ thống thương mại điện tử thời trang tích hợp AI Virtual Try-On, AR Try-On và chatbot AI nhằm hỗ trợ tư vấn sản phẩm, nâng cao trải nghiệm người dùng và hỗ trợ hoạt động quản lý kinh doanh cho cửa hàng thời trang.
 
-Trên thế giới, nhiều nền tảng thương mại điện tử lớn như Amazon, Zara hay ASOS đã bước đầu tích hợp công nghệ Virtual Try-On vào quá trình mua hàng. Trong nghiên cứu học thuật, các mô hình như VITON, HR-VITON và đặc biệt là CatVTON (Concatenation-based Virtual Try-On Network) dựa trên kiến trúc diffusion đã đạt kết quả ấn tượng trong việc ghép hình ảnh quần áo lên ảnh người dùng. Song song, MediaPipe của Google cung cấp giải pháp phát hiện điểm mốc cơ thể (pose landmarks) chạy được theo thời gian thực trên trình duyệt, thuận lợi cho ứng dụng AR trên web.
+\section*{2. Tình hình nghiên cứu}
 
-Tại Việt Nam, các sàn thương mại điện tử lớn như Shopee, Lazada chủ yếu khai thác AI ở dạng gợi ý sản phẩm và tìm kiếm hình ảnh, trong khi các giải pháp thử đồ ảo hoàn chỉnh áp dụng cho cửa hàng tư nhân vẫn còn hạn chế. Bên cạnh đó, việc kết hợp đồng thời chức năng thử đồ ảo dựa trên CV/AR với chatbot RAG để tư vấn sản phẩm theo thời gian thực trong cùng một hệ thống thương mại điện tử là hướng tiếp cận chưa được khai thác phổ biến.
+Trên thế giới, nhiều nền tảng thương mại điện tử lớn như Amazon, Zara và ASOS đã bước đầu tích hợp công nghệ Virtual Try-On vào quy trình mua sắm trực tuyến nhằm nâng cao trải nghiệm khách hàng. Trong lĩnh vực nghiên cứu học thuật, các mô hình như VITON, HR-VITON và FitDiT dựa trên kiến trúc diffusion đã cho thấy hiệu quả cao trong bài toán sinh ảnh thử đồ ảo.
 
-\textbf{3. Mục đích nghiên cứu}
+Song song đó, các kỹ thuật phát hiện keypoint cơ thể như DWpose và Human Parsing hỗ trợ quá trình phân tích hình dạng cơ thể và phân vùng quần áo chính xác hơn, giúp cải thiện chất lượng kết quả thử đồ. Trong lĩnh vực AR, các nền tảng như Snap Camera Kit hỗ trợ triển khai thử đồ trực tiếp trên trình duyệt thông qua camera thời gian thực.
 
-Đề tài nhằm xây dựng một hệ thống thương mại điện tử hoàn chỉnh dành cho cửa hàng thời trang, tích hợp hai tính năng nổi bật: chức năng thử quần áo ảo sử dụng Computer Vision và Augmented Reality (kết hợp MediaPipe Pose và mô hình CatVTON), và chatbot RAG hỗ trợ tư vấn sản phẩm dựa trên Ollama và Qdrant. Hệ thống hướng tới việc nâng cao trải nghiệm mua sắm trực tuyến, giúp khách hàng hình dung được sản phẩm trên cơ thể mình trước khi quyết định đặt hàng, đồng thời cung cấp công cụ quản lý kinh doanh chủ động cho chủ cửa hàng.
+Ngoài ra, các mô hình ngôn ngữ lớn (LLM) và kỹ thuật Retrieval-Augmented Generation (RAG) cũng đang được ứng dụng rộng rãi trong các hệ thống chatbot hỗ trợ khách hàng. Việc kết hợp vector database với mô hình ngôn ngữ giúp chatbot có khả năng truy xuất dữ liệu ngữ nghĩa và phản hồi phù hợp với ngữ cảnh người dùng.
 
-\textbf{4. Nhiệm vụ nghiên cứu}
+Tại Việt Nam, các sàn thương mại điện tử lớn như Shopee hay Lazada chủ yếu ứng dụng AI vào gợi ý sản phẩm và tìm kiếm thông minh, trong khi các hệ thống tích hợp đồng thời AI Virtual Try-On, AR Try-On và chatbot AI trong cùng một nền tảng thương mại điện tử vẫn chưa được khai thác phổ biến, đặc biệt đối với các cửa hàng thời trang quy mô vừa và nhỏ.
 
-\begin{itemize}
-    \item Phân tích yêu cầu và thiết kế kiến trúc tổng thể hệ thống thương mại điện tử với các chức năng cơ bản: quản lý sản phẩm, giỏ hàng, đặt hàng, thanh toán và quản trị.
-    \item Xây dựng giao diện người dùng bằng Vue.js, Nuxt.js và TailwindCSS, đảm bảo responsive trên cả desktop và mobile.
-    \item Phát triển backend bằng FastAPI (Python) theo kiến trúc RESTful API; thiết kế cơ sở dữ liệu quan hệ trên PostgreSQL (Neon) và cơ sở dữ liệu vector trên Qdrant.
-    \item Tích hợp MediaPipe Pose để phát hiện điểm mốc cơ thể và mô hình CatVTON để ghép hình ảnh quần áo lên ảnh người dùng, hình thành chức năng thử đồ ảo theo thời gian thực.
-    \item Xây dựng chatbot RAG sử dụng Ollama (LLM cục bộ) và Qdrant (vector store) để tư vấn sản phẩm dựa trên dữ liệu thực tế của cửa hàng.
-    \item Tích hợp cổng thanh toán VNPay và hỗ trợ thanh toán khi nhận hàng (COD).
-    \item Triển khai hệ thống bằng Docker và tiến hành kiểm thử trên nhiều trình duyệt và thiết bị.
-\end{itemize}
+\section*{3. Mục đích nghiên cứu}
 
-\textbf{5. Phương pháp nghiên cứu}
+Đề tài hướng đến việc xây dựng một hệ thống thương mại điện tử thời trang tích hợp các công nghệ AI và AR nhằm nâng cao trải nghiệm mua sắm trực tuyến cho người dùng. Hệ thống hỗ trợ thử quần áo ảo bằng AI Virtual Try-On dựa trên mô hình FitDiT kết hợp DWpose và Human Parsing, đồng thời hỗ trợ thử đồ AR theo thời gian thực thông qua Snap Camera Kit.
+
+Ngoài ra, hệ thống còn tích hợp chatbot AI sử dụng mô hình ngôn ngữ lớn chạy cục bộ thông qua Ollama kết hợp kỹ thuật RAG và PostgreSQL pgvector nhằm hỗ trợ tư vấn sản phẩm và tương tác với khách hàng. Hệ thống đồng thời cung cấp các chức năng quản lý sản phẩm, đơn hàng, thanh toán và quản trị dành cho cửa hàng thời trang.
+
+\section*{4. Nhiệm vụ nghiên cứu}
 
 \begin{itemize}
-    \item Thu thập, đọc và phân tích tài liệu kỹ thuật, documentation chính thức của các framework, thư viện và mô hình sử dụng (Vue.js, Nuxt.js, FastAPI, MediaPipe, CatVTON, Ollama, Qdrant).
-    \item Áp dụng phương pháp phân tích thiết kế hệ thống theo mô hình component-based ở phía frontend và kiến trúc RESTful API ở phía backend.
-    \item Sử dụng các mô hình học sâu được huấn luyện sẵn (CatVTON, MediaPipe Pose) thay vì huấn luyện từ đầu, nhằm tập trung vào bài toán tích hợp và tối ưu trải nghiệm người dùng.
-    \item Áp dụng kỹ thuật Retrieval-Augmented Generation cho chatbot, kết hợp embedding sản phẩm vào Qdrant và sinh câu trả lời bằng LLM chạy cục bộ qua Ollama.
-    \item Kiểm thử API bằng Postman, kiểm thử giao diện trên đa trình duyệt (Chrome, Firefox, Edge) và đa thiết bị (desktop, mobile); quản lý mã nguồn bằng Git và đóng gói triển khai bằng Docker.
+    \item Phân tích yêu cầu và thiết kế kiến trúc tổng thể cho hệ thống thương mại điện tử thời trang tích hợp AI và AR.
+    
+    \item Xây dựng giao diện người dùng bằng Vue.js, Nuxt.js và TailwindCSS, bảo đảm khả năng responsive trên nhiều thiết bị khác nhau.
+    
+    \item Phát triển backend bằng FastAPI theo kiến trúc RESTful API, thiết kế cơ sở dữ liệu quan hệ trên PostgreSQL và sử dụng pgvector để lưu trữ vector embedding.
+    
+    \item Xây dựng chức năng AI Virtual Try-On sử dụng mô hình FitDiT kết hợp DWpose và Human Parsing nhằm sinh ảnh thử đồ ảo cho người dùng.
+    
+    \item Xây dựng chức năng AR Try-On sử dụng Snap Camera Kit và mô hình 3D để hiển thị quần áo trực tiếp trên cơ thể người dùng thông qua camera.
+    
+    \item Xây dựng chatbot AI sử dụng Ollama kết hợp kỹ thuật RAG nhằm hỗ trợ tư vấn sản phẩm và trả lời câu hỏi của khách hàng.
+    
+    \item Tích hợp thanh toán trực tuyến bằng Stripe và hỗ trợ thanh toán khi nhận hàng.
+    
 \end{itemize}
 
-\textbf{6. Kết quả đạt được}
+\section*{5. Phương pháp nghiên cứu}
 
 \begin{itemize}
-    \item Hệ thống website thương mại điện tử cho cửa hàng thời trang hoàn chỉnh, đầy đủ chức năng quản lý sản phẩm, đặt hàng, giỏ hàng, thanh toán và phân quyền người dùng.
-    \item Tích hợp thành công chức năng thử quần áo ảo dựa trên MediaPipe Pose và CatVTON, cho phép người dùng xem trực quan quần áo trên hình ảnh của mình.
-    \item Chatbot RAG sử dụng Ollama và Qdrant hoạt động ổn định, hỗ trợ tư vấn và gợi ý sản phẩm dựa trên dữ liệu thực tế của cửa hàng.
-    \item Tích hợp thành công cổng thanh toán VNPay và hỗ trợ thanh toán COD.
-    \item Hệ thống được kiểm thử trên đa trình duyệt (Chrome, Firefox, Edge) và đa thiết bị (desktop, mobile), bảo đảm khả năng vận hành thực tế.
+    \item Thu thập, đọc và phân tích các tài liệu kỹ thuật, documentation chính thức của các framework, thư viện và mô hình được sử dụng như Vue.js, Nuxt.js, FastAPI, FitDiT, DWpose, Ollama, PostgreSQL pgvector và Snap Camera Kit.
+    
+    \item Áp dụng phương pháp phân tích và thiết kế hệ thống theo hướng module hóa, tách biệt frontend, backend và AI service nhằm tăng khả năng mở rộng và bảo trì hệ thống.
+    
+    \item Áp dụng Firebase Authentication kết hợp JWT, RBAC và cơ chế Rate Limiting trong FastAPI nhằm kiểm soát truy cập và hạn chế các yêu cầu bất thường đến hệ thống.    \item Sử dụng các mô hình học sâu đã được huấn luyện sẵn như FitDiT, DWpose và Human Parsing thay vì huấn luyện từ đầu nhằm tập trung vào bài toán tích hợp hệ thống và tối ưu trải nghiệm người dùng.
+    
+    \item Áp dụng kỹ thuật RAG cho chatbot AI bằng cách tạo embedding dữ liệu sản phẩm, lưu trữ vector trên PostgreSQL pgvector và sinh phản hồi bằng mô hình ngôn ngữ chạy cục bộ thông qua Ollama.
+    
+    \item Kiểm thử API bằng Postman, kiểm thử giao diện trên nhiều trình duyệt như Chrome, Firefox và Edge, đồng thời kiểm thử trên cả desktop và mobile nhằm đánh giá khả năng vận hành thực tế của hệ thống.
+    
+    \item Sử dụng Git để quản lý mã nguồn.
 \end{itemize}
+
+\section*{6. Kết quả đạt được}
+
+\begin{itemize}
+    \item Xây dựng hoàn chỉnh hệ thống thương mại điện tử thời trang với đầy đủ các chức năng quản lý sản phẩm, giỏ hàng, đặt hàng, thanh toán và phân quyền người dùng.
+    
+    \item Tích hợp chức năng AI Virtual Try-On sử dụng FitDiT, DWpose và Human Parsing, cho phép người dùng thử quần áo ảo thông qua hình ảnh cá nhân.
+    
+    \item Xây dựng chức năng AR Try-On hỗ trợ hiển thị quần áo trên cơ thể người dùng thông qua camera theo thời gian thực.
+    
+    \item Xây dựng chatbot AI sử dụng Ollama kết hợp kỹ thuật RAG và PostgreSQL pgvector nhằm hỗ trợ tư vấn và gợi ý sản phẩm.
+    
+    \item Tích hợp thanh toán trực tuyến bằng Stripe và hỗ trợ thanh toán COD.
+    
+    \item Hệ thống hỗ trợ xác thực JWT, phân quyền người dùng theo vai trò và giới hạn tần suất truy cập API nhằm nâng cao tính bảo mật.
+    
+    \item Hệ thống được kiểm thử trên nhiều trình duyệt và thiết bị khác nhau, bảo đảm khả năng vận hành ổn định trong môi trường thực tế.
+\end{itemize}
+
+\section*{7. Kết cấu luận văn tốt nghiệp}
+
+Luận văn tốt nghiệp được tổ chức thành 4 chương như sau:
+
+\begin{itemize}
+    \item Chương 1: Cơ sở lý thuyết
+    \item Chương 2: Phân tích, thiết kế và xây dựng hệ thống
+    \item Chương 3: Cài đặt và kiểm thử
+    \item Chương 4: Kết luận và hướng phát triển
+\end{itemize}
+
 
 \clearpage

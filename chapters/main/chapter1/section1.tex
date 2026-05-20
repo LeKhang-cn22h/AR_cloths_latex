@@ -9,4 +9,15 @@ Vue.js là một framework JavaScript mã nguồn mở được phát triển b�
 Nuxt.js là framework cấp cao được xây dựng trên nền Vue.js, hỗ trợ đầy đủ các chế độ render gồm Server-Side Rendering (SSR), Static Site Generation (SSG) và Client-Side Rendering (CSR). SSR giúp trang web tải nhanh hơn và tối ưu cho công cụ tìm kiếm (SEO) -- yếu tố quan trọng đối với một website thương mại điện tử cần khả năng tiếp cận khách hàng qua Google. Nuxt.js cũng cung cấp cấu trúc thư mục quy ước (pages, components, layouts, middleware), tự động sinh route và tích hợp sẵn các tính năng như state management qua Pinia, plugins và composables, giúp rút ngắn thời gian phát triển \cite{nuxt_assets}.
 
 \subsection{TailwindCSS}
-TailwindCSS là một utility-first CSS framework cho phép xây dựng giao diện nhanh chóng thông qua các class tiện ích có sẵn (ví dụ: \texttt{flex}, \texttt{p-4}, \texttt{text-center}) thay vì viết CSS tùy chỉnh. Cách tiếp cận này giúp đảm bảo sự thống nhất về thiết kế trong toàn bộ ứng dụng và giảm đáng kể kích thước file CSS cuối cùng nhờ cơ chế tree-shaking, chỉ giữ lại các class thực sự được sử dụng. TailwindCSS hỗ trợ responsive design tốt thông qua các breakpoint quy ước (\texttt{sm}, \texttt{md}, \texttt{lg}, \texttt{xl}), bảo đảm trải nghiệm thử đồ ảo hoạt động ổn định trên cả desktop lẫn mobile \cite{tailwindcss_docs}.
+TailwindCSS là một utility-first CSS framework cho phép xây dựng giao diện nhanh chóng thông qua các class tiện ích có sẵn, thay vì viết CSS tùy chỉnh từ đầu. Cách tiếp cận này giúp đảm bảo sự thống nhất về thiết kế trong toàn bộ ứng dụng và giảm đáng kể kích thước file CSS cuối cùng nhờ cơ chế tree-shaking, chỉ giữ lại các class thực sự được sử dụng \cite{tailwindcss_docs}.
+
+\subsection{TypeScript}
+TypeScript là ngôn ngữ lập trình mã nguồn mở do Microsoft phát 
+triển, là tập cha (superset) của JavaScript với khả năng kiểm 
+tra kiểu tĩnh (static typing) \cite{typescript_docs}. Trong đề 
+tài, TypeScript được sử dụng xuyên suốt ở cả hai lớp: tầng 
+giao diện người dùng (Nuxt.js, Vue.js) để đảm bảo tính nhất 
+quán kiểu dữ liệu khi giao tiếp với API, và tầng AR (Lens 
+Studio) để viết các script điều khiển thành phần thực tế tăng 
+cường, giúp phát hiện lỗi sớm và nâng cao khả năng bảo trì 
+mã nguồn.

@@ -1,10 +1,26 @@
 \section{Computer Vision và Augmented Reality}
 
 \subsection{Computer Vision}
-Computer Vision (CV) là lĩnh vực trí tuệ nhân tạo cho phép máy tính nhận diện và xử lý hình ảnh, video tương tự như thị giác con người. Trong đề tài, CV được ứng dụng để nhận diện cơ thể người dùng phục vụ chức năng thử quần áo ảo.
+Computer Vision là lĩnh vực trí tuệ nhân tạo cho phép máy 
+tính nhận diện và xử lý hình ảnh, video tương tự như thị giác 
+con người \cite{snap_body_tracking_docs}. Trong đề tài, CV được 
+ứng dụng thông qua thành phần ObjectTracking3D của 
+Snap Inc. để nhận diện và theo dõi cơ thể người dùng trong không 
+gian 3D theo thời gian thực, phục vụ cho chức năng thử quần áo 
+ảo qua camera.
 
-\subsection{MediaPipe}
-MediaPipe là framework của Google cung cấp các giải pháp ML sẵn có cho xử lý hình ảnh và video theo thời gian thực. MediaPipe Pose cho phép phát hiện và theo dõi các điểm mốc cơ thể người (body landmarks) với độ chính xác cao, là nền tảng để xác định vị trí đặt quần áo ảo lên người dùng.
+\subsection{Lens Studio}
+Lens Studio là công cụ phát triển AR của Snap Inc., cho phép xây 
+dựng các hiệu ứng thực tế tăng cường (AR lens) và xuất bản lên 
+nền tảng Snap \cite{lens_studio_docs}. Trong đề tài, Lens Studio 
+được sử dụng để xây dựng lens thử đồ ảo bằng TypeScript, bao 
+gồm chức năng theo dõi cơ thể người dùng, hiển thị mô hình 3D 
+quần áo và giao diện tương tác trong không gian thực.
 
-\subsection{Augmented Reality}
-Augmented Reality (AR) là công nghệ tăng cường thực tế, cho phép chồng lớp các đối tượng ảo lên môi trường thực thông qua camera. Trong hệ thống, AR được ứng dụng để hiển thị quần áo ảo lên hình ảnh người dùng theo thời gian thực, mang lại trải nghiệm thử đồ trực tuyến trực quan.
+\subsection{Snap Camera Kit}
+Snap Camera Kit là SDK đa nền tảng do Snap Inc. cung cấp, cho 
+phép tích hợp trải nghiệm AR lens vào ứng dụng web hoặc mobile 
+\cite{snap_camera_kit_docs}. Trong đề tài, Camera Kit được tích 
+hợp vào giao diện web (Nuxt.js) để khởi tạo phiên AR, nạp lens 
+tương ứng với sản phẩm được chọn và hiển thị trải nghiệm thử đồ 
+theo thời gian thực trực tiếp trên trình duyệt.

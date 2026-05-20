@@ -1,7 +1,11 @@
 \section{Công nghệ Backend}
 
 \subsection{Python và FastAPI}
-Python là ngôn ngữ lập trình phổ biến, được sử dụng rộng rãi trong phát triển backend. FastAPI là framework hiện đại cho phép xây dựng API nhanh chóng với tính năng tự động tạo tài liệu API và kiểm tra dữ liệu \cite{python_fastapi_official}.
+Python là một trong những ngôn ngữ lập trình phổ biến nhất hiện nay nhờ cú pháp đơn giản, dễ đọc và hệ sinh thái thư viện phong phú. Trong phát triển backend, Python được ưa chuộng nhờ khả năng phát triển nhanh và hỗ trợ mạnh mẽ cho trí tuệ nhân tạo, xử lý dữ liệu và xây dựng API.
+
+FastAPI là framework web hiện đại, hiệu năng cao của Python, được xây dựng dựa trên tiêu chuẩn ASGI. FastAPI nổi bật với tốc độ gần tương đương với Node.js và Go, đồng thời tự động sinh tài liệu API tương tác (Swagger UI và ReDoc) thông qua chuẩn OpenAPI. Framework còn hỗ trợ mạnh mẽ validation dữ liệu bằng Pydantic, dependency injection, authentication và WebSocket. Trong đề tài, FastAPI được chọn để xây dựng RESTful API cho các chức năng quản lý người dùng, sản phẩm, đơn hàng và tích hợp với hệ thống thử đồ ảo \cite{python_fastapi_official}.
 
 \subsection{RESTful API}
-REST (Representational State Transfer) là kiến trúc thiết kế API sử dụng các phương thức HTTP (GET, POST, PUT, DELETE) để thực hiện các thao tác CRUD trên tài nguyên. RESTful API giúp tách biệt frontend và backend, tăng tính linh hoạt và khả năng mở rộng của hệ thống.
+REST (Representational State Transfer) là một phong cách kiến trúc phần mềm sử dụng các phương thức HTTP tiêu chuẩn (GET, POST, PUT, PATCH, DELETE) để thực hiện các thao tác CRUD (Create - Read - Update - Delete) trên tài nguyên. 
+
+RESTful API mang lại nhiều ưu điểm quan trọng: tính tách biệt cao giữa frontend và backend (loose coupling), dễ dàng mở rộng (scalability), dễ bảo trì và tích hợp với nhiều nền tảng khác nhau (web, mobile, third-party). Trong hệ thống thương mại điện tử của đề tài, RESTful API đóng vai trò trung tâm để xử lý logic nghiệp vụ, trao đổi dữ liệu giữa giao diện người dùng (Vue.js/Nuxt.js) và cơ sở dữ liệu \cite{fielding_rest}.

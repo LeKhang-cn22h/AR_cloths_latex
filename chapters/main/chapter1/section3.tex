@@ -1,14 +1,18 @@
-\section{Cơ sở dữ liệu}
+\section{Cơ sở dữ liệu và Dịch vụ đám mây}
 
-\subsection{Neon}
-Neon là một nền tảng cơ sở dữ liệu PostgreSQL managed, cung cấp các tính năng như auto-scaling, backup tự động và khả năng truy cập nhanh chóng từ anywhere. Neon phù hợp cho các ứng dụng yêu cầu độ tin cậy cao và khả năng mở rộng linh hoạt \cite{neon_database_projects}.
+\subsection{Neon (PostgreSQL Serverless)}
+Neon là nền tảng cơ sở dữ liệu PostgreSQL serverless, cho phép tách biệt hoàn toàn storage và compute. Neon cung cấp các tính năng nổi bật như auto-scaling, branching (tạo branch database giống Git), backup tự động, và scale-to-zero giúp tiết kiệm chi phí. Việc sử dụng Neon giúp nhóm dễ dàng phát triển, test và deploy mà không phải quản lý server truyền thống \cite{neon_database}.
+
+\subsection{DBeaver CE}
+DBeaver Community Edition là một công cụ quản lý cơ sở dữ liệu mã nguồn mở, đa nền tảng và hỗ trợ rất nhiều loại database (PostgreSQL, MySQL, SQL Server, SQLite,...). DBeaver cung cấp giao diện đồ họa trực quan, cho phép thực hiện query SQL, xem cấu trúc bảng, quản lý dữ liệu, import/export và debug dễ dàng.
+
+Trong đề tài, DBeaver CE được sử dụng kết hợp với Neon (PostgreSQL) để thiết kế schema database, viết và kiểm tra SQL query, quản lý dữ liệu test cũng như theo dõi hiệu suất trong quá trình phát triển \cite{dbeaver_docs}.
 
 \subsection{Firebase}
-Firebase là nền tảng phát triển ứng dụng di động và web của Google, cung cấp các dịch vụ như cơ sở dữ liệu thời gian thực, xác thực người dùng, lưu trữ và push notification. Firebase phù hợp cho các ứng dụng yêu cầu tốc độ phát triển nhanh và tích hợp dễ dàng \cite{firebase_database_projects}.
+Firebase là nền tảng phát triển ứng dụng (Backend-as-a-Service - BaaS) của Google, cung cấp nhiều dịch vụ sẵn có như Realtime Database, Firestore, Authentication, Cloud Storage và Cloud Messaging (push notification). Firebase đặc biệt phù hợp cho việc xây dựng tính năng đăng nhập, đồng bộ dữ liệu thời gian thực và thông báo cho người dùng trên web và mobile \cite{firebase_docs}.
 
 \subsection{Cloudinary}
-Cloudinary là dịch vụ quản lý và tối ưu hóa hình ảnh và video trên đám mây, cung cấp các API để upload, lưu trữ, xử lý và phân phối media. Cloudinary giúp cải thiện hiệu suất tải trang và trải nghiệm người dùng thông qua việc tối ưu hóa hình ảnh tự động \cite{cloudinary_database_projects}.
+Cloudinary là nền tảng quản lý media (hình ảnh và video) trên đám mây hàng đầu hiện nay. Cloudinary cung cấp các API mạnh mẽ để upload, lưu trữ, tối ưu hóa (resize, compress, format chuyển đổi tự động), và phân phối media qua CDN. Trong đề tài, Cloudinary được sử dụng để xử lý hình ảnh sản phẩm và ảnh thử đồ ảo, giúp giảm đáng kể thời gian tải trang và cải thiện trải nghiệm người dùng trên thiết bị di động \cite{cloudinary_docs}.
 
 \subsection{Ngrok}
-Ngrok là công cụ tạo đường hầm (tunneling) cho phép expose một server local ra internet thông qua một URL công khai. Ngrok rất hữu ích trong quá trình phát triển và thử nghiệm các ứng dụng web, đặc biệt khi cần chia sẻ ứng dụng đang chạy trên máy local với người khác hoặc để tích hợp với các dịch vụ bên ngoài \cite{ngrok_database_projects}.
-
+Ngrok là công cụ tunneling phổ biến cho phép expose server đang chạy local ra internet thông qua một URL công khai và an toàn. Ngrok hỗ trợ HTTPS tự động, authentication, và inspection traffic. Trong giai đoạn phát triển, Ngrok được sử dụng để test webhook từ các dịch vụ bên thứ ba và chia sẻ ứng dụng đang phát triển với thành viên khác mà không cần deploy lên server \cite{ngrok_docs}.

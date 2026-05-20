@@ -2,30 +2,43 @@
 
 \subsection{Yêu cầu chức năng}
 
-Hệ thống website thương mại điện tử được xây dựng nhằm phục vụ hoạt động bán hàng quần áo trực tuyến, tích hợp chức năng thử quần áo ảo sử dụng Computer Vision và Augmented Reality.
-Hệ thống cung cấp các chức năng phù hợp với hai nhóm người dùng chính: khách hàng và quản trị viên, bao gồm quản lý đơn hàng, thanh toán trực tuyến, hỗ trợ khách hàng và thử đồ ảo theo thời gian thực.
+Hệ thống thương mại điện tử thời trang được xây dựng nhằm hỗ trợ hoạt động mua sắm quần áo trực tuyến, đồng thời tích hợp công nghệ trí tuệ nhân tạo (AI) và thực tế tăng cường (Augmented Reality – AR) để nâng cao trải nghiệm người dùng. 
 
-\textbf{a) Sơ đồ phân rã chức năng (BFD)}
+Hệ thống cho phép khách hàng tìm kiếm, lựa chọn và mua sản phẩm thời trang, thử quần áo ảo bằng AI Virtual Try-On, thử đồ thời gian thực bằng AR Try-On, đồng thời cung cấp chatbot AI hỗ trợ tư vấn sản phẩm và phối đồ. Ngoài ra, hệ thống còn hỗ trợ quản trị viên quản lý người dùng, sản phẩm, đơn hàng, nội dung và tài nguyên AI.
 
-Sơ đồ phân rã chức năng (Business Function Decomposition – BFD) mô tả các chức năng nghiệp vụ chính của hệ thống website thương mại điện tử bán quần áo.
-Các chức năng được phân rã từ mức tổng quát xuống các chức năng chi tiết, tương ứng với từng vai trò người dùng trong hệ thống.
+\textbf{a) Sơ đồ BFD}
+
+Sơ đồ BFD mô tả các nhóm chức năng chính của hệ thống thương mại điện tử thời trang tích hợp AI và AR. Các chức năng được phân rã từ mức tổng quát đến các chức năng chi tiết nhằm thể hiện đầy đủ các nghiệp vụ của hệ thống.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth]{graphics/front/BFDtm.png}
-    \caption{Sơ đồ phân rã chức năng (BFD) của hệ thống}
+    \includegraphics[width=\textwidth]{graphics/front/BFDtm.png}
+    \caption{Sơ đồ BFD của hệ thống}
     \label{fig:bfd}
 \end{figure}
 
 \textbf{b) Mô tả ngắn gọn các nhóm chức năng}
 
 \begin{itemize}
-  \item \textbf{Quản lý người mua}: Cho phép người mua đăng ký, đăng nhập, duyệt và tìm kiếm sản phẩm quần áo, quản lý giỏ hàng, đặt hàng, theo dõi đơn hàng và đánh giá sản phẩm.
-  \item \textbf{Thử quần áo ảo (Virtual Try-On)}: Cho phép người dùng thử quần áo ảo theo thời gian thực thông qua camera, sử dụng MediaPipe để nhận diện cơ thể và mô hình CatVTON để ghép hình ảnh quần áo lên người dùng.
-  \item \textbf{Quản lý thanh toán}: Hỗ trợ thanh toán trực tuyến qua cổng VNPAY và thanh toán khi nhận hàng (COD).
-  \item \textbf{Quản lý giao hàng}: Hỗ trợ người bán chuẩn bị giao hàng và cập nhật trạng thái vận chuyển cho đơn hàng.
-  \item \textbf{Hỗ trợ và AI}: Cung cấp chatbot RAG hỗ trợ tư vấn khách hàng, gợi ý sản phẩm phù hợp dựa trên sở thích và lịch sử mua hàng.
-  \item \textbf{Quản lý người bán}: Cho phép người bán quản lý danh mục, sản phẩm, đơn hàng, đánh giá của khách hàng, theo dõi thống kê doanh thu thông qua dashboard và quản lý người dùng.
+
+    \item \textbf{Quản lý người dùng}: 
+    Cho phép người dùng đăng ký, đăng nhập bằng tài khoản hoặc Google, quản lý hồ sơ cá nhân, địa chỉ giao hàng, số đo cơ thể và lịch sử hoạt động trên hệ thống. Hệ thống cũng hỗ trợ phân quyền và quản lý trạng thái tài khoản.
+
+    \item \textbf{Quản lý thương mại điện tử (Ecommerce)}: 
+    Hỗ trợ quản lý sản phẩm, danh mục, giỏ hàng, đơn hàng, thanh toán trực tuyến, voucher giảm giá, đánh giá sản phẩm và quản lý tồn kho. Người dùng có thể tìm kiếm, lựa chọn và theo dõi trạng thái đơn hàng trực tuyến.
+
+    \item \textbf{AI Virtual Try-On}: 
+    Cho phép người dùng thử quần áo ảo bằng công nghệ AI thông qua việc tải ảnh người dùng và ảnh quần áo lên hệ thống. Hệ thống sử dụng mô hình FitDiT kết hợp xử lý keypoint và phân vùng cơ thể để sinh ảnh thử đồ ảo, đồng thời hỗ trợ đánh giá độ vừa vặn và gợi ý kích thước phù hợp.
+
+    \item \textbf{Quản lý AR Try-On}: 
+    Hỗ trợ thử quần áo theo thời gian thực bằng công nghệ thực tế tăng cường (AR). Hệ thống sử dụng Snap Camera Kit và mô hình 3D để hiển thị quần áo trực tiếp trên cơ thể người dùng thông qua camera.
+
+    \item \textbf{Chatbot AI}: 
+    Cung cấp chatbot AI hỗ trợ tư vấn thời trang, gợi ý sản phẩm và hỗ trợ khách hàng. Chatbot sử dụng mô hình ngôn ngữ lớn (LLM), kỹ thuật RAG và tìm kiếm vector để tạo phản hồi phù hợp theo ngữ cảnh hội thoại.
+
+    \item \textbf{Quản trị hệ thống}: 
+    Cho phép quản trị viên quản lý người dùng, cửa hàng, sản phẩm, nội dung hệ thống, tài nguyên AI và theo dõi thống kê doanh thu, hoạt động hệ thống cũng như hiệu năng xử lý AI.
+
 \end{itemize}
 
 \subsection{Yêu cầu phi chức năng}
@@ -33,9 +46,23 @@ Các chức năng được phân rã từ mức tổng quát xuống các chức
 Bên cạnh các yêu cầu chức năng, hệ thống cần đáp ứng các yêu cầu phi chức năng sau:
 
 \begin{itemize}
-  \item \textbf{Tính bảo mật}: Đảm bảo an toàn thông tin người dùng, đặc biệt là dữ liệu tài khoản và thông tin thanh toán. Hệ thống sử dụng JWT để xác thực và phân quyền người dùng.
-  \item \textbf{Hiệu năng}: Hệ thống có thời gian phản hồi nhanh, đáp ứng tốt khi nhiều người dùng truy cập đồng thời. Chức năng thử đồ ảo đảm bảo xử lý theo thời gian thực với độ trễ thấp.
-  \item \textbf{Tính khả dụng}: Giao diện thân thiện, dễ sử dụng đối với cả người mua và người bán. Chức năng AR hoạt động trực tiếp trên trình duyệt mà không cần cài đặt thêm phần mềm.
-  \item \textbf{Tính mở rộng}: Hệ thống có khả năng mở rộng và nâng cấp thêm các chức năng trong tương lai, đặc biệt là cải thiện độ chính xác của mô hình Virtual Try-On.
-  \item \textbf{Độ tin cậy}: Hệ thống hoạt động ổn định, hạn chế lỗi và đảm bảo dữ liệu không bị mất mát.
+
+    \item \textbf{Tính bảo mật}: 
+    Hệ thống đảm bảo an toàn thông tin người dùng và dữ liệu hệ thống thông qua cơ chế xác thực JWT, Firebase Authentication và phân quyền truy cập theo vai trò người dùng.
+
+    \item \textbf{Hiệu năng}: 
+    Hệ thống có khả năng xử lý đồng thời nhiều yêu cầu truy cập. Các chức năng AI Virtual Try-On và AR Try-On cần đảm bảo thời gian phản hồi hợp lý và tối ưu tài nguyên GPU trong quá trình xử lý.
+
+    \item \textbf{Tính khả dụng}: 
+    Giao diện hệ thống thân thiện, dễ sử dụng trên nhiều thiết bị khác nhau. Các chức năng AR hoạt động trực tiếp trên trình duyệt mà không yêu cầu cài đặt thêm phần mềm.
+
+    \item \textbf{Tính mở rộng}: 
+    Hệ thống được thiết kế theo hướng module hóa, cho phép dễ dàng mở rộng thêm các chức năng AI, nâng cấp mô hình xử lý ảnh hoặc tích hợp thêm các công nghệ mới trong tương lai.
+
+    \item \textbf{Độ tin cậy}: 
+    Hệ thống hoạt động ổn định, đảm bảo dữ liệu không bị mất mát và duy trì khả năng phục hồi khi xảy ra lỗi trong quá trình xử lý.
+
+    \item \textbf{Khả năng bảo trì}: 
+    Mã nguồn được tổ chức rõ ràng theo kiến trúc frontend, backend và AI service riêng biệt nhằm hỗ trợ dễ dàng bảo trì, nâng cấp và triển khai hệ thống.
+
 \end{itemize}

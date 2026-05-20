@@ -1,10 +1,40 @@
 \section{Trí tuệ nhân tạo}
 
-\subsection{Mô hình CatVTON}
-CatVTON (Concatenation-based Virtual Try-On Network) là mô hình học sâu chuyên biệt cho bài toán Virtual Try-On, cho phép ghép hình ảnh quần áo lên hình ảnh người dùng một cách tự nhiên và chính xác. Mô hình sử dụng kỹ thuật diffusion model để tạo ra kết quả thử đồ có chất lượng cao.
+\subsection{Mô hình FitDiT}
+FitDiT (Fit Diffusion Transformer) là mô hình học sâu chuyên biệt 
+cho bài toán Virtual Try-On, được phát triển bởi nhóm nghiên cứu 
+từ Tencent và Đại học Fudan \cite{fitdit_paper}. Mô hình sử dụng 
+kiến trúc Diffusion Transformer (DiT) thay thế cho U-Net truyền 
+thống, cho phép tập trung xử lý nhiều hơn ở các đặc trưng độ 
+phân giải cao, giải quyết hai thách thức chính là bảo toàn kết 
+cấu vải (texture-aware maintenance) và khớp kích thước trang phục 
+(size-aware fitting). Trong đề tài, FitDiT nhận đầu vào là ảnh 
+người dùng và ảnh quần áo, sau đó sinh ra ảnh kết quả thể hiện 
+người dùng đang mặc trang phục đó một cách chân thực.
 
-\subsection{RAG Chatbot}
-RAG (Retrieval-Augmented Generation) là kỹ thuật kết hợp giữa truy xuất thông tin và sinh văn bản, giúp chatbot trả lời dựa trên dữ liệu thực tế thay vì chỉ dựa vào kiến thức được huấn luyện. Hệ thống sử dụng Ollama để triển khai mô hình ngôn ngữ cục bộ và Qdrant để lưu trữ vector embeddings \cite{rag_docker_ray_qdrant}.
+\subsection{RAG (Retrieval-Augmented Generation)}
+RAG là kỹ thuật kết hợp giữa truy xuất thông tin (retrieval) và 
+sinh văn bản (generation), giúp mô hình ngôn ngữ trả lời dựa trên 
+dữ liệu thực tế được cung cấp thay vì chỉ dựa vào kiến thức được 
+huấn luyện sẵn \cite{rag_lewis_2020}. Trong đề tài, RAG được ứng 
+dụng cho chatbot tư vấn thời trang, sử dụng pgvector để lưu trữ 
+và tìm kiếm vector embeddings của thông tin sản phẩm, từ đó cung 
+cấp câu trả lời chính xác và phù hợp với danh mục hàng hóa thực 
+tế của hệ thống.
 
 \subsection{Ollama}
-Ollama là công cụ cho phép triển khai và chạy các mô hình ngôn ngữ lớn (LLM) trên máy cục bộ mà không cần kết nối Internet hay dịch vụ cloud. Điều này giúp đảm bảo tính bảo mật dữ liệu người dùng và giảm chi phí vận hành.
+Ollama là công cụ mã nguồn mở cho phép triển khai và chạy các 
+mô hình ngôn ngữ lớn (LLM) trên máy cục bộ mà không cần kết nối 
+Internet hay dịch vụ đám mây \cite{ollama_docs}. Trong đề tài, 
+Ollama được sử dụng để chạy mô hình Qwen2.5 7B trên máy chủ nội 
+bộ, phục vụ cho chức năng chatbot tư vấn thời trang, đảm bảo tính 
+bảo mật dữ liệu người dùng và giảm chi phí vận hành.
+
+\subsection{pgvector}
+pgvector là extension mã nguồn mở cho PostgreSQL, bổ sung khả năng 
+lưu trữ và tìm kiếm tương đồng vector (vector similarity search) 
+trực tiếp trong cơ sở dữ liệu quan hệ \cite{pgvector_github}. 
+Trong đề tài, pgvector được tích hợp vào Neon PostgreSQL để lưu 
+trữ vector embeddings của sản phẩm (1536 chiều), phục vụ cho 
+việc tìm kiếm ngữ nghĩa trong luồng RAG của chatbot tư vấn 
+thời trang.

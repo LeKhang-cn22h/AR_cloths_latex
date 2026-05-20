@@ -1,17 +1,16 @@
 \section{Cài đặt Hệ thống}
 \subsection{Backend}
-Backend được xây dựng bằng Express.js trên nền tảng Node.js, đóng vai trò trung tâm trong kiến trúc hệ thống. Thành phần này chịu trách nhiệm xử lý các yêu cầu từ phía người dùng, quản lý nghiệp vụ, xác thực, phân quyền và kết nối với các dịch vụ như cơ sở dữ liệu, AI Service và hệ thống thanh toán.
+Backend được xây dựng bằng FastAPI, đóng vai trò trung tâm trong kiến trúc hệ thống. Thành phần này chịu trách nhiệm xử lý các yêu cầu từ phía người dùng, quản lý nghiệp vụ, xác thực, phân quyền và kết nối với các dịch vụ như cơ sở dữ liệu, AI Service và hệ thống thanh toán.
 
 \textbf{Cài đặt:}
 \begin{itemize}[noitemsep]
-    \item Cài đặt các thư viện và gói phụ thuộc cần thiết cho backend.
-    \item Cấu hình các biến môi trường và thông tin kết nối cơ sở dữ liệu.
+    \item Khởi tạo môi trường ảo và cài đặt các thư viện cần thiết từ file requirements.txt.
+    \item Cấu hình các biến môi trường và thông tin kết nối cơ sở dữ liệu trong file .env.
     \item Thực hiện migration để khởi tạo cấu trúc dữ liệu.
-    \item Khởi động server và kiểm tra các API cơ bản.
     \item Khởi động server và kiểm tra các API tại địa chỉ localhost cổng 8081.
 \end{itemize}
 \subsection{Frontend}
-Frontend được xây dựng bằng Nuxt 3.4 nhằm phát triển giao diện người dùng thân thiện, hỗ trợ hiển thị phía máy chủ và cải thiện trải nghiệm người dùng. Frontend đóng vai trò hiển thị dữ liệu, tiếp nhận tương tác của người dùng và giao tiếp với backend thông qua các API. Frontend được triển khai trên môi trường cục bộ tại cổng 3000.
+Frontend được xây dựng bằng Nuxt nhằm phát triển giao diện người dùng thân thiện, hỗ trợ hiển thị phía máy chủ và cải thiện trải nghiệm người dùng. Frontend đóng vai trò hiển thị dữ liệu, tiếp nhận tương tác của người dùng và giao tiếp với backend thông qua các API. Frontend được triển khai trên môi trường cục bộ tại cổng 3000.
 
 \textbf{Cài đặt:}
 \begin{itemize}[noitemsep]
@@ -19,29 +18,14 @@ Frontend được xây dựng bằng Nuxt 3.4 nhằm phát triển giao diện n
     \item Khởi động server phát triển và truy cập hệ thống tại localhost cổng 3000.
 \end{itemize}
 \subsection{Database}
-Hệ thống sử dụng Microsoft SQL Server LocalDB để lưu trữ dữ liệu nghiệp vụ, bao gồm thông tin người dùng, lịch sử tương tác, kết quả phân tích da và các dữ liệu liên quan đến thanh toán. Việc sử dụng LocalDB giúp thuận tiện cho quá trình phát triển và kiểm thử trên môi trường cục bộ.
-
-\textbf{Cấu hình:}
-\begin{itemize}[noitemsep]
-    \item Server: localhost MSSQLLocalDB
-    \item Database: GlowUpDB
-    \item Xác thực: Windows Authentication
-\end{itemize}
+Hệ thống sử dụng:
+Neon: PostgreSQL được sử dụng làm cơ sở dữ liệu chính để lưu trữ dữ liệu nghiệp vụ, bao gồm thông tin người dùng, lịch sử tương tác, kết quả phân tích da và các dữ liệu liên quan đến thanh toán. Việc sử dụng Neon giúp đảm bảo hiệu suất cao và khả năng mở rộng linh hoạt cho hệ thống.
+Firebase: Authentication được sử dụng để quản lý xác thực người dùng, cung cấp các phương thức đăng nhập đa dạng như email/password, Google, Facebook và Apple. Firebase Authentication giúp đơn giản hóa quá trình quản lý người dùng và tăng cường bảo mật cho hệ thống. Firestore được sử dụng để lưu trữ dữ liệu phi cấu trúc như sản phẩm,loại sản phẩm, đơn hàng, giỏ hàng, khuyến mãi, cấu hình giới thiệu.
+Dbreaver CE: Công cụ quản lý cơ sở dữ liệu được sử dụng để trực quan hóa và quản lý dữ liệu trong Neon. Dbeaver CE hỗ trợ kết nối đến nhiều loại cơ sở dữ liệu khác nhau, giúp việc truy vấn, chỉnh sửa và theo dõi dữ liệu trở nên dễ dàng hơn.
+cloudinary: Dịch vụ lưu trữ đám mây được sử dụng để lưu trữ các tệp tin đa phương tiện như ảnh đại diện người dùng, ảnh sản phẩm và các tài liệu liên quan đến hỗ trợ khách hàng. Cloudinary cung cấp khả năng quản lý và tối ưu hóa hình ảnh hiệu quả, giúp cải thiện tốc độ tải trang và trải nghiệm người dùng.
 
 \subsection{Vector Database}
-Qdrant được sử dụng để lưu trữ các vector embeddings và hỗ trợ tìm kiếm ngữ nghĩa, phục vụ cho cơ chế truy xuất tri thức trong hệ thống hỏi đáp dựa trên ngữ cảnh. Thành phần này giúp chatbot đưa ra câu trả lời chính xác hơn nhờ khai thác tri thức đã được lưu trữ.
-
-\textbf{Cài đặt:}
-\begin{itemize}[noitemsep]
-    \item Triển khai Qdrant bằng Docker để thuận tiện cho việc quản lý và mở rộng.
-    \item Truy cập Dashboard nhằm theo dõi trạng thái hoạt động và dữ liệu lưu trữ.
-\end{itemize}
-
-\textbf{Cấu hình:}
-\begin{itemize}[noitemsep]
-    \item REST API: localhost cổng 6333
-    \item Collection: glowup embeddings
-\end{itemize}
+pgvector trong Neon dùng được sử dụng để lưu trữ các vector embeddings và hỗ trợ tìm kiếm ngữ nghĩa, phục vụ cho cơ chế truy xuất tri thức trong hệ thống hỏi đáp dựa trên ngữ cảnh. Thành phần này giúp chatbot đưa ra câu trả lời chính xác hơn nhờ khai thác tri thức đã được lưu trữ.
 
 \subsection{AI Chatbot}
 Hệ thống sử dụng Ollama để triển khai mô hình ngôn ngữ lớn cho chatbot tư vấn làm đẹp và chăm sóc da. Chatbot có khả năng tiếp nhận câu hỏi tự nhiên từ người dùng, kết hợp ngữ cảnh truy xuất từ Vector Database để tạo ra phản hồi phù hợp.
