@@ -1,48 +1,97 @@
-\section{Sơ đồ ERD (Entity Relationship Diagram)}
+\section{Sơ đồ ERD}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{graphics/main/chapter2/section6/erd2.png}
+    \includegraphics[width=0.9\textwidth]{graphics/main/chapter2/section6/erd3.jpg}
     \caption{Sơ đồ ERD của hệ thống Virtual Try-On}
     \label{fig:erd_vton}
 \end{figure}
 
 \subsection*{Các thực thể}
 
-Cơ sở dữ liệu của hệ thống được thiết kế theo kiến trúc kép gồm Firebase Firestore (NoSQL) và Neon PostgreSQL (quan hệ), với các thực thể chính sau:
+Cơ sở dữ liệu của hệ thống được thiết kế theo kiến trúc kép gồm
+Firebase Firestore (NoSQL) và Neon PostgreSQL (quan hệ), với các
+thực thể chính sau:
 
 \textbf{Firebase Firestore:}
 \begin{itemize}[noitemsep]
-    \item \textbf{Users\_FS}: Lưu thông tin tài khoản người dùng, phân quyền và trạng thái tài khoản. Xác thực thông qua Firebase Auth (Google Sign-In).
-    \item \textbf{Categories}: Lưu danh mục sản phẩm thời trang (Áo, Quần, Túi...) kèm ảnh đại diện Cloudinary.
-    \item \textbf{Products}: Lưu thông tin sản phẩm bao gồm tên, thương hiệu, màu sắc, kích cỡ, hình ảnh, giá bán và tồn kho.
-    \item \textbf{Carts}: Lưu giỏ hàng của người dùng với tổng số lượng và tổng giá trị.
-    \item \textbf{Cart\_Items}: Lưu chi tiết từng sản phẩm trong giỏ hàng gồm màu sắc, size và số lượng.
-    \item \textbf{Orders}: Lưu đơn hàng sau thanh toán bao gồm danh sách sản phẩm, địa chỉ giao hàng, phương thức thanh toán và trạng thái đơn.
-    \item \textbf{Vouchers}: Lưu mã giảm giá với điều kiện áp dụng, giá trị giảm và thời hạn sử dụng.
-    \item \textbf{Site\_Config}: Lưu thông tin giới thiệu cửa hàng (counters, vị trí hiển thị trên bản đồ Leaflet).
+    \item \textbf{users}: Lưu thông tin tài khoản người dùng,
+    phân quyền (role) và trạng thái tài khoản. Xác thực thông
+    qua Firebase Auth (Google Sign-In).
+    \item \textbf{category}: Lưu danh mục sản phẩm thời trang
+    (Áo, Quần, Túi...) kèm ảnh đại diện Cloudinary.
+    \item \textbf{products}: Lưu thông tin sản phẩm bao gồm
+    tên, thương hiệu, màu sắc, kích cỡ, hình ảnh, giá bán
+    và tồn kho.
+    \item \textbf{carts}: Lưu giỏ hàng của người dùng với
+    danh sách sản phẩm, tổng số lượng và tổng giá trị.
+    \item \textbf{orders}: Lưu đơn hàng sau thanh toán bao
+    gồm danh sách sản phẩm, địa chỉ giao hàng, phương thức
+    thanh toán và trạng thái đơn.
+    \item \textbf{shipping\_trackings}: Lưu thông tin vận
+    chuyển đơn hàng gồm mã vận đơn, đơn vị vận chuyển và
+    trạng thái giao hàng.
+    \item \textbf{vouchers}: Lưu mã giảm giá với điều kiện
+    áp dụng, giá trị giảm và thời hạn sử dụng.
+    \item \textbf{site\_config}: Lưu thông tin cấu hình
+    website gồm counters thống kê và vị trí hiển thị
+    trên bản đồ Leaflet.
 \end{itemize}
 
 \textbf{Neon PostgreSQL:}
 \begin{itemize}[noitemsep]
-    \item \textbf{Users\_PG}: Lưu thông tin người dùng phía PostgreSQL, liên kết với Firebase qua \texttt{firebase\_uid}.
-    \item \textbf{Addresses}: Lưu các địa chỉ giao hàng của người dùng, hỗ trợ nhiều địa chỉ với một địa chỉ mặc định.
-    \item \textbf{Stores}: Lưu thông tin cửa hàng bao gồm tên, địa chỉ và logo.
-    \item \textbf{Garment\_Categories}: Lưu danh mục trang phục dành riêng cho module AR và AI Try-On.
-    \item \textbf{Garments}: Lưu thông tin trang phục ảo gồm file GLB (AR Try-On), ảnh flat-lay (FitDiT), \texttt{item\_index} (Snap Carousel) và thông số kỹ thuật từng size.
-    \item \textbf{Body\_Profiles}: Lưu số đo cơ thể người dùng (ngực, eo, hông, vai, tay, chân) phục vụ tính năng gợi ý size.
-    \item \textbf{Photo\_Tryon\_Sessions}: Lưu lịch sử phiên thử đồ AI gồm ảnh đầu vào, ảnh kết quả FitDiT, size được gợi ý và cảnh báo vùng không vừa.
-    \item \textbf{Reviews}: Lưu đánh giá và nhận xét của người dùng đối với từng trang phục.
-    \item \textbf{Chat\_Sessions}: Lưu các phiên hội thoại với chatbot tư vấn thời trang.
-    \item \textbf{Chat\_Messages}: Lưu nội dung từng tin nhắn trong phiên chat, phân biệt vai trò \texttt{user} và \texttt{assistant}.
-    \item \textbf{Product\_Embeddings}: Lưu vector embedding (1536 chiều) của sản phẩm phục vụ tìm kiếm ngữ nghĩa cho chatbot RAG.
+    \item \textbf{users}: Lưu thông tin người dùng phía
+    PostgreSQL, liên kết với Firebase qua firebase\_uid.
+    \item \textbf{addresses}: Lưu các địa chỉ giao hàng
+    của người dùng, hỗ trợ nhiều địa chỉ với một địa chỉ
+    mặc định, tọa độ GPS (latitude, longitude).
+    \item \textbf{stores}: Lưu thông tin cửa hàng bao gồm
+    tên, địa chỉ, logo, banner và thông tin người quản lý.
+    \item \textbf{garment\_categories}: Lưu danh mục trang
+    phục dành riêng cho module AR và AI Try-On.
+    \item \textbf{garments}: Lưu thông tin trang phục ảo gồm
+    ảnh flat-lay (FitDiT), item\_index (Snap Carousel),
+    liên kết sản phẩm Firestore qua firestore\_product\_id.
+    \item \textbf{garment\_size\_specs}: Lưu bảng thông số
+    size của từng trang phục gồm số đo thực tế (ngực, eo,
+    hông, vai) và khuyến nghị chiều cao, cân nặng theo
+    từng size label (XS--XXXL).
+    \item \textbf{body\_profiles}: Lưu số đo cơ thể người
+    dùng (ngực, eo, hông, vai, tay, chân) phục vụ tính
+    năng gợi ý size.
+    \item \textbf{tryon\_history}: Lưu lịch sử phiên thử
+    đồ AI gồm ảnh kết quả FitDiT, thông số inference
+    (num\_steps, seed, resolution).
+    \item \textbf{reviews}: Lưu đánh giá và nhận xét của
+    người dùng đối với từng sản phẩm Firestore, kèm
+    ảnh minh họa.
+    \item \textbf{chat\_sessions}: Lưu các phiên hội thoại
+    với chatbot tư vấn thời trang.
+    \item \textbf{chat\_messages}: Lưu nội dung từng tin
+    nhắn trong phiên chat, phân biệt vai trò user và
+    assistant, kèm gợi ý sản phẩm liên quan.
+    \item \textbf{product\_embeddings}: Lưu vector embedding
+    của sản phẩm (text và image) phục vụ tìm kiếm ngữ
+    nghĩa cho chatbot RAG qua pgvector.
 \end{itemize}
 
 \subsection*{Mối quan hệ giữa các thực thể}
 
-Người dùng là trung tâm của hệ thống, liên kết với hầu hết các thực thể. Mỗi người dùng có thể sở hữu một giỏ hàng, đặt nhiều đơn hàng, lưu nhiều địa chỉ giao hàng, tạo nhiều phiên chat và thực hiện nhiều phiên thử đồ AI.
+Người dùng là trung tâm của hệ thống, liên kết với hầu hết
+các thực thể ở cả hai cơ sở dữ liệu. Tài khoản Firebase
+xác thực người dùng và lưu thông tin phân quyền, trong khi
+Neon PostgreSQL lưu dữ liệu quan hệ như địa chỉ, số đo
+cơ thể và lịch sử thử đồ.
 
-Sản phẩm Firestore và Garments PostgreSQL được liên kết thông qua \texttt{firestore\_product\_id}, cho phép một sản phẩm có thể có nhiều phiên bản trang phục ảo tương ứng phục vụ cho AR Try-On và AI Virtual Try-On. Mỗi trang phục thuộc về một cửa hàng và một danh mục, đồng thời chứa thông số kỹ thuật chi tiết từng size phục vụ thuật toán Fit Assessment.
+Sản phẩm Firestore và Garments PostgreSQL được liên kết
+thông qua firestore\_product\_id, cho phép một sản phẩm
+có thể có trang phục ảo tương ứng phục vụ AR Try-On và
+AI Virtual Try-On. Mỗi trang phục thuộc về một cửa hàng
+và một danh mục, đồng thời chứa thông số kỹ thuật chi
+tiết từng size phục vụ thuật toán Fit Assessment.
 
-Phiên thử đồ AI liên kết trang phục với người dùng, lưu lại toàn bộ thông tin đầu vào và kết quả sinh ảnh của FitDiT, bao gồm gợi ý size và cảnh báo các vùng không vừa dựa trên số đo cơ thể người dùng.
-
-Chatbot RAG sử dụng bảng \texttt{product\_embeddings} để tìm kiếm ngữ nghĩa qua pgvector, kết hợp với lịch sử hội thoại trong \texttt{chat\_sessions} và \texttt{chat\_messages} để cung cấp tư vấn thời trang cá nhân hóa.
+Lịch sử thử đồ AI liên kết trang phục với người dùng,
+lưu lại toàn bộ thông số inference của FitDiT. Chatbot
+RAG sử dụng bảng product\_embeddings để tìm kiếm ngữ
+nghĩa qua pgvector, kết hợp với lịch sử hội thoại trong
+chat\_sessions và chat\_messages để cung cấp tư vấn
+thời trang cá nhân hóa.

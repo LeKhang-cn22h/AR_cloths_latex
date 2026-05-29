@@ -1,15 +1,15 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.5.11)  27 MAY 2026 15:40
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2026.3.21)  29 MAY 2026 22:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**d:/doan/AR_cloths_latex/test_section7.tex
-(d:/doan/AR_cloths_latex/test_section7.tex
+**d:/AR_cloths_Latex/test_section7.tex
+(d:/AR_cloths_Latex/test_section7.tex
 LaTeX2e <2025-11-01>
-L3 programming layer <2025-12-24>
-(D:\APP\MiKTeX\tex/latex/base\article.cls
+L3 programming layer <2026-01-19>
+(C:\Users\Acer\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
 Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
-(D:\APP\MiKTeX\tex/latex/base\size10.clo
+(C:\Users\Acer\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
 File: size10.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count271
@@ -23,32 +23,40 @@ File: size10.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 \abovecaptionskip=\skip49
 \belowcaptionskip=\skip50
 \bibindent=\dimen148
-) (D:\APP\MiKTeX\tex/latex/graphics\graphicx.sty
+)
+(C:\Users\Acer\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
 Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
- (D:\APP\MiKTeX\tex/latex/graphics\keyval.sty
+
+(C:\Users\Acer\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks17
-) (D:\APP\MiKTeX\tex/latex/graphics\graphics.sty
+)
+(C:\Users\Acer\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
 Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
- (D:\APP\MiKTeX\tex/latex/graphics\trig.sty
+
+(C:\Users\Acer\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
 Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
-) (D:\APP\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
+)
+(C:\Users\Acer\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cf
+g
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: xetex.def on input line 106.
- (D:\APP\MiKTeX\tex/latex/graphics-def\xetex.def
+
+(C:\Users\Acer\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\xetex.def
 File: xetex.def 2025/11/01 v5.0p Graphics/color driver for xetex
 ))
 \Gin@req@height=\dimen149
 \Gin@req@width=\dimen150
-) (D:\APP\MiKTeX\tex/latex/float\float.sty
+) (C:\Users\Acer\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count279
 \float@exts=\toks18
 \float@box=\box53
 \@float@everytoks=\toks19
 \@floatcapt=\box54
-) (D:\APP\MiKTeX\tex/latex/enumitem\enumitem.sty
+)
+(C:\Users\Acer\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\enumitem.sty
 Package: enumitem 2025/02/06 v3.11 Customized lists
 \labelindent=\skip51
 \enit@outerparindent=\dimen151
@@ -56,12 +64,18 @@ Package: enumitem 2025/02/06 v3.11 Customized lists
 \enit@inbox=\box55
 \enit@count@id=\count280
 \enitdp@description=\count281
-) (D:\APP\MiKTeX\tex/latex/l3backend\l3backend-xetex.def
+)
+(C:\Users\Acer\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-xete
+x.def
 File: l3backend-xetex.def 2025-10-09 L3 backend support: XeTeX
 \g__graphics_track_int=\count282
 \g__pdfannot_backend_int=\count283
 \g__pdfannot_backend_link_int=\count284
-) (test_section7.aux)
+) (test_section7.aux
+
+LaTeX Warning: Label `fig:admin_dashboard_ui' multiply defined.
+
+)
 \openout1 = `test_section7.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
@@ -85,94 +99,167 @@ File: graphics/main/chapter3/dk.png Graphic file (type bmp)
 <graphics/main/chapter3/dk.png>
 File: graphics/main/chapter3/dn.png Graphic file (type bmp)
 <graphics/main/chapter3/dn.png>
- [1
+
+
+[1
 
 ]
 File: graphics/main/chapter3/home.jpg Graphic file (type bmp)
 <graphics/main/chapter3/home.jpg>
- [2]
+
+
+[2]
 File: graphics/main/chapter3/ca_nhan.png Graphic file (type bmp)
 <graphics/main/chapter3/ca_nhan.png>
- [3]
+
+
+[3]
 Underfull \hbox (badness 10000) in paragraph at lines 67--68
 
  []
 
 File: graphics/main/chapter3/trang_gioi_thieu.png Graphic file (type bmp)
 <graphics/main/chapter3/trang_gioi_thieu.png>
+
+
 [4]
 File: graphics/main/chapter3/trang_lienhe.png Graphic file (type bmp)
 <graphics/main/chapter3/trang_lienhe.png>
 File: graphics/main/chapter3/danh_muc.png Graphic file (type bmp)
 <graphics/main/chapter3/danh_muc.png>
- [5]
+
+
+[5]
 File: graphics/main/chapter3/store.png Graphic file (type bmp)
 <graphics/main/chapter3/store.png>
- [6]
+
+
+[6]
 File: graphics/main/chapter3/sp_detail.png Graphic file (type bmp)
 <graphics/main/chapter3/sp_detail.png>
- [7]
+
+
+[7]
 File: graphics/main/chapter3/cmt.png Graphic file (type bmp)
 <graphics/main/chapter3/cmt.png>
 File: graphics/main/chapter3/goi_y.png Graphic file (type bmp)
 <graphics/main/chapter3/goi_y.png>
- [8]
+
+
+[8]
 File: graphics/main/chapter3/gio_hang.png Graphic file (type bmp)
 <graphics/main/chapter3/gio_hang.png>
- [9]
+
+
+[9]
 File: graphics/main/chapter3/lua_chon_phuong_thuc.png Graphic file (type bmp)
 <graphics/main/chapter3/lua_chon_phuong_thuc.png>
 File: graphics/main/chapter3/theo_doi_don_hang.png Graphic file (type bmp)
 <graphics/main/chapter3/theo_doi_don_hang.png>
- [10]
+
+
+[10]
 File: graphics/main/chapter3/xac_thuc_thanh_toan.png Graphic file (type bmp)
 <graphics/main/chapter3/xac_thuc_thanh_toan.png>
 File: graphics/main/chapter3/thanh_toan_thanh_cong.png Graphic file (type bmp)
 <graphics/main/chapter3/thanh_toan_thanh_cong.png>
- [11] [12]
+
+
+[11]
+
+[12]
 File: graphics/main/chapter3/box_chat.png Graphic file (type bmp)
 <graphics/main/chapter3/box_chat.png>
-File: graphics/main/chapter3/ar.png Graphic file (type bmp)
-<graphics/main/chapter3/ar.png>
- [13]
+File: graphics/main/chapter2/section7/UserAR.jpg Graphic file (type bmp)
+<graphics/main/chapter2/section7/UserAR.jpg>
+
+
+[13]
+File: graphics/main/chapter2/section7/UserAI.jpg Graphic file (type bmp)
+<graphics/main/chapter2/section7/UserAI.jpg>
+
+
+[14]
+File: graphics/main/chapter2/section7/lsAI.jpg Graphic file (type bmp)
+<graphics/main/chapter2/section7/lsAI.jpg>
+File: graphics/main/chapter2/section7/goiy.jpg Graphic file (type bmp)
+<graphics/main/chapter2/section7/goiy.jpg>
+
+
+[15]
 File: graphics/main/chapter3/admin_dashboard.png Graphic file (type bmp)
 <graphics/main/chapter3/admin_dashboard.png>
- [14]
+
+
+[16]
+File: graphics/main/chapter2/section7/dashb.jpg Graphic file (type bmp)
+<graphics/main/chapter2/section7/dashb.jpg>
 File: graphics/main/chapter3/admin_sp.png Graphic file (type bmp)
 <graphics/main/chapter3/admin_sp.png>
- [15]
-File: graphics/main/chapter3/admin_donhang.png Graphic file (type bmp)
-<graphics/main/chapter3/admin_donhang.png>
- [16]
+
+
+[17]
+File: graphics/main/chapter2/section7/orderad.jpg Graphic file (type bmp)
+<graphics/main/chapter2/section7/orderad.jpg>
+
+
+[18]
 File: graphics/main/chapter3/admin_danhmuc.png Graphic file (type bmp)
 <graphics/main/chapter3/admin_danhmuc.png>
- [17]
+
+
+[19]
 File: graphics/main/chapter3/admin_danhmuc.png Graphic file (type bmp)
 <graphics/main/chapter3/admin_danhmuc.png>
- [18]
+
+
+[20]
+File: graphics/main/chapter2/section7/shipad.jpg Graphic file (type bmp)
+<graphics/main/chapter2/section7/shipad.jpg>
 File: graphics/main/chapter3/admin_vanchuyenchitiet.png Graphic file (type bmp)
+
 <graphics/main/chapter3/admin_vanchuyenchitiet.png>
-File: graphics/main/chapter3/admin_vanchuyenchitiet.png Graphic file (type bmp)
-<graphics/main/chapter3/admin_vanchuyenchitiet.png>
- [19]
+
+
+[21]
 File: graphics/main/chapter3/admin_add_km.png Graphic file (type bmp)
 <graphics/main/chapter3/admin_add_km.png>
- [20]
+
+
+[22]
+File: graphics/main/chapter2/section7/adlsAI.jpg Graphic file (type bmp)
+<graphics/main/chapter2/section7/adlsAI.jpg>
 File: graphics/main/chapter3/admin_add_km.png Graphic file (type bmp)
 <graphics/main/chapter3/admin_add_km.png>
-) [21] (test_section7.aux)
+
+
+[23]
+File: graphics/main/chapter2/section7/GarmentAR.jpg Graphic file (type bmp)
+<graphics/main/chapter2/section7/GarmentAR.jpg>
+
+
+[24]
+File: graphics/main/chapter2/section7/adchat.jpg Graphic file (type bmp)
+<graphics/main/chapter2/section7/adchat.jpg>
+)
+
+[25] (test_section7.aux)
  ***********
 LaTeX2e <2025-11-01>
-L3 programming layer <2025-12-24>
+L3 programming layer <2026-01-19>
  ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 1550 strings out of 402987
- 30825 string characters out of 5454941
- 434385 words of memory out of 5000000
- 30263 multiletter control sequences out of 15000+600000
+ 1629 strings out of 402984
+ 34563 string characters out of 5448712
+ 434411 words of memory out of 5000000
+ 30339 multiletter control sequences out of 15000+600000
  627769 words of font info for 46 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 57i,6n,65p,571b,212s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,6n,65p,566b,212s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on test_section7.pdf (21 pages).
+Output written on test_section7.pdf (25 pages).

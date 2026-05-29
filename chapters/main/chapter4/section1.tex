@@ -1,57 +1,45 @@
-<<<<<<< HEAD
-\section{Kết luận chung}
-
-Đề tài "Xây dựng hệ thống thương mại điện tử thời trang tích hợp thử đồ ảo bằng AI và AR" đã đạt được các mục tiêu đề ra, cụ thể như sau:
-
->>>>>>> 1cd5c21fbd7f9cc5cce956caf90a26cc32f44f31
-=======
 \section{Kết luận}
 
->>>>>>> 99e9c2d14e8104e734b7f79a460e1415767cdbef
 \subsection{Kết quả đạt được}
 
 \textbf{Về mặt chức năng:}
 \begin{itemize}[noitemsep]
-\item Xây dựng thành công hệ thống thương mại điện tử hoàn chỉnh với các chức năng: đăng nhập/đăng ký, danh mục sản phẩm, giỏ hàng, đặt hàng, thanh toán Stripe, quản lý đơn hàng và voucher.
-\item Tích hợp thành công mô hình \textbf{FitDiT} (Diffusion Transformer) cho phép người dùng thử đồ ảo từ ảnh tĩnh với độ chân thực cao.
-\item Tích hợp \textbf{Snap Camera Kit} và \textbf{Lens Studio} cung cấp trải nghiệm thử đồ thời trang theo thời gian thực (AR) ngay trên trình duyệt web.
-\item Xây dựng chatbot tư vấn thời trang sử dụng \textbf{Ollama} (qwen2.5:7b) kết hợp cơ chế \textbf{RAG} trên pgvector giúp trả lời chính xác các câu hỏi về sản phẩm, size, và xu hướng thời trang.
-\item Phát triển tính năng gợi ý size dựa trên số đo cơ thể người dùng với phương pháp Ease Allowance.
-\item Xây dựng giao diện quản trị (Admin) cho phép quản lý sản phẩm, đơn hàng, cửa hàng và thống kê doanh thu.
+    \item Xây dựng thành công hệ thống thương mại điện tử hoàn chỉnh với các chức năng: đăng nhập/đăng ký, danh mục sản phẩm, giỏ hàng, đặt hàng, thanh toán Stripe, quản lý đơn hàng và voucher.
+    \item Tích hợp thành công mô hình \textbf{FitDiT} (Diffusion Transformer) cho phép người dùng thử đồ ảo từ ảnh tĩnh với độ chân thực cao.
+    \item Tích hợp \textbf{Snap Camera Kit} và \textbf{Lens Studio} cung cấp trải nghiệm thử đồ thời trang theo thời gian thực (AR) ngay trên trình duyệt web.
+    \item Xây dựng chatbot tư vấn thời trang sử dụng \textbf{Ollama} (qwen2.5:7b) kết hợp cơ chế \textbf{RAG} trên pgvector giúp trả lời chính xác các câu hỏi về sản phẩm, size, và xu hướng thời trang.
+    \item Phát triển tính năng gợi ý size dựa trên số đo cơ thể người dùng với phương pháp Ease Allowance.
+    \item Xây dựng giao diện quản trị (Admin) cho phép quản lý sản phẩm, đơn hàng, cửa hàng và thống kê doanh thu.
 \end{itemize}
 
 \textbf{Về mặt kỹ thuật:}
 \begin{itemize}[noitemsep]
-\item Hệ thống được xây dựng theo kiến trúc microservice với backend \textbf{FastAPI} (Python), frontend \textbf{Nuxt.js 3} (TypeScript), đảm bảo tính modular, dễ bảo trì và mở rộng.
-\item Kết hợp hai loại cơ sở dữ liệu: \textbf{Firebase Firestore} cho dữ liệu nghiệp vụ và \textbf{Neon PostgreSQL} (pgvector) cho dữ liệu quan hệ và tìm kiếm ngữ nghĩa.
-\item Mô hình FitDiT hoạt động ổn định trên GPU RTX 4060, tạo ảnh thử đồ với độ phân giải lên đến 1536$\times$2048.
-\item Lens AR trên Snap Camera Kit bám theo cơ thể người dùng với 7 điểm mốc (Neck, Arms, Hips), hỗ trợ tương tác qua carousel 3D chọn trang phục.
-\item Xác thực và phân quyền người dùng được thực hiện qua \textbf{Firebase Authentication} và JWT, phân biệt rõ vai trò user/admin.
+    \item Hệ thống được xây dựng theo kiến trúc microservice với backend \textbf{FastAPI} (Python), frontend \textbf{Nuxt.js 3} (TypeScript), đảm bảo tính modular, dễ bảo trì và mở rộng.
+    \item Kết hợp hai loại cơ sở dữ liệu: \textbf{Firebase Firestore} cho dữ liệu nghiệp vụ và \textbf{Neon PostgreSQL} (pgvector) cho dữ liệu quan hệ và tìm kiếm ngữ nghĩa.
+    \item Mô hình FitDiT hoạt động ổn định trên GPU RTX 4060, tạo ảnh thử đồ với độ phân giải lên đến 1536$\times$2048.
+    \item Lens AR trên Snap Camera Kit bám theo cơ thể người dùng với 7 điểm mốc (Neck, Arms, Hips), hỗ trợ tương tác qua carousel 3D chọn trang phục.
+    \item Xác thực và phân quyền người dùng được thực hiện qua \textbf{Firebase Authentication} và JWT, phân biệt rõ vai trò user/admin.
 \end{itemize}
 
 \subsection{Hạn chế và hướng phát triển}
 
 \textbf{Hạn chế:}
 \begin{itemize}[noitemsep]
-\item Thời gian xử lý của FitDiT còn chậm (khoảng 2--3 phút cho 30 bước lặp trên GPU laptop), chưa đáp ứng tốt cho trải nghiệm real-time.
-\item Chưa tích hợp hoàn thiện cơ chế face swap cho trường hợp ảnh người dùng chỉ có khuôn mặt.
-\item Lens AR yêu cầu thiết bị có camera và cấu hình đủ mạnh để chạy ObjectTracking3D mượt mà.
-\item Chưa triển khai hệ thống lên môi trường production (đang chạy local qua ngrok).
+    \item Thời gian xử lý của FitDiT còn chậm (khoảng 2--3 phút cho 30 bước lặp trên GPU laptop), chưa đáp ứng tốt cho trải nghiệm real-time.
+    \item Chưa tích hợp hoàn thiện cơ chế face swap cho trường hợp ảnh người dùng chỉ có khuôn mặt.
+    \item Lens AR yêu cầu thiết bị có camera và cấu hình đủ mạnh để chạy ObjectTracking3D mượt mà.
+    \item Chưa triển khai hệ thống lên môi trường production (đang chạy local qua ngrok).
 \end{itemize}
 
 \textbf{Hướng phát triển:}
 \begin{itemize}[noitemsep]
-\item Tối ưu tốc độ inference của FitDiT (giảm num\_steps, sử dụng TensorRT) hoặc chuyển sang GPU cloud (RunPod/Vast.ai).
-<<<<<<< HEAD
-\item Hoàn thiện pipeline smart try-on: tự động phát hiện ảnh full-body hay chỉ có mặt → face swap nếu cần → fit assessment → FitDiT.
-=======
-\item Hoàn thiện pipeline smart try-on: tự động phát hiện ảnh full-body hay chỉ có mặt $\to$ face swap nếu cần $\to$ fit assessment $\to$ FitDiT.
->>>>>>> 99e9c2d14e8104e734b7f79a460e1415767cdbef
-\item Mở rộng kho dữ liệu 3D model (GLB) cho nhiều loại trang phục hơn.
-\item Triển khai hệ thống lên cloud (AWS/GCP) với Docker/Kubernetes để đảm bảo tính sẵn sàng và mở rộng.
-\item Phát triển ứng dụng di động (React Native/Flutter) tích hợp Camera Kit để tăng trải nghiệm AR.
+    \item Tối ưu tốc độ inference của FitDiT (giảm num\_steps, sử dụng TensorRT) hoặc chuyển sang GPU cloud (RunPod/Vast.ai).
+    \item Hoàn thiện pipeline smart try-on: tự động phát hiện ảnh full-body hay chỉ có mặt $\to$ face swap nếu cần $\to$ fit assessment $\to$ FitDiT.
+    \item Mở rộng kho dữ liệu 3D model (GLB) cho nhiều loại trang phục hơn.
+    \item Triển khai hệ thống lên cloud (AWS/GCP) với Docker/Kubernetes để đảm bảo tính sẵn sàng và mở rộng.
+    \item Phát triển ứng dụng di động (React Native/Flutter) tích hợp Camera Kit để tăng trải nghiệm AR.
 \end{itemize}
 
 \subsection{Đánh giá tổng quan}
 
-Đề tài đã chứng minh tính khả thi của việc tích hợp các công nghệ AI (FitDiT, RAG, Ollama) và AR (Snap Camera Kit) vào một hệ thống thương mại điện tử thời trang hoàn chỉnh. Hệ thống không chỉ cung cấp trải nghiệm mua sắm trực tuyến thông thường mà còn giải quyết bài toán "thử đồ trực tuyến" vốn là rào cản lớn của ngành thời trang thương mại điện tử. Kết quả của đề tài có thể làm nền tảng để phát triển thành sản phẩm thương mại thực tế, đáp ứng nhu cầu ngày càng cao của người tiêu dùng trong thời đại chuyển đổi số.
+Đề tài đã chứng minh tính khả thi của việc tích hợp các công nghệ AI (FitDiT, RAG, Ollama) và AR (Snap Camera Kit) vào một hệ thống thương mại điện tử thời trang hoàn chỉnh. Hệ thống không chỉ cung cấp trải nghiệm mua sắm trực tuyến thông thường mà còn giải quyết bài toán thử đồ trực tuyến vốn là rào cản lớn của ngành thời trang thương mại điện tử. Kết quả của đề tài có thể làm nền tảng để phát triển thành sản phẩm thương mại thực tế, đáp ứng nhu cầu ngày càng cao của người tiêu dùng trong thời đại chuyển đổi số.
