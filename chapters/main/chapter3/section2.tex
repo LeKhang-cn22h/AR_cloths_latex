@@ -49,41 +49,31 @@ mà không cần thiết bị vật lý.
 Các endpoint của hệ thống được kiểm thử thông qua Postman và 
 Swagger UI. Bảng~\ref{tab:api_test} trình bày một số test case 
 tiêu biểu.
-
 \begin{table}[H]
 \centering
 \caption{Một số test case kiểm thử API}
 \label{tab:api_test}
-\begin{tabular}{|c|p{3cm}|p{3cm}|p{3cm}|c|}
+\begin{tabular}{|c|p{3cm}|p{3cm}|p{3.5cm}|c|}
 \hline
-\textbf{STT} & \textbf{Endpoint} & \textbf{Input} & 
-\textbf{Kết quả mong đợi} & \textbf{Kết quả} \\
+\textbf{STT} & \textbf{Endpoint} & \textbf{Input} & \textbf{Kết quả mong đợi} & \textbf{Kết quả} \\
 \hline
-1 & POST /users & Firebase UID hợp lệ & 
-Upsert user thành công, trả về thông tin user & Đạt \\
+1 & POST /users & Firebase UID hợp lệ & Upsert user thành công, trả về thông tin user & Đạt \\
 \hline
-2 & GET /garments/ & -- & 
-Trả về danh sách garment & Đạt \\
+2 & GET /garments/ & -- & Trả về danh sách garment & Đạt \\
 \hline
-3 & POST /tryon & Ảnh người + ảnh quần áo & 
-Trả về URL ảnh kết quả từ Cloudinary & Đạt \\
+3 & POST /tryon & Ảnh người + ảnh quần áo & Trả về URL ảnh kết quả từ Cloudinary & Đạt \\
 \hline
-4 & POST /photo-tryon/fit-assessment & 
-body\_profile\_id, garment\_id, size\_label & 
-Trả về đánh giá chest\_fit, waist\_fit, hip\_fit, 
-size\_suggestion & Đạt \\
+4 & POST /photo-tryon/fit-assessment & body\_profile\_id, garment\_id, size\_label & Trả về đánh giá chest\_fit, waist\_fit, hip\_fit, size\_suggestion & Đạt \\
 \hline
-5 & POST /chatbot/chat & Câu hỏi tư vấn thời trang & 
-Trả về phản hồi từ Ollama qwen2.5 & Đạt \\
+5 & POST /chatbot/chat & Câu hỏi tư vấn thời trang & Trả về phản hồi từ Ollama qwen2.5 & Đạt \\
 \hline
-6 & POST /payment/stripe & Thông tin đơn hàng & 
-Tạo payment intent thành công & Đạt \\
+6 & POST /payment/stripe & Thông tin đơn hàng & Tạo payment intent thành công & Đạt \\
 \hline
-7 & POST /tryon & Thiếu file ảnh & 
-Trả về lỗi 422 Unprocessable Entity & Đạt \\
+7 & POST /tryon & Thiếu file ảnh & Trả về lỗi 422 Unprocessable Entity & Đạt \\
 \hline
 \end{tabular}
 \end{table}
+
 \subsubsection{Kết quả thực nghiệm AI Try-On (FitDiT)}
 
 Thực nghiệm đo thời gian xử lý của mô hình FitDiT được thực hiện trên
