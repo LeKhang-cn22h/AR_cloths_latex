@@ -36,7 +36,8 @@
 \usepackage{fancyhdr}
 
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
-% === GEOMETRY (theo đúng hướng dẫn) ===
+
+% === GEOMETRY ===
 \geometry{
     a4paper,
     left=3.5cm,
@@ -65,22 +66,20 @@
 
 \titleformat{\subsection}
 {\normalfont\fontsize{13}{15}\bfseries\itshape}
-{\hspace{2em}\thesubsection}   % <-- thêm \hspace ở đây
-{0.2em}                          % giảm sep xuống một chút vì đã có indent
-{}
+{\hspace{2em}\thesubsection}
+{0.2em}{}
 
 \titleformat{\subsubsection}
 {\normalfont\fontsize{13}{15}\itshape}
 {\hspace{3em}\thesubsection}
-{0.2em}
-{}
+{0.2em}{}
 
 \makeglossaries
 
 \captionsetup{labelfont=it, textfont=it}
 \captionsetup[table]{labelfont=it, textfont=it}
 
-% === SỐ TRANG Ở GIỮA PHÍA DƯỚI ===
+% === SỐ TRANG ===
 \pagestyle{fancy}
 \fancyhf{}
 \fancyfoot[C]{\thepage}
@@ -94,20 +93,19 @@
 % =====================
 \begin{document}
 
-% === TRANG BÌA (không đánh số) ===
+% === TRANG BÌA ===
 \pagenumbering{gobble}
 \input{cover}
 \clearpage
 \input{chapters/front/review}
 \input{chapters/front/review2}
 
-% === PHẦN ĐẦU (đánh số La Mã) ===
+% === PHẦN ĐẦU (số La Mã) ===
 \pagenumbering{roman}
 \setcounter{page}{1}
 
 \include{chapters/front/thanks}
-\include{chapters/front/commitment}   % Lời cam đoan - bắt buộc
-
+\include{chapters/front/commitment}
 % --- Mục lục ---
 \renewcommand{\cfttoctitlefont}{\hspace*{\fill}\fontsize{14}{17}\selectfont\bfseries\MakeUppercase}
 \renewcommand{\cftaftertoctitle}{\hspace*{\fill}}
@@ -152,12 +150,12 @@
 \listoftables
 \clearpage
 
-% === NỘI DUNG CHÍNH (đánh số Ả-rập) ===
+% === NỘI DUNG CHÍNH (số Ả-rập) ===
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
 \begin{spacing}{1.5}
-\include{chapters/front/introduction}    % Lời mở đầu - tính từ trang 1
+\include{chapters/front/introduction}
 \include{chapters/main/chapter1/container}
 \include{chapters/main/chapter2/container}
 \include{chapters/main/chapter3/container}
@@ -168,17 +166,18 @@
 \clearpage
 \addcontentsline{toc}{chapter}{TÀI LIỆU THAM KHẢO}
 \begin{thebibliography}{99}
-\fontfamily{ptm}\selectfont
 
 \bibitem{vuejs_docs}
-Vue.js Team. Vue.js Documentation. Truy cập ngày 20/12/2025, https://vuejs.org/guide/introduction.html.
+Vue.js Team. Vue.js Documentation. Truy cập ngày 20/12/2025,
+https://vuejs.org/guide/introduction.html.
 
 \bibitem{nuxt_assets}
-Nuxt Team. Nuxt Documentation, Assets. Truy cập ngày 20/12/2025, https://nuxt.com/docs/4.x/getting-started/assets.
+Nuxt Team. Nuxt Documentation, Assets. Truy cập ngày 20/12/2025,
+https://nuxt.com/docs/4.x/getting-started/assets.
 
 \bibitem{tailwindcss_docs}
-Tailwind Labs. Tailwind CSS Documentation. Truy cập ngày 20/12/2025, https://tailwindcss.com/docs/.
-
+Tailwind Labs. Tailwind CSS Documentation. Truy cập ngày 20/12/2025,
+https://tailwindcss.com/docs/.
 
 \bibitem{typescript_docs}
 Microsoft. \textit{TypeScript --- JavaScript With Syntax For Types}.
@@ -186,25 +185,34 @@ Truy cập ngày 20/05/2026,
 https://www.typescriptlang.org/docs/
 
 \bibitem{python_fastapi_official}
-FastAPI Team. FastAPI Documentation. Truy cập ngày 20/12/2025, https://fastapi.tiangolo.com/.
+FastAPI Team. FastAPI Documentation. Truy cập ngày 20/12/2025,
+https://fastapi.tiangolo.com/.
 
 \bibitem{fielding_rest}
-Fielding, R. T. Architectural Styles and the Design of Network-based Software Architectures. Doctoral Dissertation, University of California, Irvine, 2000. Truy cập ngày 20/12/2025, https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm.
+Fielding, R. T. Architectural Styles and the Design of Network-based
+Software Architectures. Doctoral Dissertation, University of California,
+Irvine, 2000. Truy cập ngày 20/12/2025,
+https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm.
 
 \bibitem{neon_database}
-Neon. Neon Serverless Postgres Documentation. Truy cập ngày 20/12/2025, https://neon.tech/docs.
+Neon. Neon Serverless Postgres Documentation. Truy cập ngày 20/12/2025,
+https://neon.tech/docs.
 
 \bibitem{dbeaver_docs}
-DBeaver. DBeaver Documentation. Truy cập ngày 20/12/2025, https://dbeaver.io/docs/.
+DBeaver. \textit{DBeaver Documentation}. Truy cập ngày 20/12/2025,
+https://dbeaver.io/docs/.
 
 \bibitem{firebase_docs}
-Google. Firebase Documentation. Truy cập ngày 20/12/2025, https://firebase.google.com/docs.
+Google. Firebase Documentation. Truy cập ngày 20/12/2025,
+https://firebase.google.com/docs.
 
 \bibitem{cloudinary_docs}
-Cloudinary. Cloudinary Documentation. Truy cập ngày 20/12/2025, https://cloudinary.com/documentation.
+Cloudinary. \textit{Cloudinary Documentation}. Truy cập ngày 20/12/2025,
+https://cloudinary.com/documentation.
 
 \bibitem{ngrok_docs}
-Ngrok. Ngrok Documentation. Truy cập ngày 20/12/2025, https://ngrok.com/docs.
+Ngrok. Ngrok Documentation. Truy cập ngày 20/12/2025,
+https://ngrok.com/docs.
 
 \bibitem{snap_body_tracking_docs}
 Snap Inc. \textit{3D Body and Hand Tracking --- Lens Studio Documentation}.
@@ -222,8 +230,9 @@ Truy cập ngày 20/05/2026,
 https://developers.snap.com/camera-kit/integrate-sdk/web/web-configuration
 
 \bibitem{fitdit_paper}
-Jiang, B., Hu, X., Luo, D., He, Q., Xu, C., Peng, J., Zhang, J., et al.
-\textit{FitDiT: Advancing the Authentic Garment Details for High-fidelity Virtual Try-on}.
+Jiang, B., Hu, X., Luo, D., et al.
+\textit{FitDiT: Advancing the Authentic Garment Details for
+High-fidelity Virtual Try-on}.
 arXiv:2411.10499, 2024.
 https://arxiv.org/abs/2411.10499
 
@@ -242,6 +251,12 @@ https://docs.ollama.com/
 pgvector. \textit{pgvector: Open-source vector similarity search for Postgres}.
 Truy cập ngày 20/05/2026,
 https://github.com/pgvector/pgvector
+
+\bibitem{stripe_docs}
+Stripe. \textit{Stripe API Documentation}.
+Truy cập ngày 20/05/2026,
+https://stripe.com/docs
+
 \bibitem{lighthouse_docs}
 Google. \textit{Lighthouse --- Web Dev Documentation}.
 Truy cập ngày 20/05/2026,
@@ -256,25 +271,10 @@ https://learning.postman.com/docs/introduction/overview/
 Responsive Viewer. \textit{Responsive Viewer Chrome Extension}.
 Truy cập ngày 20/05/2026,
 https://chromewebstore.google.com/detail/responsive-viewer/inmopeiepgfljkpkidclfgbgbmfcennb
-\bibitem{dbeaver_docs}
-DBeaver. \textit{DBeaver Documentation}.
-Truy cập ngày 20/05/2026,
-https://dbeaver.io/docs/
-
-\bibitem{cloudinary_docs}
-Cloudinary. \textit{Cloudinary Documentation}.
-Truy cập ngày 20/05/2026,
-https://cloudinary.com/documentation
-
-\bibitem{stripe_docs}
-Stripe. \textit{Stripe API Documentation}.
-Truy cập ngày 20/05/2026,
-https://stripe.com/docs
 
 \end{thebibliography}
 
-
-% === PHỤ LỤC (đánh A, B, C theo hướng dẫn) ===
+% === PHỤ LỤC ===
 \clearpage
 \appendix
 \renewcommand{\thechapter}{\Alph{chapter}}
